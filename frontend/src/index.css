@@ -1,0 +1,93 @@
+/* tailwind 를 css 에 넣어주는 설정 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 기본 폰트 pretendard 설정 */
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: "Pretendard-Regular";
+}
+
+/* 스크롤바 설정 */
+/* width */
+::-webkit-scrollbar {
+  border-radius: 8px; /* 둥근 모서리의 크기 조정 */
+  width: 10px;
+}
+
+/* 스크롤바 트랙(경로)에 대한 스타일 */
+::-webkit-scrollbar-track {
+  border-radius: 8px; /* 둥근 모서리의 크기 조정 */
+  background: #fcfcfc;
+}
+
+/* 스크롤바 핸들(스크롤 막대)에 대한 스타일 */
+::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 8px;
+}
+
+/* 스크롤바 호버 */
+::-webkit-scrollbar-thumb:hover {
+  background: #f0eded;
+}
+
+/* -------- ☝☝☝☝☝ 여기까지 default css -------------- */
+
+/* -------- 👇👇👇👇👇 여기부터 custom css ---------------- */
+
+.info-list-item::before {
+  margin-right: 0.5em;
+}
+
+/* 그리드 설정 */
+@media (min-width: 640px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+  }
+
+  .searchBar {
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+  }
+
+  .menuBar {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+  }
+
+  .main {
+    grid-column: 2/3;
+    grid-row: 3/4;
+  }
+
+  .cardListGridContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, auto));
+    gap: 2%;
+  }
+
+  .sidebarLeft {
+    grid-column: 1/2;
+    grid-row: 3/4;
+  }
+
+  .sidebarRight {
+    grid-column: 3/4;
+    grid-row: 3/4;
+  }
+
+  .footer {
+    grid-column: 1/4;
+    grid-row: 4/5;
+  }
+}
