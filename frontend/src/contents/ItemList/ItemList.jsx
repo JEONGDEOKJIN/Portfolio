@@ -7,7 +7,18 @@ import Modal from "../../components/Modal";
 import UserList from "../../components/UserList";
 import CardList from "../../components/CardList";
 
+
+
 const ItemList = () => {
+
+  const getNotionApi = () => { 
+
+
+    
+  }
+
+
+
   return (
 
     <div className="overflow-x-hidden grid-container ">

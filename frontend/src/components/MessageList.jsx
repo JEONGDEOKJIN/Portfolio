@@ -37,7 +37,11 @@ const MessageList = () => {
                 }}
               ></figure>
 
-              <p className="message-content">{item.desc}</p>
+              {/* 📛 삐져 나오는 코드  */}
+              {/* <p className=" message-content">{item.desc}</p> */}
+
+              {/* 🔵 해결 코드 */}
+              <p className="min-w-0 break-words message-content">{item.desc}</p>
             </li>
           );
         })}
