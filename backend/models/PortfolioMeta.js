@@ -87,4 +87,4 @@ class PortfolioMeta extends Model {
 
 }
 
-module.exports = User;
+module.exports = PortfolioMeta;

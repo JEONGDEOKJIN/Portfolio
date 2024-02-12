@@ -1,7 +1,7 @@
-import * as dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config();
 
-export const config = {
+const config = {
     dev : {
         database: process.env.DATABASE_NAME,
         username: process.env.DATABASE_USERNAME,
@@ -10,6 +10,8 @@ export const config = {
         dialect: "mysql",
     }
 }
+
+module.exports = config;
 
 /* 위의 버전은 ts 버전. 혹시 안 되면 아래 버전으로 
 const config = {
