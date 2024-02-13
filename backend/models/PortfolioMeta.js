@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require("sequelize");
+import { Model, DataTypes } from "sequelize"
 
 class PortfolioMeta extends Model {
 
@@ -27,7 +27,7 @@ class PortfolioMeta extends Model {
                 archtectureImg : {
                     type : DataTypes.STRING, 
                 }, 
-                // 담당 역할 (front, backend) 
+                // 담당 역할 (frontend, backendend, aws, 기획) 
                 role : {
                     type : DataTypes.STRING, 
                 }, 
@@ -35,7 +35,7 @@ class PortfolioMeta extends Model {
                 stack : {
                     type : DataTypes.STRING, 
                 }, 
-                // 프로젝트 이름 (parentProject) 
+                // 프로젝트 이름 : feature 에 경우 꼭 필요. project 의 경우에도 작성 (parentProject) 
                 parentProject : {
                     type : DataTypes.STRING, 
                 }, 
@@ -87,4 +87,4 @@ class PortfolioMeta extends Model {
 
 }
 
-module.exports = PortfolioMeta;
+export default PortfolioMeta;

@@ -1,16 +1,21 @@
-const Sequelize = require("sequelize");
-const config = require("../config");
-const PortfolioMeta = require("./PortfolioMeta");
+
+import { Sequelize } from "sequelize";
+import { config } from "../config/index.js"
+
+import PortfolioMeta from "./PortfolioMeta.js";
 
 const sequelize = new Sequelize(config.dev);
 
-const db = {};
+export const db = {
+    sequelize,
+    PortfolioMeta
+};
 
-db.sequelize = sequelize;
-db.PortfolioMeta = PortfolioMeta;
-
+db.sequelize = sequelize
 PortfolioMeta.init(sequelize);
 
 // PortfolioMeta.associate(db);
 
-module.exports = db;
+
+export {sequelize}
+export default db;

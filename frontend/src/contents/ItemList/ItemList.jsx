@@ -11,12 +11,6 @@ import CardList from "../../components/CardList";
 
 const ItemList = () => {
 
-  const getNotionApi = () => { 
-
-
-    
-  }
-
 
 
   return (
