@@ -42,9 +42,6 @@ export const postPortfolioMeta = async (req, res) => {
     });
   }
 
-
-
-
   const {
     category,
     title,
@@ -90,9 +87,122 @@ export const postPortfolioMeta = async (req, res) => {
     else return false;
   } catch (error) {
     console.log("@Login Controller", error);
+    res.status(500).send("Error 📛");
+
   }
 };
 
+
+export const getItemById = async (req, res) => {
+
+  console.log("path paramter 잘 넘어오는지 확인" , req.params)
+  const {id} = req.params;
+
+  try {
+
+    const itemById = await db.PortfolioMeta.findByPk(id);
+    if(itemById) return res.status(200).send(itemById)
+    
+  } catch (error) {
+    console.log(error)
+    res.status(500).send("Error 📛");
+  }
+}
+
+
+export const updateItemById = async (req, res) => {
+
+  const { id } = req.params; // id 값 가져오기
+  let updateMetaData = req.body; // 업데이트할 데이터. 클라이언트에서 가져옴
+
+// 파일 이름을 매핑하기 위한 객체 초기화 
+let updateImgFields = {
+  architectureImg_1: "",
+  architectureImg_2: "",
+  architectureImg_3: "",
+  architectureImg_4: "",
+  architectureImg_5: "",
+  demoVideo_1: "",
+  demoVideo_2: "",
+  demoVideo_3: "",
+  demoVideo_4: "",
+  demoVideo_5: "",
+};
+
+// 아키텍처 이미지 파일 이름 처리 : 1) 해당 값이 있으면 파일 이름 넣고 2) 없으면 빈값 넣기
+req.files['architectureImg']?.forEach((file, index) => {
+  if (index < 5) {
+    updateImgFields[`architectureImg_${index + 1}`] = file.filename;
+  }
+});
+
+// 데모 비디오 파일 이름 처리 : 1) 해당 값이 있으면 파일 이름 넣고 2) 없으면 빈값 넣기
+req.files['demoVideo']?.forEach((file, index) => {
+  if (index < 5) {
+    updateImgFields[`demoVideo_${index + 1}`] = file.filename;
+  }
+});
+
+// updateMetaData 객체에 파일 정보를 합침
+updateMetaData = { ...updateMetaData, ...updateImgFields };
+
+  try {
+    
+    // 해당 item 찾아서 업데이트 하기 
+    const [updatedResults] = await db.PortfolioMeta.update(updateMetaData, {
+      where: { id: id }
+    });
+    
+    if(updatedResults || updatedArchitectureImgResults || updatedDemoVideoResults){
+      const storedItem = await db.PortfolioMeta.findByPk(id);   // 업데이트 되어 DB 에 저장된 아이템을 조회해서 가져옴
+      if(storedItem) return res.status(200).json(storedItem); // JSON 형태로 응답 수정
+    }
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send("Error 📛");
+  }
+}
+
+/*
+  // const { id } = req.params; // id 값 가져오기 
+  // const updateData = req.body;  // 업데이트할 데이터. 클라이언트에서 가져옴
+  // const demoVideosArr = [];
+  // const architectureImgsArr = [];
+
+  // let updateArchitectureImgFields = {};
+  // let updateDemoVideosFields = {};
+
+  // console.log("update 넘어온 path parameter 확인" , id)
+  // console.log("update updateData 확인" , updateData)
+  // console.log("update updatefiles 확인" , req.files)
+
+  // // 'demoVideo' 파일 처리
+  // if (req.files['demoVideo']) {
+  //   req.files['demoVideo'].forEach((file, index) => {
+  //     // 최대 5개의 파일만 처리
+  //     if (index < 5) demoVideosArr.push(file.filename); 
+  //   });
+  // }
+  
+  // // 'architectureImg' 파일 처리
+  // if (req.files['architectureImg']) {
+  //   req.files['architectureImg'].forEach((file, index) => {
+  //     // 최대 5개의 파일만 처리
+  //     if (index < 5) architectureImgsArr.push(file.filename); // ⭐'filename' 저장
+  //   });
+  // }
+
+  // architectureImgsArr.forEach( (img, index) => {
+  //   updateArchitectureImgFields[`architectureImg_${index + 1}`] = img;
+  // })
+  
+  // demoVideosArr.forEach( (img, index) => {
+  //   updateDemoVideosFields[`demoVideo_${index + 1}`] = img;
+  // })
+
+
+*/
 
 
 /*
