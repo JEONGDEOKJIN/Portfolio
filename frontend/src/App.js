@@ -6,6 +6,7 @@ import Event from "./page/crud_test/EVENT";
 import State from "./page/crud_test/State";
 import Create from "./page/crud_test/Create";
 import Update from "./page/crud_test/Update";
+import Delete from "./page/crud_test/page/Delete";
 
 function App() {
   return (
@@ -15,10 +16,11 @@ function App() {
       {/* <Event /> */}
       {/* <State /> */}
       {/* <Create /> */}
-      <Update />
+      {/* <Update /> */}
+      {/* <Delete /> */}
 
 
-      {/* <ItemList /> */}
+      <ItemList />
     </div>
   );
 }

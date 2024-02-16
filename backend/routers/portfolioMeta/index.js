@@ -1,9 +1,10 @@
 import express from "express";
 
-import { postPortfolioMeta } from "../../controllers/portfolioMeta/index.js";
+import { deleteItemById, postPortfolioMeta } from "../../controllers/portfolioMeta/index.js";
 import { getItemById } from "../../controllers/portfolioMeta/index.js";
 import { Upload } from "../../middleware/imgUpload.js";
 import { updateItemById } from "../../controllers/portfolioMeta/index.js";
+import { getAllItem } from "../../controllers/portfolioMeta/index.js";
 
 const router = express.Router();
 
@@ -24,6 +25,8 @@ router.post(
 
 // GET
 router.get("/itemById/:id", getItemById);
+router.get("/allMetaData", getAllItem);
+
 
 // PATCH
 router.patch(
@@ -34,5 +37,8 @@ router.patch(
   ]),
   updateItemById
 );
+
+// Delete
+router.delete("/deleteItem/:id" , deleteItemById );
 
 export default router;

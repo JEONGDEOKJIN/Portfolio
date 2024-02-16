@@ -1,8 +1,8 @@
 import db from "../../models/index.js";
 
 export const postPortfolioMeta = async (req, res) => {
-  console.log("req body 로 payload 가 들어오는지 테스트", req.body);
-  console.log("req.files", req.files);
+  // console.log("req body 로 payload 가 들어오는지 테스트", req.body);
+  // console.log("req.files", req.files);
   /* 하나만 있을 때의 req.files 구조 
       req.files [{
         fieldname: 'architectureImg',
@@ -94,12 +94,9 @@ export const postPortfolioMeta = async (req, res) => {
 
 
 export const getItemById = async (req, res) => {
-
-  console.log("path paramter 잘 넘어오는지 확인" , req.params)
+  // console.log("path paramter 잘 넘어오는지 확인" , req.params)
   const {id} = req.params;
-
   try {
-
     const itemById = await db.PortfolioMeta.findByPk(id);
     if(itemById) return res.status(200).send(itemById)
     
@@ -110,11 +107,21 @@ export const getItemById = async (req, res) => {
 }
 
 
+export const getAllItem = async (req, res) => {
+  // console.log("전체 요청 잘 넘어오는지 확인" , req)
+  try {
+    const allItem = await db.PortfolioMeta.findAll();
+    if(allItem) return res.status(200).send(allItem)
+  } catch (error) {
+    console.log("getAllItem 오류 발생" , error)
+    return res.status(500).send(error.message)
+  }
+}
+
+
 export const updateItemById = async (req, res) => {
-
-  const { id } = req.params; // id 값 가져오기
-  let updateMetaData = req.body; // 업데이트할 데이터. 클라이언트에서 가져옴
-
+  // const { id } = req.params; // id 값 가져오기
+  // let updateMetaData = req.body; // 업데이트할 데이터. 클라이언트에서 가져옴
 // 파일 이름을 매핑하기 위한 객체 초기화 
 let updateImgFields = {
   architectureImg_1: "",
@@ -163,6 +170,32 @@ updateMetaData = { ...updateMetaData, ...updateImgFields };
     res.status(500).send("Error 📛");
   }
 }
+
+
+export const deleteItemById = async (req, res) => {
+
+  try {
+    const { id } = req.params; // id 값 가져오기
+
+    const deleteItem = await db.PortfolioMeta.destroy({
+      where : {id : id}
+    })
+
+    if(deleteItem) {
+      return res.status(200).json(`${id} item delete 완료`)
+    } else {
+      return res.status(404).json(`해당 ID 를 가진 레코드가 없음`)
+    }
+    
+  } catch (error) {
+    console.log("delete operation 오류 발생" , error)
+    return res.status(500).send(error.message)
+  }
+}
+
+
+
+
 
 /*
   // const { id } = req.params; // id 값 가져오기 

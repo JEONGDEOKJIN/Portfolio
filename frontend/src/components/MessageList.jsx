@@ -27,7 +27,7 @@ const MessageList = () => {
       <ul>
         {messageItem.map((item, index) => {
           return (
-            <li className="flex p-3 mb-6 bg-stone-300">
+            <li key={index} className="flex p-3 mb-6 bg-stone-300">
               {/* <figure className="w-12 h-12 mr-2 bg-green-500 bg-top bg-cover border-2 rounded-2xl shrink-0 bg-[url('./assets/images/BJJTOM.jpg')]  "></figure> */}
               <figure
                 className="w-12 h-12 mr-2 bg-green-500 bg-center bg-cover border-2 rounded-2xl shrink-0 "
