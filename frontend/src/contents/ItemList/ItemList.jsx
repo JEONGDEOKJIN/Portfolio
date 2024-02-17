@@ -8,8 +8,7 @@ import UserList from "../../components/UserList";
 import CardList from "../../components/CardList";
 import fetchAllMetaData from "../../fetch/ItemList/fetchAllMetaData";
 import { isError, useQuery } from "react-query";
-import Filter from "../../components/Filter";
-import Sort from "../../components/Sort";
+
 
 const ItemList = () => {
   return (

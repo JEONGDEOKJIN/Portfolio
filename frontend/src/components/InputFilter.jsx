@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BtnFilter from "./BtnFilter";
 import InputCheckbox from "./InputCheckbox";
 
-const Filter = ({
+const InputFilter = ({
   selectedFilterOptionArr,
   setSelectedFilterOptionArr,
 }) => {
@@ -54,9 +54,9 @@ const Filter = ({
         <label>
           <input
             type="checkbox"
-            value="project"
+            value="category_project"
             onChange={handleCheckBoxInput}
-            checked={selectedFilterOptionArr?.includes("project")}
+            checked={selectedFilterOptionArr?.includes("category_project")}
           />
           project
         </label>
@@ -64,17 +64,17 @@ const Filter = ({
         <label>
           <input
             type="checkbox"
-            value="feature"
+            value="category_feature"
             onChange={handleCheckBoxInput}
-            checked={selectedFilterOptionArr?.includes("feature")}
+            checked={selectedFilterOptionArr?.includes("category_feature")}
           />
           feature
         </label>
 
-        <InputCheckbox value={"frontend"} handleCheckBoxInput={handleCheckBoxInput} selectedFilterOptionArr={selectedFilterOptionArr} />
-        <InputCheckbox value={"backend"} handleCheckBoxInput={handleCheckBoxInput} selectedFilterOptionArr={selectedFilterOptionArr} />
-        <InputCheckbox value={"aws"} handleCheckBoxInput={handleCheckBoxInput} selectedFilterOptionArr={selectedFilterOptionArr} />
-        <InputCheckbox value={"planning"} handleCheckBoxInput={handleCheckBoxInput} selectedFilterOptionArr={selectedFilterOptionArr} />
+        <InputCheckbox value={"roles_frontend"} handleCheckBoxInput={handleCheckBoxInput} selectedFilterOptionArr={selectedFilterOptionArr} />
+        <InputCheckbox value={"roles_backend"} handleCheckBoxInput={handleCheckBoxInput} selectedFilterOptionArr={selectedFilterOptionArr} />
+        <InputCheckbox value={"roles_aws"} handleCheckBoxInput={handleCheckBoxInput} selectedFilterOptionArr={selectedFilterOptionArr} />
+        <InputCheckbox value={"roles_planning"} handleCheckBoxInput={handleCheckBoxInput} selectedFilterOptionArr={selectedFilterOptionArr} />
 
 
         {/* [label input 연결 방식 2] input 태그의 id 와 label 태그의 htmlFor 를 일치 시킨다. */}
@@ -135,4 +135,4 @@ const Filter = ({
   );
 };
 
-export default Filter;
+export default InputFilter;
