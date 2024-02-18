@@ -1,6 +1,6 @@
 import express from "express";
 
-import { deleteItemById, postPortfolioMeta } from "../../controllers/portfolioMeta/index.js";
+import { deleteItemById, getSearchedItem, postPortfolioMeta } from "../../controllers/portfolioMeta/index.js";
 import { getItemById } from "../../controllers/portfolioMeta/index.js";
 import { Upload } from "../../middleware/imgUpload.js";
 import { updateItemById } from "../../controllers/portfolioMeta/index.js";
@@ -24,8 +24,9 @@ router.post(
 );
 
 // GET
-router.get("/itemById/:id", getItemById);
+router.get("/itemById/:id", getItemById);  // path parameter 의 경우, url 에 추가 표시 있음
 router.get("/allMetaData", getAllItem);
+router.get("/search", getSearchedItem);   // query parameter 의 경우, url 에 추가 표시 하지 않음
 
 
 // PATCH

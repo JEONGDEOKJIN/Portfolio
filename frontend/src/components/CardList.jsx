@@ -1,40 +1,83 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import fetchAllMetaData from "../fetch/ItemList/fetchAllMetaData";
-
 import { isError, useQuery } from "react-query";
-
 import SelectSort from "./SelectSort";
 import InputFilter from "./InputFilter";
+import axios from "axios";
+import getSearchResults from "../fetch/ItemList/getSearchResults";
+import loadingMessage from "../utils/loadingMessage";
+import errorMessage from "../utils/errorMessage";
 
-const CardList = () => {
+const CardList = ({
+  searchTerm,
+  isSubmitClicked,
+  setIsSubmitClicked,
+  searchBarInput,
+}) => {
   const [selectedFilterOptionArr, setSelectedFilterOptionArr] = useState([]);
   const [sortOption, setSortOption] = useState("");
 
+  console.log("searchTerm✅ @CardList", searchTerm);
+
+  // 검색 useQuery
+  const {
+    data: searchResultData,
+    isLoading: isSearchLoading,
+    error: isSearchError,
+  } = useQuery(
+    ["search", searchTerm],
+    () => getSearchResults(searchTerm), // searchTerm 이 있을 때, 실행되는 검색쿼리 처리 함수
+    {
+      enabled:
+        !!searchTerm && isSubmitClicked == true && searchBarInput != null,
+    }
+    // searchTerm 이 있을 때만 실행됨
+    // isSubmitClicked != null : false 건, true 건 뭔가 들어가 있어야 한다.
+    // isSubmitClicked == true
+    // searchBarInput!= null : 검색단어가 뭐라도 있을 때 실행된다
+  );
+
+  // isSubmitClicked 제출 버튼 완료되면(true) -> 다시 false 로 버튼 초기화 하기⭐
+  useEffect(() => {
+    if (isSubmitClicked == true) setIsSubmitClicked(false);
+  }, [isSubmitClicked, setIsSubmitClicked]);
+
+  // 기본 metaData 검색 useQuery
   const {
     data: metaData,
-    isLoading,
-    error,
+    isLoading: isMetaLoading,
+    error: isMetaError,
   } = useQuery("metaData", fetchAllMetaData);
   console.log("metaData fetching 값", metaData);
 
+  // 에러 및 로딩 메시지
   if (!metaData || metaData.length === 0) {
     return <p> DB 에서 가져온 metaData 가 없습니다. </p>;
   }
 
-  if (error) {
-    console.log("ItemList, data fetching error 발생", error);
-    return <p> 에러 발생📛📛📛📛📛 | 관리자 문의 연락처 👉 010-6368-0416 </p>;
-  }
+  const errorMessageComponent = errorMessage(
+    isSearchError,
+    isMetaError,
+    searchTerm
+  );
+  if (errorMessageComponent) return errorMessageComponent; // errorMessageComponent 가 있으면, 렌더링 한다.
 
-  if (isLoading) {
-    alert("현재 로딩중!✅ | 로딩 컴포넌트 필요 ✅");
-    return <p> 현재 로딩중!✅ | 로딩 컴포넌트 필요 ✅ </p>;
-  }
+  const loadingMessageComponent = loadingMessage(
+    isSearchLoading,
+    isMetaLoading,
+    searchTerm
+  );
+  if (loadingMessageComponent) return loadingMessageComponent; // loadingMessageComponent 가 있으면, 렌더링 한다.
+
+  // 검색 데이터가 있으면, 검색 데이터를 반영. 검색이 없으면 기본 metaData 를 렌더
+  // 1. 제출 버튼 없이도 -> 렌더 되게 하기 (검색 예상 dropdown 구현할 때 사용)
+  // const dataToRender = searchTerm.trim() ? searchResultData : metaData
+  // 2. 제출 버튼 눌러야 -> dropdown 에서 렌더되게 하기
+  const dataToRender = isSubmitClicked == true ? searchResultData : metaData;
 
   // 필터, 분류 기능
-  const filteredSortedData = metaData
-    ? metaData
+  const filteredSortedData = dataToRender
+    ? dataToRender
         .filter((item) => {
           // all 을 클릭했거나, 아무것도 클릭 안 해서 배열이 비어있는 경우
           if (

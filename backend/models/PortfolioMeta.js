@@ -104,9 +104,22 @@ class PortfolioMeta extends Model {
         underscored: false, // 모델 필드에 snake_case 적용할지 여부
         timestamps: true, // createdAt, updatedAt 필드를 추가할지 여부
         modelName: "PortfolioMeta", // sequelize 내부에서
-        tableName: "portfolioMeta", // DB 에서 사용할 테이블 이름
+        tableName: "portfoliometa", // DB 에서 사용할 테이블 이름 ⭐ | 반드시 소문자로! 
+          // 왜냐면, 검색 인덱싱 작업에서, 대소문자 구분 관련해서, 소문자로 하는게 더 나을 것 같다고 해서 
         charset: "utf8", // 인코딩 관련
         collate: "utf8_general_ci", // 인코딩 관련
+
+        // 인덱싱 
+        indexes : [
+          {
+            type : 'FULLTEXT', 
+            name : 'text_idx', // 인덱싱의 고유한 이름. | 다른 인덱싱 이름과 겹치면 안 
+            
+            // 이 필드에 대해서 검색이 이루어짐 
+            fields : ['title' , 'summary' , 'subTasks' , 'roles' , 'stacks' , 'parentProject']
+          }
+        ]
+        
       }
     );
   }

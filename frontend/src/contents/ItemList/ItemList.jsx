@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Menu from "../../components/Menu";
 import SearchBar from "../../components/SearchBar";
 import BulletList from "../../components/BulletList";
@@ -11,17 +11,36 @@ import { isError, useQuery } from "react-query";
 
 
 const ItemList = () => {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false)
+  const [searchBarInput, setSearchBarInput] = useState("");
+
+  
   return (
     <div className="overflow-x-hidden grid-container ">
       {/* header */}
-      <SearchBar className="w-screen " />
+
+      <SearchBar 
+        className="w-screen" 
+        setIsSubmitClicked = {setIsSubmitClicked} 
+        isSubmitClicked ={isSubmitClicked}
+        setSearchTerm={setSearchTerm} 
+        searchTerm={searchTerm} 
+        searchBarInput ={searchBarInput}
+        setSearchBarInput={setSearchBarInput}
+      />
 
       {/* 메뉴 */}
       <Menu className="menuBar " />
 
       {/* main */}
       <section className="p-3 mb-3 main ">
-        <CardList />
+        <CardList 
+          searchTerm={searchTerm}  
+          setIsSubmitClicked ={setIsSubmitClicked}
+          isSubmitClicked={isSubmitClicked} 
+          searchBarInput={searchBarInput}
+          />
       </section>
 
       {/* sidebarLeft */}
