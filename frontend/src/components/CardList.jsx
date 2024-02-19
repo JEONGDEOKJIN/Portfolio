@@ -69,11 +69,20 @@ const CardList = ({
   );
   if (loadingMessageComponent) return loadingMessageComponent; // loadingMessageComponent 가 있으면, 렌더링 한다.
 
+  
   // 검색 데이터가 있으면, 검색 데이터를 반영. 검색이 없으면 기본 metaData 를 렌더
-  // 1. 제출 버튼 없이도 -> 렌더 되게 하기 (검색 예상 dropdown 구현할 때 사용)
-  // const dataToRender = searchTerm.trim() ? searchResultData : metaData
-  // 2. 제출 버튼 눌러야 -> dropdown 에서 렌더되게 하기
-  const dataToRender = isSubmitClicked == true ? searchResultData : metaData;
+    // 1. 제출 버튼 없이도 -> 렌더 되게 하기 (검색 예상 dropdown 구현할 때 사용)
+    // const dataToRender = searchTerm.trim() ? searchResultData : metaData
+  
+    // 2. 제출 버튼 눌러야 -> dropdown 에서 렌더되게 하기
+  let dataToRender = metaData;
+
+  if(searchResultData && searchResultData.length > 0) {
+    dataToRender = searchResultData
+  }
+  
+  console.log("dataToRender 에 들어가는 데이터" , searchResultData)
+  console.log("dataToRender 에 들어간 데이터" , dataToRender)
 
   // 필터, 분류 기능
   const filteredSortedData = dataToRender
@@ -146,8 +155,12 @@ const CardList = ({
 
   return (
     <>
-      <section className="flex">
+    
+      <section className="flex flex-row items-center h-[10rem] bg-pink-200 ">
         {/* 필터 */}
+
+        <FilterBtn />
+
         <InputFilter
           className="filter"
           setSelectedFilterOptionArr={setSelectedFilterOptionArr}

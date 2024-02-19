@@ -14,7 +14,7 @@ const Menu = () => {
         return (
           <li
             key={index}
-            className="w-1/4 transition duration-300 ease-in-out bg-gold-500 hover:bg-crimson-500 hover:w-1/3"
+            className="w-1/4 transition duration-300 ease-in-out bg-gold-200 hover:bg-crimson-500 hover:w-1/3"
           >
             <a
               href={item.link}

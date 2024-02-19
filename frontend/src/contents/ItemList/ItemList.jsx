@@ -8,59 +8,76 @@ import UserList from "../../components/UserList";
 import CardList from "../../components/CardList";
 import fetchAllMetaData from "../../fetch/ItemList/fetchAllMetaData";
 import { isError, useQuery } from "react-query";
-
+import Footer from "../../components/Footer";
+import Navigation from "../../components/Navigation";
+import HeroSection from "../../components/HeroSection";
 
 const ItemList = () => {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [isSubmitClicked, setIsSubmitClicked] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false);
   const [searchBarInput, setSearchBarInput] = useState("");
 
-  
   return (
     <div className="overflow-x-hidden grid-container ">
-      {/* header */}
+      
+      {/* ✅ height 단위 변경 */}
+      <header className=" bg-indigo-200 h-[6rem] w-screen ">
+        <Navigation />
+        
+      </header>
 
-      <SearchBar 
-        className="w-screen" 
-        setIsSubmitClicked = {setIsSubmitClicked} 
-        isSubmitClicked ={isSubmitClicked}
-        setSearchTerm={setSearchTerm} 
-        searchTerm={searchTerm} 
-        searchBarInput ={searchBarInput}
-        setSearchBarInput={setSearchBarInput}
-      />
+      
+      <main>
+        
+        <section className="bg-green-200">
+          <h1 className="text-6xl">
+            Discover the world’s top designers & creatives
+          </h1>
 
-      {/* 메뉴 */}
-      <Menu className="menuBar " />
+          <h2>
+            Dribbble is the leading destination to find & showcase creative work
+            and home to the world's best design professionals.
+          </h2>
 
-      {/* main */}
-      <section className="p-3 mb-3 main ">
-        <CardList 
-          searchTerm={searchTerm}  
-          setIsSubmitClicked ={setIsSubmitClicked}
-          isSubmitClicked={isSubmitClicked} 
-          searchBarInput={searchBarInput}
+          <SearchBar
+            className="w-screen"
+            setIsSubmitClicked={setIsSubmitClicked}
+            isSubmitClicked={isSubmitClicked}
+            setSearchTerm={setSearchTerm}
+            searchTerm={searchTerm}
+            searchBarInput={searchBarInput}
+            setSearchBarInput={setSearchBarInput}
           />
-      </section>
+        </section>
 
-      {/* sidebarLeft */}
-      <aside className="px-5 py-3 sidebarLeft">
-        <BulletList />
-        <UserList />
-      </aside>
+        {/* 메뉴 */}
+        {/* <Menu className="menuBar " /> */}
 
-      {/* sidebarRight */}
-      <aside className="px-5 py-3 sidebarRight">
-        <MessageList />
-      </aside>
+        {/* main */}
+        <section className="p-3 mb-3 main ">
+          <CardList
+            searchTerm={searchTerm}
+            setIsSubmitClicked={setIsSubmitClicked}
+            isSubmitClicked={isSubmitClicked}
+            searchBarInput={searchBarInput}
+          />
+        </section>
 
-      {/* 모달 */}
-      {/* <Modal /> */}
+        {/* sidebarLeft */}
+        {/* <aside className="px-5 py-3 sidebarLeft">
+          <BulletList />
+          <UserList />
+        </aside> */}
 
-      {/* footer */}
-      <footer className="w-full p-5 mx-auto text-center footer bg-stone-200 ">
-        🎏Footer 후터 푸터 퓨터 퓨털 휘털 footer🎏
-      </footer>
+        {/* sidebarRight */}
+        {/* <aside className="px-5 py-3 sidebarRight">
+          <MessageList />
+        </aside> */}
+
+        {/* 상세 페이지 */}
+        {/* <Modal /> */}
+      </main>
+      <Footer />
     </div>
   );
 };

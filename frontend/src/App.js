@@ -10,10 +10,11 @@ import Delete from "./page/crud_test/page/Delete";
 import { Route, Routes } from "react-router-dom";
 import Feedback from "./components/Feedback";
 
+import FeatureList from "./pages/FeatureList";
+
 function App() {
   return (
     <div className="App">
-      
       {/* <READ_PROPS /> */}
       {/* <Event /> */}
       {/* <State /> */}
@@ -22,19 +23,14 @@ function App() {
       {/* <Delete /> */}
 
       <Routes>
-        <Route path="test/update" element={ <Update /> }  />
+        <Route path="test/update" element={<Update />} />
 
         {/* 메인 페이지 추가되면, 변경해야 함✅ */}
         {/* <Route path="itemList" element={ <ItemList /> }  /> */}
-        <Route path="/" element={ <ItemList /> }  />
-
+        <Route path="/" element={<FeatureList />} />
 
         {/* <Route path="feedback" element={ <Feedback /> }  /> */}
-        
-
       </Routes>
-    
-
     </div>
   );
 }
