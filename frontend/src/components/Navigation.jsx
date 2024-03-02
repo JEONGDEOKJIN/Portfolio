@@ -1,19 +1,16 @@
 import React from "react";
 import Menu from "./Menu";
+import MenuSub from "./MenuSub"
+
 
 const Navigation = () => {
   return (
     <>
-      <nav>
-        <Menu />
-      </nav>
 
-      <nav>
-        <div className="flex flex-row justify-between">
-          <div> 🤸‍♂️ </div>
-          <div> DJ </div>
-        </div>
-      </nav>
+        <Menu />
+
+        <MenuSub />
+
     </>
   );
 };

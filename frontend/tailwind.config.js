@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "mediumseagreen": {
+        mediumseagreen: {
           50: "#ECF9F2",
           100: "#D5F1E2",
           200: "#AFE4C7",
@@ -16,9 +16,9 @@ module.exports = {
           700: "#246B44",
           800: "#18492E",
           900: "#0C2216",
-          950: "#06130C"
-        }, 
-        
+          950: "#06130C",
+        },
+
         gold: {
           50: "#FFFBE5",
           100: "#FFF7CC",
@@ -49,6 +49,10 @@ module.exports = {
 
       padding: {
         "60p": "60%", // 사진 일정 비율 유지하기 위한 padding-botto 60%
+      },
+
+      height: {
+        "100vh-96px": "calc(100vh - 96px)", // 밑에 딱 맞춰주려면! | 커스텀 클래스 이름: 100vh-88 | chatBox의 높이
       },
     },
   },

@@ -48,35 +48,36 @@ body {
   margin-right: 0.5em;
 }
 
-/* 그리드 설정 */
+/* ⭐ 그리드 설정 ⭐ | 예시니까 지우지 마!  */
 @media (min-width: 640px) {
-  .grid-container {
+  /* .grid-container {
     display: grid;
     grid-template-columns: 20% 1fr 20%;
-  }
+  } */
 
-  .searchBar {
+  /* .searchBar {
     grid-column: 1 / 4;
     grid-row: 1 / 2;
-  }
+  } */
 
-  .menuBar {
+  /* .menuBar {
     grid-column: 1 / 4;
     grid-row: 2 / 3;
-  }
+  } */
 
-  .main {
+  /* .main {
     grid-column: 2/3;
     grid-row: 3/4;
-  }
+  } */
 
+  /* ⭐ 이게 카드 리스트 그리드 컨테이너 ⭐ */
   .cardListGridContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, auto));
     gap: 2%;
   }
 
-  .sidebarLeft {
+  /* .sidebarLeft {
     grid-column: 1/2;
     grid-row: 3/4;
   }
@@ -89,5 +90,5 @@ body {
   .footer {
     grid-column: 1/4;
     grid-row: 4/5;
-  }
+  } */
 }

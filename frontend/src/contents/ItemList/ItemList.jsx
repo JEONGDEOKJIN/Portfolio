@@ -18,17 +18,17 @@ const ItemList = () => {
   const [searchBarInput, setSearchBarInput] = useState("");
 
   return (
-    <div className="overflow-x-hidden grid-container ">
-      
+    // grid 테스트 할 때 필요한 grid-container
+    // <div className="overflow-x-hidden grid-container ">
+
+    // grid 없이, 이번엔 flex
+    <div className="flex flex-col overflow-x-hidden">
       {/* ✅ height 단위 변경 */}
-      <header className=" bg-indigo-200 h-[6rem] w-screen ">
+      <header className="w-full bg-indigo-200 ">
         <Navigation />
-        
       </header>
 
-      
-      <main>
-        
+      <main className="h-[560px] ">
         <section className="bg-green-200">
           <h1 className="text-6xl">
             Discover the world’s top designers & creatives
