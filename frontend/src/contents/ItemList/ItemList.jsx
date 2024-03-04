@@ -28,13 +28,14 @@ const ItemList = () => {
         <Navigation />
       </header>
 
-      <main className="h-[560px] ">
-        <section className="bg-green-200">
-          <h1 className="text-6xl">
+      <main>
+        {/* 검색 hero 섹션 */}
+        <section className="bg-green-50 tablet:h-[560px] flex flex-col justify-between items-center px-6 py-12">
+          <h1 className="text-6xl font-semibold font-sans4">
             Discover the world’s top designers & creatives
           </h1>
 
-          <h2>
+          <h2 className="text-5xl font-sansPro">
             Dribbble is the leading destination to find & showcase creative work
             and home to the world's best design professionals.
           </h2>

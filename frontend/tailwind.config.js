@@ -54,6 +54,19 @@ module.exports = {
       height: {
         "100vh-96px": "calc(100vh - 96px)", // 밑에 딱 맞춰주려면! | 커스텀 클래스 이름: 100vh-88 | chatBox의 높이
       },
+
+      screens: {
+        // break point 종단점 구성
+        mobile: "320px", // tailwind 는 mobile 기반으로 min-width 를 기본으로 만듦
+        tablet: "768px", // tailwind 와 겹칠 수도 있을거 같아서 따로 뺌
+        desktop: "1024px",
+      },
+
+      fontFamily: {
+        // SourceSansPro: ["source-sans-pro", "san-serif"],
+        sans4: ['"Source Serif 4"', "cursive"],
+        sansPro: ['"Source Sans Pro"'],
+      },
     },
   },
   plugins: [],

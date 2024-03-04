@@ -1,7 +1,14 @@
+/* 어도비에서 source-sans-pro free 다운 */
+/* @import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap"); */
+/* @import url("https://use.typekit.net/vsv8zys.css"); */
+
 /* tailwind 를 css 에 넣어주는 설정 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* source-serif-pro 버전의 구글 폰트 */
+/* @import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Tenor+Sans&display=swap"); */
 
 /* 기본 폰트 pretendard 설정 */
 @font-face {
@@ -12,8 +19,27 @@
   font-style: normal;
 }
 
+/* 세리프체 - 검색 hero 테스트 : 사용 안 함 🟠 */
+@font-face {
+  font-family: "MapoDacapo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoDacapoA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 세리프체 - Cobaissi - 검색 hero 테스트 : 사용 안 함 🟠 */
+@font-face {
+  font-family: "Cobaissi";
+  src: url("/public/fonts/Cobaissi/cobaissi-webfont.woff2") format("woff2"),
+    url("/public/fonts/Cobaissi/cobaissi-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: "Pretendard-Regular";
+  
 }
 
 /* 스크롤바 설정 */
