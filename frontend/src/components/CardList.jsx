@@ -7,6 +7,8 @@ import axios from "axios";
 import getSearchResults from "../fetch/ItemList/getSearchResults";
 import loadingMessage from "../utils/loadingMessage";
 import errorMessage from "../utils/errorMessage";
+import SVGFilterIcon from "./SVGFilterIcon";
+import FilterBtn from "./FilterBtn";
 
 const CardList = ({
   searchTerm,
@@ -16,6 +18,7 @@ const CardList = ({
 }) => {
   const [selectedFilterOptionArr, setSelectedFilterOptionArr] = useState([]);
   const [sortOption, setSortOption] = useState("recommended");
+  const [isFilterBtnClicked, setIsFilterBtnClicked] = useState(false)
 
   console.log("searchTerm✅ @CardList", searchTerm);
 
@@ -165,24 +168,20 @@ const CardList = ({
           sortOption={sortOption}
         />
 
-        <div
-          className="
-            text-gray-700 text-[14px]
-            border-[1.5px] border-gray-200/90 rounded-full"
-        >
-          Filters
-        </div>
-      </section>
+        <FilterBtn setIsFilterBtnClicked={setIsFilterBtnClicked} isFilterBtnClicked={isFilterBtnClicked} />
 
-      <section>
-        {" "}
-        클릭여부에 따라서 여기에 추가 🤸‍♂️
-        <InputFilter
-          className="filter"
-          setSelectedFilterOptionArr={setSelectedFilterOptionArr}
-          selectedFilterOptionArr={selectedFilterOptionArr}
-        />
       </section>
+      
+      {isFilterBtnClicked ? 
+        <section>
+          <InputFilter
+            className="filter"
+            setSelectedFilterOptionArr={setSelectedFilterOptionArr}
+            selectedFilterOptionArr={selectedFilterOptionArr}
+          />
+        </section>
+      : ""}
+
 
       {/* cardListGridContainer : index.css 로 설정 */}
       <ul className="flex flex-col min-h-screen cardListGridContainer ">
