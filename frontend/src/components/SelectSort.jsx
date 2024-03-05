@@ -19,16 +19,20 @@ const SelectSort = ({ setSortOption, sortOption }) => {
   return (
     <>
       <section>
-        <div
-          className="relative flex items-center justify-between bg-blue-300 cursor-pointer"
+        <div className="
+            px-4 font-medium h-12 border-[1.5px] text-[14px]
+            border-gray-200/90 rounded-lg relative 
+            flex items-center justify-between  cursor-pointer  
+            hover:shadow-sortDropDownBox text-gray-700"
           onClick={sortDropDown}
         >
-          <span className="ml-3 mr-3"> {viewSelectedOption} </span>
-          <DropDownArrow />
+          <span className="min-w-[125px] text-gray-800">{viewSelectedOption}</span>
+          <DropDownArrow isSortDropDown={isSortDropDown} />
 
           {isSortDropDown ? (
             <DropDownListOption
               handleSortDropDownList={handleSortDropDownList}
+              sortOption = {sortOption}
             />
           ) : null}
         </div>

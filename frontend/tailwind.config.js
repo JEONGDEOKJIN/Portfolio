@@ -45,9 +45,6 @@ module.exports = {
           900: "#2A040B",
           950: "#170206",
         },
-        
-        
-
       },
 
       padding: {
@@ -71,14 +68,15 @@ module.exports = {
         sansPro: ['"Source Sans Pro"'],
       },
 
-      boxShadow : { 
-        searchBox: '0 0 0 4px rgba(234,100,217,0.1)',
+      boxShadow: {
+        searchBox: "0 0 0 4px rgba(234,100,217,0.1)",
+        sortDropDownBox: "0 2px 2px 0 rgba(0,0,0,0.03)",
+        sortDropDownList: "0 4px 4px 0 rgba(0,0,0,0.03)",
       },
 
-      borderColor : { 
-        searchBoxBorder : 'rgba(234, 100, 217, 0.4)'
-      }
-
+      borderColor: {
+        searchBoxBorder: "rgba(234, 100, 217, 0.4)",
+      },
     },
   },
   plugins: [],

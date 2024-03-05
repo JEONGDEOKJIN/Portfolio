@@ -154,7 +154,7 @@ const CardList = ({
 
   return (
     <>
-      <section className="flex flex-row justify-between items-center h-[10rem] bg-pink-200 ">
+      <section className="flex flex-row justify-between items-center h-[10rem]  ">
         {/* 필터 */}
         {/* <FilterBtn /> */}
 
@@ -165,6 +165,18 @@ const CardList = ({
           sortOption={sortOption}
         />
 
+        <div
+          className="
+            text-gray-700 text-[14px]
+            border-[1.5px] border-gray-200/90 rounded-full"
+        >
+          Filters
+        </div>
+      </section>
+
+      <section>
+        {" "}
+        클릭여부에 따라서 여기에 추가 🤸‍♂️
         <InputFilter
           className="filter"
           setSelectedFilterOptionArr={setSelectedFilterOptionArr}
