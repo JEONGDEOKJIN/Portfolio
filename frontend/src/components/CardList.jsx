@@ -15,7 +15,7 @@ const CardList = ({
   searchBarInput,
 }) => {
   const [selectedFilterOptionArr, setSelectedFilterOptionArr] = useState([]);
-  const [sortOption, setSortOption] = useState("");
+  const [sortOption, setSortOption] = useState("recommended");
 
   console.log("searchTerm✅ @CardList", searchTerm);
 
@@ -154,22 +154,24 @@ const CardList = ({
 
   return (
     <>
-      <section className="flex flex-row items-center h-[10rem] bg-pink-200 ">
+      <section className="flex flex-row justify-between items-center h-[10rem] bg-pink-200 ">
         {/* 필터 */}
-
         {/* <FilterBtn /> */}
+
+        {/* 분류 */}
+        <SelectSort
+          className="sort"
+          setSortOption={setSortOption}
+          sortOption={sortOption}
+        />
 
         <InputFilter
           className="filter"
           setSelectedFilterOptionArr={setSelectedFilterOptionArr}
           selectedFilterOptionArr={selectedFilterOptionArr}
         />
-
-        {/* 분류 */}
-        <SelectSort className="sort" setSortOption={setSortOption} />
       </section>
-    
-    
+
       {/* cardListGridContainer : index.css 로 설정 */}
       <ul className="flex flex-col min-h-screen cardListGridContainer ">
         {filteredSortedData.map((item, index) => {

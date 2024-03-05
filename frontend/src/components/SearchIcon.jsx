@@ -4,14 +4,15 @@ const SearchIcon = () => {
   return (
     <>
       <svg
-        className="absolute top-[20px] left-[20px]"
+        className="absolute top-[24px] left-[35px]"
         xmlns="http://www.w3.org/2000/svg"
         width="17"
         height="17"
         fill="none"
       >
         <path
-          stroke="#515062"
+          stroke="#000000"
+          opacity={0.5}
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"

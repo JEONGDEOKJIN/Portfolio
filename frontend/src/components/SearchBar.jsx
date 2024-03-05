@@ -40,7 +40,7 @@ const SearchBar = ({
       {/* <header className="flex items-center w-screen px-3 py-1 sm:row-end-2 sm:row-start-1 sm:col-end-4 sm:col-start-1 searchBar h-18 "> */}
       {/* <div className="flex items-center w-full px-3 py-1 bg-blue-200 searchBar h-18"> */}
 
-      <div className="px-3 py-1 bg-blue-200 w-max-[600px] w-full searchBar h-18 relative">
+      <div className="px-3 py-1  w-max-[600px] w-full searchBar h-18 relative">
         <SearchIcon />
 
         <form
@@ -49,15 +49,30 @@ const SearchBar = ({
         >
           <input
             type="search"
-            className="mr-3 text-base bg-gray-200 rounded-md grow"
+            className="
+                  text-base rounded-[50px] grow border-[1px] border-gray-100 text-gray-800
+                  hover:border-black/[.10]  
+                  hover:shadow-searchBox
+                  focus:outline-none                  
+                  focus:shadow-searchBox
+                  focus:border-searchBoxBorder
+                  active:border-gray-50
+                  placeholder:text-gray-300 
+                  placeholder:text-base
+                  pl-12
+                  py-[28px]
+                  "
+            placeholder="Search features, skill & projects... "
             onChange={handleSearchTermChange}
             value={searchBarInput}
           />
-          <input
+          
+          {/* 이게 없어도 검색이 된다. */}
+          {/* <input
             type="submit"
             value="찾기"
             className="w-16 text-base rounded-md bg-gold-500 hover:cursor-pointer hover:bg-gold-200 "
-          />
+          /> */}
         </form>
 
         {/* {searchDropDown ? <Dropdown setSearchDropDown={setSearchDropDown} /> : ""} */}

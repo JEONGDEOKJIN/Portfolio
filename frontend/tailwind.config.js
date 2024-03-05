@@ -45,7 +45,7 @@ module.exports = {
           900: "#2A040B",
           950: "#170206",
         },
-
+        
         
 
       },
@@ -70,6 +70,15 @@ module.exports = {
         sans4: ['"Source Serif 4"', "cursive"],
         sansPro: ['"Source Sans Pro"'],
       },
+
+      boxShadow : { 
+        searchBox: '0 0 0 4px rgba(234,100,217,0.1)',
+      },
+
+      borderColor : { 
+        searchBoxBorder : 'rgba(234, 100, 217, 0.4)'
+      }
+
     },
   },
   plugins: [],
