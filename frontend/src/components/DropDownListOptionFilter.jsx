@@ -2,6 +2,7 @@ import React from "react";
 import ArrowUp from "./ArrowUp";
 import ArrowDown from "./ArrowDown";
 import VCheck from "./VCheck";
+import ListOption from "./ListOption";
 
 const DropDownListOptionFilter = ({
   selectedFilterOptionArr,
@@ -28,7 +29,15 @@ const DropDownListOptionFilter = ({
           border-[1.5px] border-gray-200/90  rounded-[7px]
         "
       >
-        {selectedFilterOptionArr?.includes("category_project") ? (
+        
+        <ListOption  
+            keywordToDB = 'category_project'
+            keywordToShow = 'category_project🔥🔥🔥'
+            selectedFilterOptionArr = {selectedFilterOptionArr}
+            handleFilterDropDownList = {handleFilterDropDownList}
+        />
+        
+        {/* {selectedFilterOptionArr?.includes("category_project") ? (
           <li
             onClick={() => handleFilterDropDownList("category_project")}
             className="pl-2 h-[42px] text-sm flex text-[13px] items-center bg-neutral-100 rounded-[7px] text-gray-600 cursor-pointer hover:bg-neutral-50/90 hover:rounded-[7px]"
@@ -45,14 +54,16 @@ const DropDownListOptionFilter = ({
           >
             category_project
           </li>
-        )}
+        )} */}
+
+        
 
         {selectedFilterOptionArr?.includes("category_feature") ? (
           <li
             onClick={() => handleFilterDropDownList("category_feature")}
             className="pl-2 h-[42px] text-sm flex text-[13px] items-center bg-neutral-100 text-gray-600 cursor-pointer hover:bg-neutral-50/90 hover:rounded-[7px]"
           >
-            category_feature <ArrowUp />
+            category_feature🔥🔥🔥 <ArrowUp />
             <span className="ml-auto mr-2">
               <VCheck />
             </span>
@@ -125,6 +136,7 @@ const DropDownListOptionFilter = ({
           >
             roles_aws <ArrowUp />
           </li>
+          
         )}
       </ul>
     </>

@@ -168,7 +168,10 @@ const CardList = ({
           sortOption={sortOption}
         />
 
-        <FilterBtn setIsFilterBtnClicked={setIsFilterBtnClicked} isFilterBtnClicked={isFilterBtnClicked} />
+        <FilterBtn 
+            selectedFilterOptionArr={selectedFilterOptionArr}
+            setIsFilterBtnClicked={setIsFilterBtnClicked} 
+            isFilterBtnClicked={isFilterBtnClicked} />
 
       </section>
       
