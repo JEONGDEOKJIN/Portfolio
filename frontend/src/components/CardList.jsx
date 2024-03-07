@@ -10,6 +10,7 @@ import errorMessage from "../utils/errorMessage";
 import SVGFilterIcon from "./SVGFilterIcon";
 import FilterBtn from "./FilterBtn";
 import SVGCalendar from "./SVGCalendar";
+import SVGExternalLink from "./SVGExternalLink";
 
 const CardList = ({
   searchTerm,
@@ -20,6 +21,7 @@ const CardList = ({
   const [selectedFilterOptionArr, setSelectedFilterOptionArr] = useState([]);
   const [sortOption, setSortOption] = useState("recommended");
   const [isFilterBtnClicked, setIsFilterBtnClicked] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   console.log("searchTerm✅ @CardList", searchTerm);
 
@@ -194,14 +196,51 @@ const CardList = ({
           return (
             <li key={index} className="flex flex-col ">
               <figure
-                className="h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg"
+                className="relative h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg"
                 style={{
                   // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
                   backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
                 }}
-              ></figure>
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                <div className="absolute flex items-end justify-between w-full h-full p-5 rounded-lg bg-gradient-to-b from-gray-50/5 to-gray-600/50">
+                  <span className="mb-3 mr-4 text-base font-normal text-gray-100 w-[80%]  truncate">
+                    {item.summary}
+                  </span>
 
-              <div className="flex items-center justify-between p-3 font-medium bg-blue-800 text-stone-900 ">
+                  {item.category === "category_feature" ? (
+                    
+                    <span
+                      className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64ea88] rounded-full 
+                    hover:bg-[#275a34] items-center hover:text-gray-50"
+                    >
+                      기능
+                    </span>
+                  ) : (
+                    <span
+                    className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64eaea] rounded-full 
+                    hover:bg-[#275c5c] items-center hover:text-gray-50"
+                    >
+                      플젝
+                    </span>
+                  )}
+                  
+                  <div className="mb-2">
+                    <div className="ml-auto flex items-center justify-center p-2 text-[12px] font-semibold text-gray-700 rounded-full bg-gray-50 shrink-0 border-[1.5px] border-gray-200">
+                      
+                      
+                      
+                      <SVGExternalLink />
+                    </div>
+                    {/* <div className="right-[-7px] top-[-5px] absolute w-5 h-5 text-[12px] flex items-center justify-center rounded-full bg-searchBoxBorder-100/85  text-gray-50">
+                      stack 의 개수 세기📛
+                    </div> */}
+                  </div>
+                </div>
+              </figure>
+
+              <div className="flex items-center justify-between p-3 font-medium text-stone-900 ">
                 <div className="flex items-center ">
                   <figure
                     className="w-6 h-6 bg-top bg-no-repeat bg-cover rounded-full"
@@ -210,36 +249,25 @@ const CardList = ({
                     }}
                   ></figure>
 
-                  <span className="ml-2 text-sm font-medium text-gray-900 truncate">
+                  <span className="ml-2 text-sm font-medium text-gray-900 truncate max-w-[100px]">
                     {item.title}
                   </span>
 
-                  {item.category === "category_feature" 
-                    ? <span
-                    className="h-4 px-1 flex ml-2 text-[10px] font-semibold text-gray-100 transition duration-200 ease-linear bg-neutral-300 rounded-sm 
-                    hover:bg-[#64ea88] items-center"
-                  >
-                    Feature
-                  </span>
-                    : <span
-                    className="h-4 px-1 flex ml-2 text-[10px] font-semibold text-gray-100 transition duration-200 ease-linear bg-neutral-300 rounded-sm 
-                    hover:bg-[#6466ea] items-center"
-                  >
-                    Project
-                  </span>
-                  }
-                  
                 </div>
 
-                <div className="flex items-center ">
+                <div className="flex items-center ml-2 ">
                   <SVGCalendar />
-                  <span className=" mt-[3px] ml-1 text-sm text-gray-800">
+                  <span className="ml-[2px] mt-[2px] text-xs text-gray-600 truncate hover:text-gray-800">
                     {(() => {
                       const startDatePart = item.startDate
                         .split("T")[0]
                         .split("-");
                       const endDatePart = item.endDate.split("T")[0].split("-");
-                      return `${startDatePart[0]}.${startDatePart[1]}.${startDatePart[2]} - ${endDatePart[1]}.${endDatePart[2]}`;
+                      return `${startDatePart[0].slice(2, 4)}.${
+                        startDatePart[1]
+                      }.${startDatePart[2]}-${startDatePart[0].slice(2, 4)}.${
+                        endDatePart[1]
+                      }.${endDatePart[2]}`;
                     })()}
                   </span>
                 </div>
