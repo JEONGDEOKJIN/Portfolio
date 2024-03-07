@@ -30,59 +30,60 @@ const InputFilter = ({
 
   return (
     <>
-      <section>  
+      <section className="mb-10">  
         <FilterShots 
             selectedFilterOptionArr = {selectedFilterOptionArr} 
             setSelectedFilterOptionArr = {setSelectedFilterOptionArr} />
       </section>
 
-      <section>
-        <button onClick={handleClearAll}> clear all ❎ </button>
-
-        {/* [label input 연결 방식 1] label 로 감싸면, 라벨을 클릭해도 -> input 이 클릭될 수 있음.  */}
-        <label>
-          <input
-            type="checkbox"
-            value="category_project"
-            onChange={handleCheckBoxInput}
-            checked={selectedFilterOptionArr?.includes("category_project")}
-          />
-          project
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            value="category_feature"
-            onChange={handleCheckBoxInput}
-            checked={selectedFilterOptionArr?.includes("category_feature")}
-          />
-          feature
-        </label>
-
-        <InputCheckbox
-          value={"roles_frontend"}
-          handleCheckBoxInput={handleCheckBoxInput}
-          selectedFilterOptionArr={selectedFilterOptionArr}
-        />
-        <InputCheckbox
-          value={"roles_backend"}
-          handleCheckBoxInput={handleCheckBoxInput}
-          selectedFilterOptionArr={selectedFilterOptionArr}
-        />
-        <InputCheckbox
-          value={"roles_aws"}
-          handleCheckBoxInput={handleCheckBoxInput}
-          selectedFilterOptionArr={selectedFilterOptionArr}
-        />
-        <InputCheckbox
-          value={"roles_planning"}
-          handleCheckBoxInput={handleCheckBoxInput}
-          selectedFilterOptionArr={selectedFilterOptionArr}
-        />
-      </section>
     </>
   );
 };
 
 export default InputFilter;
+
+      // <section>
+      //   <button onClick={handleClearAll}> clear all ❎ </button>
+
+      //   {/* [label input 연결 방식 1] label 로 감싸면, 라벨을 클릭해도 -> input 이 클릭될 수 있음.  */}
+      //   <label>
+      //     <input
+      //       type="checkbox"
+      //       value="category_project"
+      //       onChange={handleCheckBoxInput}
+      //       checked={selectedFilterOptionArr?.includes("category_project")}
+      //     />
+      //     project
+      //   </label>
+
+      //   <label>
+      //     <input
+      //       type="checkbox"
+      //       value="category_feature"
+      //       onChange={handleCheckBoxInput}
+      //       checked={selectedFilterOptionArr?.includes("category_feature")}
+      //     />
+      //     feature
+      //   </label>
+
+      //   <InputCheckbox
+      //     value={"roles_frontend"}
+      //     handleCheckBoxInput={handleCheckBoxInput}
+      //     selectedFilterOptionArr={selectedFilterOptionArr}
+      //   />
+      //   <InputCheckbox
+      //     value={"roles_backend"}
+      //     handleCheckBoxInput={handleCheckBoxInput}
+      //     selectedFilterOptionArr={selectedFilterOptionArr}
+      //   />
+      //   <InputCheckbox
+      //     value={"roles_aws"}
+      //     handleCheckBoxInput={handleCheckBoxInput}
+      //     selectedFilterOptionArr={selectedFilterOptionArr}
+      //   />
+      //   <InputCheckbox
+      //     value={"roles_planning"}
+      //     handleCheckBoxInput={handleCheckBoxInput}
+      //     selectedFilterOptionArr={selectedFilterOptionArr}
+      //   />
+      // </section>

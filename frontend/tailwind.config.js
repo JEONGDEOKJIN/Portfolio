@@ -45,10 +45,29 @@ module.exports = {
           900: "#2A040B",
           950: "#170206",
         },
+
+        searchBoxBorder : {
+          10 : "rgba(234, 100, 217, 0.1)",
+          20 : "rgba(234, 100, 217, 0.2)",
+          30 : "rgba(234, 100, 217, 0.3)",
+          40 : "rgba(234, 100, 217, 0.4)",
+          50 : "rgba(234, 100, 217, 0.5)",
+          100 : "rgba(234, 100, 217, 1)",
+        }, 
+
+        projectBadge : {
+          "basic" : "#6466ea"
+        }, 
+        
+        featureBadge : {
+          "basic" : "#64ea88"
+        }, 
+
+
       },
 
       padding: {
-        "60p": "60%", // 사진 일정 비율 유지하기 위한 padding-botto 60%
+        "75%": "75%", // 사진 일정 비율 유지하기 위한 padding-botto 60%
       },
 
       height: {
@@ -77,6 +96,11 @@ module.exports = {
       borderColor: {
         searchBoxBorder: "rgba(234, 100, 217, 0.4)",
       },
+      
+      stroke: {
+        searchBoxBorder100 : "rgba(234, 100, 217)",
+      },
+
     },
   },
   plugins: [],

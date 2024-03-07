@@ -9,6 +9,7 @@ import loadingMessage from "../utils/loadingMessage";
 import errorMessage from "../utils/errorMessage";
 import SVGFilterIcon from "./SVGFilterIcon";
 import FilterBtn from "./FilterBtn";
+import SVGCalendar from "./SVGCalendar";
 
 const CardList = ({
   searchTerm,
@@ -18,7 +19,7 @@ const CardList = ({
 }) => {
   const [selectedFilterOptionArr, setSelectedFilterOptionArr] = useState([]);
   const [sortOption, setSortOption] = useState("recommended");
-  const [isFilterBtnClicked, setIsFilterBtnClicked] = useState(false)
+  const [isFilterBtnClicked, setIsFilterBtnClicked] = useState(false);
 
   console.log("searchTerm✅ @CardList", searchTerm);
 
@@ -168,14 +169,14 @@ const CardList = ({
           sortOption={sortOption}
         />
 
-        <FilterBtn 
-            selectedFilterOptionArr={selectedFilterOptionArr}
-            setIsFilterBtnClicked={setIsFilterBtnClicked} 
-            isFilterBtnClicked={isFilterBtnClicked} />
-
+        <FilterBtn
+          selectedFilterOptionArr={selectedFilterOptionArr}
+          setIsFilterBtnClicked={setIsFilterBtnClicked}
+          isFilterBtnClicked={isFilterBtnClicked}
+        />
       </section>
-      
-      {isFilterBtnClicked ? 
+
+      {isFilterBtnClicked ? (
         <section>
           <InputFilter
             className="filter"
@@ -183,26 +184,65 @@ const CardList = ({
             selectedFilterOptionArr={selectedFilterOptionArr}
           />
         </section>
-      : ""}
-
+      ) : (
+        ""
+      )}
 
       {/* cardListGridContainer : index.css 로 설정 */}
-      <ul className="flex flex-col min-h-screen cardListGridContainer ">
+      <ul className="flex flex-col cardListGridContainer">
         {filteredSortedData.map((item, index) => {
           return (
-            <li key={index} className="flex flex-col mb-8">
+            <li key={index} className="flex flex-col ">
               <figure
-                className="h-0 bg-top bg-no-repeat bg-cover pb-60p"
+                className="h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg"
                 style={{
                   // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
                   backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
                 }}
               ></figure>
-              <div className="flex-auto p-3 font-medium text-stone-900 bg-mediumseagreen-200">
-                <p>제목 : {item.title}</p>
-                <p className="">
-                  일정 ✅ 수정 필요 : {item.startDate} - {item.endDate}
-                </p>
+
+              <div className="flex items-center justify-between p-3 font-medium bg-blue-800 text-stone-900 ">
+                <div className="flex items-center ">
+                  <figure
+                    className="w-6 h-6 bg-top bg-no-repeat bg-cover rounded-full"
+                    style={{
+                      backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                    }}
+                  ></figure>
+
+                  <span className="ml-2 text-sm font-medium text-gray-900 truncate">
+                    {item.title}
+                  </span>
+
+                  {item.category === "category_feature" 
+                    ? <span
+                    className="h-4 px-1 flex ml-2 text-[10px] font-semibold text-gray-100 transition duration-200 ease-linear bg-neutral-300 rounded-sm 
+                    hover:bg-[#64ea88] items-center"
+                  >
+                    Feature
+                  </span>
+                    : <span
+                    className="h-4 px-1 flex ml-2 text-[10px] font-semibold text-gray-100 transition duration-200 ease-linear bg-neutral-300 rounded-sm 
+                    hover:bg-[#6466ea] items-center"
+                  >
+                    Project
+                  </span>
+                  }
+                  
+                </div>
+
+                <div className="flex items-center ">
+                  <SVGCalendar />
+                  <span className=" mt-[3px] ml-1 text-sm text-gray-800">
+                    {(() => {
+                      const startDatePart = item.startDate
+                        .split("T")[0]
+                        .split("-");
+                      const endDatePart = item.endDate.split("T")[0].split("-");
+                      return `${startDatePart[0]}.${startDatePart[1]}.${startDatePart[2]} - ${endDatePart[1]}.${endDatePart[2]}`;
+                    })()}
+                  </span>
+                </div>
               </div>
             </li>
           );

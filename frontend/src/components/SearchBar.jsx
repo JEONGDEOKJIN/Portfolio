@@ -50,7 +50,7 @@ const SearchBar = ({
           <input
             type="search"
             className="
-                  text-base rounded-[50px] grow border-[1px] border-gray-100 text-gray-800
+                  text-base rounded-[50px] grow border-[1px] border-gray-200 text-gray-800
                   hover:border-black/[.10]  
                   hover:shadow-searchBox
                   focus:outline-none                  
