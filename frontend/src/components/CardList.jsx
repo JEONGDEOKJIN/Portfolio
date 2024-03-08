@@ -167,6 +167,10 @@ const CardList = ({
     console.log(`${index}`, index);
   };
 
+  const handleCloseBtn = () => {
+    setIsItemDetailOpened(false);
+  };
+
   return (
     <>
       <section className="flex flex-row justify-between items-center h-[10rem]  ">
@@ -292,36 +296,36 @@ const CardList = ({
       {/* itemDetail 영역 | 여기는 컴포넌트로 따로 빼서 진행 */}
       {isItemDetailOpened ? (
         <section className="">
-          <div className="fixed inset-0 z-50 w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-gray-200">
-            이제, 드리블 & ocula 보면서, 하나씩 만들어야 함
-
-            <div> 
-              <span>취소 버튼 있는 투명 </span>
-            </div>
-
-            <header> 
+          <div className="fixed inset-0 z-50 flex items-center justify-end w-full h-10 bg-black/80 mix-blend-normal">
+            <button className="mb-1 mr-2" onClick={handleCloseBtn}>
+              ❎
+            </button>
+          </div>
+          <div className="fixed inset-0 z-50 w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-gray-200 inset-y-9">
+            <header>
               <p> Hot sauce illustrations </p>
-              <span> 내 얼굴 </span> 
-              <span> 정덕진 </span> 
+              <span> 내 얼굴 </span>
+              <span> 정덕진 </span>
               <span> 'FrontEnd Developer' 라고 명확히 기재 </span>
-              
+
               <span> send message 혹은 send feedback 아이콘 넣기🔥 </span>
             </header>
 
             <main>
-              <article> 
+              <article>
                 <figure> 여기에 배경 프로젝트 사진 </figure>
                 <figure> 여기에 플젝 또는 기능 사진 </figure>
                 <div> 여기에 이제 설명 </div>
               </article>
 
-              <section> JEONG DEOKJIN 에 대해서 설명하고, 다시 FEEDBACK 요청 | 클릭하면, 메시지 CREATE 될 수 있게 </section>
+              <section>
+                {" "}
+                JEONG DEOKJIN 에 대해서 설명하고, 다시 FEEDBACK 요청 | 클릭하면,
+                메시지 CREATE 될 수 있게{" "}
+              </section>
 
               <section> you may also like </section>
-
             </main>
-
-            
           </div>
         </section>
       ) : (
