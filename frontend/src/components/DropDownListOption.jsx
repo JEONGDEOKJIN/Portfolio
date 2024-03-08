@@ -10,7 +10,7 @@ const DropDownListOption = ({ handleSortDropDownList, sortOption }) => {
         className="
           p-3 absolute top-16 left-0 bg-white 
            drop-shadow-sortDropDownList min-w-[200px] 
-          border-[1.5px] border-gray-200/90  rounded-[7px]
+          border-[1.5px] border-gray-200/90  rounded-[7px] z-10
         "
       >
         {sortOption === "recommended" ? (
