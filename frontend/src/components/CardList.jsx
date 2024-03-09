@@ -301,7 +301,7 @@ const CardList = ({
               ❎
             </button>
           </div>
-          <div className="fixed inset-0 z-50 flex flex-col w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-gray-200 inset-y-9">
+          <div className="fixed inset-0 z-50 flex flex-col w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-gray-50 inset-y-9">
             <header className="flex flex-col items-center mt-16 ">
               <div className="flex flex-row w-full max-w-[1200px] bg-gray-300  items-center">
                 <div className="flex items-center justify-center w-12 h-12 bg-green-500 rounded-full">
@@ -330,19 +330,63 @@ const CardList = ({
             </header>
 
             {/* 💪 mx-auto 하면 이제 가운데로 오긴 하는데, flex 를 써서 깔끔하게 오게 하고 싶긴 함  */}
-            <main className="w-full mt-12 bg-yellow-300 max-w-[1200px] mx-auto">
+            <main className="w-full mt-12 bg-neutral-100 max-w-[1200px] mx-auto rounded-[64px] p-10">
               <article>
-                <figure> 여기에 배경 프로젝트 사진 </figure>
-                <figure> 여기에 플젝 또는 기능 사진 </figure>
-                <div> 여기에 이제 설명 </div>
+                <div className="flex flex-row justify-normal gap-[24px]">
+                  <figure className="w-[400px] h-[450px] bg-yellow-300 rounded-[40px]">
+                    여기에 배경 프로젝트 사진
+                  </figure>
+                  <figure className="bg-yellow-500 rounded-[40px] w-full h-[450px]">
+                    여기에 플젝 또는 기능 사진
+                  </figure>
+                </div>
+
+                <div className="flex bg-gray-300 ">
+                  {/* 왼쪽 */}
+                  <div className="bg-emerald-100">
+                    <span className="bg-[#1c5eff1a] text-[#1c5eff] px-[14px] py-[8px] rounded-[50px] text-[13px]">
+                      May 20, 2024
+                    </span>
+
+                    <div className="flex flex-row">
+                      <h2 className="text-[28px] font-semibold">
+                        Creating and Maintaining Successful Design Systems
+                      </h2>
+
+                      <div className="flex items-center ml-2 ">
+                        <span className="bg-[#2b593f] font-light text-neutral-50 px-[8px] py-[4px] rounded-[50px] text-[12px] ml-2">
+                          Next.js
+                        </span>
+                        <span className="bg-[#2b593f] font-light text-neutral-50 px-[8px] py-[4px] rounded-[50px] text-[12px] ml-2">
+                          Node.js
+                        </span>
+                        <span className="bg-[#2b593f] font-light text-neutral-50 px-[8px] py-[4px] rounded-[50px] text-[12px] ml-2">
+                          Tailwind
+                        </span>
+                      </div>
+                    </div>
+
+                    <p>
+                      Learn actionable tactics for planning, executing, and
+                      maintaining a successful design system at your
+                      organization.{" "}
+                    </p>
+
+                    <div> 기능 정의서 표 만들기 </div>
+                  </div>
+
+                  {/* 오른쪽 */}
+                  <div className="bg-indigo-300">
+                    <div> Info </div>
+                    <div> 관련 프로젝트 </div>
+                    <div> 이제 이걸, 어떤거랑 위계를 맞춰서 놓을 것 인가! </div>
+                  </div>
+                </div>
               </article>
 
-              <section>
-                JEONG DEOKJIN 에 대해서 설명하고, 다시 FEEDBACK 요청 | 클릭하면,
-                메시지 CREATE 될 수 있게
-              </section>
+              <section className="mt-20">DJ 소개</section>
 
-              <section> you may also like </section>
+              <section className="mt-20"> you may also like </section>
             </main>
           </div>
         </section>

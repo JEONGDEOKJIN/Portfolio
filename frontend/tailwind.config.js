@@ -46,24 +46,22 @@ module.exports = {
           950: "#170206",
         },
 
-        searchBoxBorder : {
-          10 : "rgba(234, 100, 217, 0.1)",
-          20 : "rgba(234, 100, 217, 0.2)",
-          30 : "rgba(234, 100, 217, 0.3)",
-          40 : "rgba(234, 100, 217, 0.4)",
-          50 : "rgba(234, 100, 217, 0.5)",
-          100 : "rgba(234, 100, 217, 1)",
-        }, 
+        searchBoxBorder: {
+          10: "rgba(234, 100, 217, 0.1)",
+          20: "rgba(234, 100, 217, 0.2)",
+          30: "rgba(234, 100, 217, 0.3)",
+          40: "rgba(234, 100, 217, 0.4)",
+          50: "rgba(234, 100, 217, 0.5)",
+          100: "rgba(234, 100, 217, 1)",
+        },
 
-        projectBadge : {
-          "basic" : "#6466ea"
-        }, 
-        
-        featureBadge : {
-          "basic" : "#64ea88"
-        }, 
+        projectBadge: {
+          basic: "#6466ea",
+        },
 
-
+        featureBadge: {
+          basic: "#64ea88",
+        },
       },
 
       padding: {
@@ -87,6 +85,10 @@ module.exports = {
         sansPro: ['"Source Sans Pro"'],
       },
 
+      fontWeight: {
+        semimedium: "600",
+      },
+
       boxShadow: {
         searchBox: "0 0 0 4px rgba(234,100,217,0.1)",
         sortDropDownBox: "0 2px 2px 0 rgba(0,0,0,0.03)",
@@ -96,11 +98,10 @@ module.exports = {
       borderColor: {
         searchBoxBorder: "rgba(234, 100, 217, 0.4)",
       },
-      
-      stroke: {
-        searchBoxBorder100 : "rgba(234, 100, 217)",
-      },
 
+      stroke: {
+        searchBoxBorder100: "rgba(234, 100, 217)",
+      },
     },
   },
   plugins: [],
