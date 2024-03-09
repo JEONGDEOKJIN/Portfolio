@@ -303,7 +303,14 @@ const CardList = ({
           </div>
           <div className="fixed inset-0 z-50 w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-gray-200 inset-y-9">
             <header>
-              <p> Hot sauce illustrations </p>
+              <div className="w-[75%]">
+                "사진" 오캐이 진행! 
+              </div>
+
+              <div className="w-[25%] ">
+              <p  > Hot sauce illustrations </p>
+                
+              </div>
               <span> 내 얼굴 </span>
               <span> 정덕진 </span>
               <span> 'FrontEnd Developer' 라고 명확히 기재 </span>
@@ -319,9 +326,8 @@ const CardList = ({
               </article>
 
               <section>
-                {" "}
                 JEONG DEOKJIN 에 대해서 설명하고, 다시 FEEDBACK 요청 | 클릭하면,
-                메시지 CREATE 될 수 있게{" "}
+                메시지 CREATE 될 수 있게
               </section>
 
               <section> you may also like </section>
