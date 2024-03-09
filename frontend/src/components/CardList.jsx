@@ -301,24 +301,36 @@ const CardList = ({
               ❎
             </button>
           </div>
-          <div className="fixed inset-0 z-50 w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-gray-200 inset-y-9">
-            <header>
-              <div className="w-[75%]">
-                "사진" 오캐이 진행! 
-              </div>
+          <div className="fixed inset-0 z-50 flex flex-col w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-gray-200 inset-y-9">
+            <header className="flex flex-col items-center mt-16 ">
+              <div className="flex flex-row w-full max-w-[1200px] bg-gray-300  items-center">
+                <div className="flex items-center justify-center w-12 h-12 bg-green-500 rounded-full">
+                  사진
+                </div>
+                <div className="ml-3 ">
+                  <span className="font-semibold text-gray-900">
+                    {" "}
+                    JEONG! DEOKJIN{" "}
+                  </span>
+                  <div className="flex flex-row items-center">
+                    <span className="bg-[#4daa57] w-2 h-2 rounded-full my-auto mr-1 animate-pulse  ">
+                      {" "}
+                    </span>
+                    <span className="text-[#4daa57] text-[12px]">
+                      {" "}
+                      Frontend Developer{" "}
+                    </span>
+                  </div>
+                </div>
 
-              <div className="w-[25%] ">
-              <p  > Hot sauce illustrations </p>
-                
+                <div className="px-4 py-3 ml-auto text-sm font-medium rounded-full cursor-pointer bg-gray-950 text-gray-50 hover:bg-gray-600 ">
+                  Contact me
+                </div>
               </div>
-              <span> 내 얼굴 </span>
-              <span> 정덕진 </span>
-              <span> 'FrontEnd Developer' 라고 명확히 기재 </span>
-
-              <span> send message 혹은 send feedback 아이콘 넣기🔥 </span>
             </header>
 
-            <main>
+            {/* 💪 mx-auto 하면 이제 가운데로 오긴 하는데, flex 를 써서 깔끔하게 오게 하고 싶긴 함  */}
+            <main className="w-full mt-12 bg-yellow-300 max-w-[1200px] mx-auto">
               <article>
                 <figure> 여기에 배경 프로젝트 사진 </figure>
                 <figure> 여기에 플젝 또는 기능 사진 </figure>
