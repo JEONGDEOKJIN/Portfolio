@@ -368,8 +368,8 @@ const CardList = ({
 
                     <p>
                       Learn actionable tactics for planning, executing, and
-                      maintaining a successful design system at your
-                      organization.{" "}
+                      maintaining a successful design system at your. nono 요~ 
+                      organization.
                     </p>
 
                     <div> 기능 정의서 표 만들기 </div>
