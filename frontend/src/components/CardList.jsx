@@ -11,6 +11,7 @@ import SVGFilterIcon from "./SVGFilterIcon";
 import FilterBtn from "./FilterBtn";
 import SVGCalendar from "./SVGCalendar";
 import SVGExternalLink from "./SVGExternalLink";
+import DivTable from "./DivTable";
 
 const CardList = ({
   searchTerm,
@@ -341,19 +342,19 @@ const CardList = ({
                   </figure>
                 </div>
 
-                <div className="flex bg-gray-300 ">
+                <div className="flex flex-row bg-gray-300 gap-[80px] px-12 py-8 ">
                   {/* 왼쪽 */}
-                  <div className="bg-emerald-100">
-                    <span className="bg-[#1c5eff1a] text-[#1c5eff] px-[14px] py-[8px] rounded-[50px] text-[13px]">
+                  <div className="flex flex-col flex-wrap bg-emerald-100 gap-[24px] ">
+                    <span className="bg-[#1c5eff1a] w-fit text-[#1c5eff] px-[14px] py-[6px] rounded-[50px] text-[13px]">
                       May 20, 2024
                     </span>
 
-                    <div className="flex flex-row">
-                      <h2 className="text-[28px] font-semibold">
+                    <div>
+                      <h2 className="text-[48px] font-semibold leading-[1.1em]  text-left	">
                         Creating and Maintaining Successful Design Systems
                       </h2>
 
-                      <div className="flex items-center ml-2 ">
+                      <span className="flex items-center mt-[1.1em] ml-[-6px]">
                         <span className="bg-[#2b593f] font-light text-neutral-50 px-[8px] py-[4px] rounded-[50px] text-[12px] ml-2">
                           Next.js
                         </span>
@@ -363,16 +364,31 @@ const CardList = ({
                         <span className="bg-[#2b593f] font-light text-neutral-50 px-[8px] py-[4px] rounded-[50px] text-[12px] ml-2">
                           Tailwind
                         </span>
-                      </div>
+                      </span>
                     </div>
 
-                    <p>
-                      Learn actionable tactics for planning, executing, and
-                      maintaining a successful design system at your. nono 요~ 
-                      organization.
-                    </p>
+                    <div className="text-[20px] leading-[1.6em] mt-[16px]">
+                      <h5 className="">
+                        <strong>Summary</strong>
+                      </h5>
+                      <p className="leading-[1.7em]  shrink-0 text-[18px] font-normal text-left mt-[15px]	">
+                        Learn actionable tactics for planning, executing, and
+                        maintaining a successful design system at your. nono 요~
+                        organization. organizationign system at /ur. nono 요~
+                        organization. organization.
+                      </p>
+                    </div>
 
-                    <div> 기능 정의서 표 만들기 </div>
+                    <div className="mt-[16px]">
+                      <h5 className="text-[20px] leading-[1.6em]  ">
+                        <strong>기능 요구사항</strong>
+                      </h5>
+
+                      <DivTable />
+
+
+                      <div></div>
+                    </div>
                   </div>
 
                   {/* 오른쪽 */}
