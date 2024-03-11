@@ -31,7 +31,6 @@ const ItemList = () => {
 
       {/* <main className="flex flex-col items-center w-full "> */}
       <main className="w-full">
-        
         {/* 검색 hero 섹션 */}
         <section className="flex flex-col items-center px-6 py-10 ">
           <div className="  tablet:h-[560px] tablet:max-w-[560px] flex flex-col justify-evenly items-center">
@@ -65,9 +64,7 @@ const ItemList = () => {
                 <RecommenedKeyWord keyword={"반응형 웹"} />
                 <RecommenedKeyWord keyword={"figma"} />
               </ul>
-              
             </div>
-            
           </div>
         </section>
 
@@ -97,10 +94,6 @@ const ItemList = () => {
 
         {/* 상세 페이지 */}
         {/* <Modal /> */}
-
-        
-
-
       </main>
       <Footer />
     </div>

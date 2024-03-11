@@ -10,19 +10,19 @@ const DivTableRow = ({
   return (
     <>
       <div className="flex text-[12px] text-gray-800">
-        <div className="flex items-center justify-center max-w-[8%]  grow border-b-[1px] border-r-[1px] border-neutral-200 p-3">
+        <div className="flex items-center justify-center w-[8%]  grow border-b-[1px] border-r-[1px] border-neutral-200 p-3">
           {largeCriteria}
         </div>
-        <div className="flex items-center justify-center max-w-[11%] grow border-b-[1px] border-r-[1px] border-neutral-200 p-3">
+        <div className="flex items-center justify-center w-[10%] grow border-b-[1px] border-r-[1px] border-neutral-200 p-3">
           {mediumCriteria}
         </div>
-        <div className="flex items-center justify-center max-w-[11%] grow border-b-[1px] border-r-[1px] border-neutral-200 p-3">
+        <div className="flex items-center justify-center w-[12%] grow border-b-[1px] border-r-[1px] border-neutral-200 p-3">
           {smallCriteria}
         </div>
-        <div className="flex items-center justify-center max-w-[35%]  grow border-b-[1px] border-r-[1px] border-neutral-200 text-left p-3">
+        <div className="flex items-center justify-center w-[20%]  grow border-b-[1px] border-r-[1px] border-neutral-200 text-left p-3">
           {requirement}
         </div>
-        <div className="flex items-center justify-center max-w-[35%]  grow border-b-[1px]  border-neutral-200 text-left p-3">
+        <div className="flex items-center justify-center w-[30%]  grow border-b-[1px]  border-neutral-200 text-left p-3">
           {desc}
         </div>
       </div>

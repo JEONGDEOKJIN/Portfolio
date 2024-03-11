@@ -39,7 +39,6 @@
 
 body {
   font-family: "Pretendard-Regular";
-  
 }
 
 /* 스크롤바 설정 */
@@ -108,14 +107,19 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(270px, auto));
     gap: 36px;
   }
-  
+
+  .detailPageGridContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, auto));
+    gap: 40px;
+  }
+
   /* [1차 설정] 
     .cardListGridContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, auto));
     gap: 2%;
   } */
-
 
   /* .sidebarLeft {
     grid-column: 1/2;

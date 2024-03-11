@@ -12,6 +12,7 @@ import FilterBtn from "./FilterBtn";
 import SVGCalendar from "./SVGCalendar";
 import SVGExternalLink from "./SVGExternalLink";
 import DivTable from "./DivTable";
+import Footer from "./Footer";
 
 const CardList = ({
   searchTerm,
@@ -324,9 +325,9 @@ const CardList = ({
                   </div>
                 </div>
 
-                <div className="px-4 py-3 ml-auto text-sm font-medium rounded-full cursor-pointer bg-gray-950 text-gray-50 hover:bg-gray-600 ">
-                  Contact me
-                </div>
+                <button className="px-4 py-3 ml-auto text-sm font-semibold rounded-full cursor-pointer bg-gray-950 text-gray-50 hover:bg-gray-600 ">
+                  Contact DJ
+                </button>
               </div>
             </header>
 
@@ -386,26 +387,149 @@ const CardList = ({
 
                       <DivTable />
 
-
                       <div></div>
                     </div>
                   </div>
 
                   {/* 오른쪽 */}
-                  <div className="bg-indigo-300">
-                    <div> Info </div>
-                    <div> 관련 프로젝트 </div>
-                    <div> 이제 이걸, 어떤거랑 위계를 맞춰서 놓을 것 인가! </div>
+                  <div className="bg-neutral-50 w-[550px] rounded-[32px]  p-8 flex gap-[12px] h-fit flex-col">
+                    <h5 className="text-[20px] font-normal"> Information </h5>
+
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 text-[14px]">Project</span>
+                      <span className="text-[14px]"> STO 프로젝트 </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 text-[14px]">Date</span>
+                      <span className="text-[14px]"> 23.03.11 - 03.12 </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 text-[14px]">
+                        프로젝트 깃 주소
+                      </span>
+                      <span className="text-[14px]"> ✅ </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 text-[14px]">
+                        프로젝트 일지
+                      </span>
+                      <span className="text-[14px]"> ✅ </span>
+                    </div>
+
+                    <button className="px-4 py-3 w-full mx-auto ml-auto text-sm font-semibold rounded-full cursor-pointer mt-[16px] bg-gray-950 text-gray-50 hover:bg-gray-600 ">
+                      Feedback Now
+                    </button>
                   </div>
                 </div>
               </article>
 
-              <section className="mt-20">DJ 소개</section>
+              <section className="flex flex-col flex-wrap  mt-20 gap-[8px] ">
+                <div className="flex flex-row ">
+                  <span className="w-full border-neutral-200 border-t-[1px] my-auto"></span>
+                  <div className="w-[72px] shrink-0 h-[72px] flex justify-center items-center rounded-full mx-[24px] bg-green-300">
+                    사진
+                  </div>
+                  <span className="w-full border-neutral-200 border-t-[1px] my-auto"></span>
+                </div>
 
-              <section className="mt-20"> you may also like </section>
+                <h5 className="text-[20px] font-medium text-gray-900 text-center mt-[8px]">
+                  Jeong! Deokjin
+                </h5>
+
+                <div className="text-center text-gray-600 text-[14px]">
+                  show me who i am
+                </div>
+
+                <button className="px-4 py-3 mx-auto ml-auto text-sm font-semibold rounded-full cursor-pointer mt-[8px] bg-gray-950 text-gray-50 hover:bg-gray-600 ">
+                  Contact DJ
+                </button>
+              </section>
+
+              <section className="mt-20 text-[16px] font-bold mb-20">
+                <div>You may also like | ✅ 클릭했을 때, 이동하게 해야 함 </div>
+                <article>
+                  <ul className="flex flex-col mt-4 detailPageGridContainer">
+                    {filteredSortedData.slice(0, 4).map((item, index) => {
+                      return (
+                        <li
+                          key={index}
+                          className="flex flex-col cursor-pointer w-[250px] "
+                          onClick={() => handleCardItem(index)}
+                        >
+                          <figure
+                            className="relative h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg "
+                            style={{
+                              // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
+                              backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                            }}
+                            onMouseEnter={() => setIsHovered(index)}
+                            onMouseLeave={() => setIsHovered(null)}
+                          >
+                            {/* 호버 했을 때 보이는 것  */}
+                            {isHovered === index ? (
+                              <div className="absolute flex items-end justify-between w-full h-full p-5 rounded-lg bg-gradient-to-b from-gray-50/5 to-gray-600/50">
+                                <span className="mb-3 mr-4 text-base font-normal text-gray-100 w-[80%]  truncate">
+                                  {item.summary}
+                                </span>
+                                {item.category === "category_feature" ? (
+                                  <span
+                                    className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64ea88] rounded-full 
+                    hover:bg-[#275a34] items-center hover:text-gray-50"
+                                  >
+                                    기능
+                                  </span>
+                                ) : (
+                                  <span
+                                    className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64eaea] rounded-full 
+                    hover:bg-[#275c5c] items-center hover:text-gray-50"
+                                  >
+                                    플젝
+                                  </span>
+                                )}
+
+                                <div className="mb-2">
+                                  <div className="ml-auto flex items-center justify-center p-2 text-[12px] font-semibold text-gray-700 rounded-full bg-gray-50 shrink-0 border-[1.5px] border-gray-200">
+                                    <SVGExternalLink />
+                                  </div>
+                                  {/* <div className="right-[-7px] top-[-5px] absolute w-5 h-5 text-[12px] flex items-center justify-center rounded-full bg-searchBoxBorder-100/85  text-gray-50">
+                      stack 의 개수 세기📛
+                    </div> */}
+                                </div>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                          </figure>
+
+                          <div className="flex items-center justify-between p-3 font-medium 2 text-stone-900 ">
+                            <div className="flex items-center ">
+                              <figure
+                                className="w-6 h-6 bg-top bg-no-repeat bg-cover rounded-full"
+                                style={{
+                                  backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                                }}
+                              ></figure>
+
+                              <span className="ml-2 text-sm font-medium text-gray-900 truncate max-w-[180px]">
+                                {item.title}
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </article>
+              </section>
             </main>
+          
+          
           </div>
         </section>
+
       ) : (
         ""
       )}
