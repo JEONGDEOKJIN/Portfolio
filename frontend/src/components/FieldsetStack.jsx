@@ -77,7 +77,7 @@ const FieldsetStack = ({
   
   return (
     <>
-      <fieldset className="w-[30%]" ref={dropDownRef}>
+      <fieldset className="w-[30%] z-10" ref={dropDownRef}>
         <div className="flex justify-between mb-2">
           <label className="my-auto ml-1 text-sm font-medium text-gray-800 ">
             기술 & 스택 

@@ -30,6 +30,8 @@ function App() {
         {/* <Route path="itemList" element={ <ItemList /> }  /> */}
         <Route path="/" element={<FeatureList />} />
 
+        <Route path="/admin" element={<Update />} />
+
         {/* <Route path="feedback" element={ <Feedback /> }  /> */}
       </Routes>
     </div>

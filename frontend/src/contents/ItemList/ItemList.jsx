@@ -56,7 +56,7 @@ const ItemList = () => {
             <div className="flex flex-col items-center w-screen mt-5">
               <ul className="flex flex-wrap items-center leading-[3rem] text-center justify-center">
                 <li className="mr-3 text-xs text-gray-500">
-                  Recommended searches
+                  Trending searches
                 </li>
                 <RecommenedKeyWord keyword={"Next.js"} />
                 <RecommenedKeyWord keyword={"React.js"} />

@@ -74,8 +74,7 @@ const FieldsetCategory = ({
 
   return (
     <>
-      <fieldset className="w-[30%]" ref={dropDownRef}>
-
+      <fieldset className="w-[30%] z-10" ref={dropDownRef}>
         <div className="flex flex-row items-center justify-between mb-2">
           <label className="my-auto ml-1 text-sm font-medium text-gray-800 ">
             카테고리

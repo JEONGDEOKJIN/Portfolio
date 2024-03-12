@@ -11,10 +11,9 @@ const FilterShots = ({
   selectedFilterOptionArr,
   setSelectedFilterOptionArr,
 }) => {
-
   return (
     <>
-      <div className="flex flex-row justify-between w-full ">
+      <div className="flex flex-row justify-between w-full px-[72px]  ">
         <FieldsetCategory
           selectedFilterOptionArr={selectedFilterOptionArr}
           setSelectedFilterOptionArr={setSelectedFilterOptionArr}

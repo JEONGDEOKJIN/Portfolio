@@ -4,10 +4,24 @@ const Footer = () => {
   return (
     <>
       {/* footer */}
-      <section className="flex items-center">
-        <div className="bg-stone-200 px-[32px] mx-auto py-[72px] max-w-[1200px] text-center">
-        🎏Footer 후터 푸터 퓨터 퓨털 휘털 footer🎏
+      <section className="text-[14px] text-gray-500 flex flex-row items-center justify-start">
+        <div className="  flex flex-row  justify-between w-[80%]  px-[32px] mx-auto py-12  max-w-[1200px] text-center">
+          <div className="">© 2024 Jeong! Deokjin</div>
 
+          <div className="flex flex-row ">
+            <a className="" href="">
+              {" "}
+              ✅ Git hub 주소
+            </a>
+            <a className="ml-2 " href="">
+              {" "}
+              ✅ Blog{" "}
+            </a>
+            <a className="ml-2 " href="">
+              {" "}
+              ✅ Resume {" "}
+            </a>
+          </div>
         </div>
       </section>
     </>

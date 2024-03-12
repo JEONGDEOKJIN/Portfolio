@@ -13,6 +13,7 @@ import SVGCalendar from "./SVGCalendar";
 import SVGExternalLink from "./SVGExternalLink";
 import DivTable from "./DivTable";
 import Footer from "./Footer";
+import CategoryOptions from "./CategoryOptions";
 
 const CardList = ({
   searchTerm,
@@ -186,6 +187,8 @@ const CardList = ({
           sortOption={sortOption}
         />
 
+        <CategoryOptions />
+
         <FilterBtn
           selectedFilterOptionArr={selectedFilterOptionArr}
           setIsFilterBtnClicked={setIsFilterBtnClicked}
@@ -206,7 +209,7 @@ const CardList = ({
       )}
 
       {/* cardListGridContainer : index.css 로 설정 */}
-      <ul className="flex flex-col cardListGridContainer">
+      <ul className="flex flex-col cardListGridContainer px-[72px]">
         {filteredSortedData.map((item, index) => {
           return (
             <li
@@ -215,7 +218,7 @@ const CardList = ({
               onClick={() => handleCardItem(index)}
             >
               <figure
-                className="relative h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg"
+                className="relative h-0 bg-cover   bg-no-repeat  pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
                 style={{
                   // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
                   backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
@@ -259,7 +262,8 @@ const CardList = ({
                 )}
               </figure>
 
-              <div className="flex items-center justify-between p-3 font-medium text-stone-900 ">
+              {/* description 부분 */}
+              <div className="flex items-center justify-between py-3 font-medium text-stone-900 ">
                 <div className="flex items-center ">
                   <figure
                     className="w-6 h-6 bg-top bg-no-repeat bg-cover rounded-full"
@@ -460,7 +464,7 @@ const CardList = ({
                           onClick={() => handleCardItem(index)}
                         >
                           <figure
-                            className="relative h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg "
+                            className="relative h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
                             style={{
                               // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
                               backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
@@ -504,7 +508,8 @@ const CardList = ({
                             )}
                           </figure>
 
-                          <div className="flex items-center justify-between p-3 font-medium 2 text-stone-900 ">
+                          {/* description 부분 */}
+                          <div className="flex items-center justify-between py-3 font-medium 2 text-stone-900 ">
                             <div className="flex items-center ">
                               <figure
                                 className="w-6 h-6 bg-top bg-no-repeat bg-cover rounded-full"
@@ -525,11 +530,8 @@ const CardList = ({
                 </article>
               </section>
             </main>
-          
-          
           </div>
         </section>
-
       ) : (
         ""
       )}
