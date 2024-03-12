@@ -19,7 +19,7 @@ const InputCreateFeedback = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-4 mb-5">
+      <div className="flex flex-col gap-4 mb-5 ">
         <InputCreateFeedbackShot
           isInputError={isInputError}
           labelName="Name"
@@ -74,9 +74,9 @@ const InputCreateFeedback = () => {
             })}
           </div>
           {isInputError ? (
-          <p className="text-[#f2545b] mx-1 text-[14px]">
-            Please complete this required field.
-          </p>
+            <p className="text-[#f2545b] mx-1 text-[14px]">
+              Please complete this required field.
+            </p>
           ) : (
             ""
           )}
