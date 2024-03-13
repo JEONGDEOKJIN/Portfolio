@@ -32,7 +32,7 @@ const ItemList = () => {
       {/* <main className="flex flex-col items-center w-full "> */}
       <main className="w-full">
         {/* 검색 hero 섹션 */}
-        <section className="flex flex-col items-center px-6 py-10 ">
+        <section className="flex flex-col items-center px-6 py-10 mt-[150px]">
           <div className="  tablet:h-[560px] tablet:max-w-[560px] flex flex-col justify-evenly items-center">
             <h1 className="text-6xl font-semibold tracking-tight text-center leading-[70px] font-sans4">
               Discover the world’s top designers & creatives
@@ -95,7 +95,7 @@ const ItemList = () => {
         {/* 상세 페이지 */}
         {/* <Modal /> */}
       </main>
-      
+
       <Footer />
     </div>
   );

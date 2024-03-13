@@ -114,6 +114,10 @@ body {
     gap: 40px;
   }
 
+  .clipping_path {
+    clip-path : polygon()
+  }
+
   /* [1차 설정] 
     .cardListGridContainer {
     display: grid;

@@ -1,12 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const OrangeCircle = () => {
   return (
     <>
-      <div className=" w-[500px] h-[500px] rounded-full     bg-[#ffe751] border-[85px] border-[#ff8700]"></div>
-
+      <div className=" w-[800px] h-[800px] rounded-full     bg-[#ffe751] border-[200px] border-[#ff8700]"></div>
     </>
-  )
-}
+  );
+};
 
-export default OrangeCircle
+export default OrangeCircle;

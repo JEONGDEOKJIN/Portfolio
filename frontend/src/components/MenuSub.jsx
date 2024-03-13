@@ -17,30 +17,34 @@ const MenuSub = () => {
 
   return (
     <>
-      <nav className=" px-[16px] py-2 blur-[0px] bg-white sticky">
+      <nav className="blur-[0px] bg-white fixed top-0 z-50 w-full overflow-hidden h-[64px] ">
+        {/* blur 위에 있는 메뉴탭 */}
+        <div className="absolute flex items-center justify-center w-full h-full gap-[24px]">
+          <button
+            className="px-3 py-1 text-sm font-normal text-white rounded-md bg-stone-800"
+            // onClick={handleGetResume}
+          >
+            Get Resume📛
+          </button>
 
-          <div>
-            <button
-              className="px-3 py-1 text-sm font-normal text-white rounded-md bg-stone-800"
-              // onClick={handleGetResume}
-            >
-              Get Resume📛
-            </button>
-          </div>
+          <button
+            className="px-3 py-1 text-sm font-normal text-white rounded-md bg-stone-800"
+            // onClick={handleSendFeedback}
+          >
+            Send Feedback 📛📛
+          </button>
+        </div>
 
-          <div className="">
-            <button
-              className="px-3 py-1 text-sm font-normal text-white rounded-md bg-stone-800"
-              onClick={handleSendFeedback}
-            >
-              Send Feedback 📛📛
-            </button>
+        {/* blur 효과 */}
+        <div className="relative  bg-[#fff6] blur-[5px] justify-center gap-3">
+          {/* blur 밑에 들어가면, 불투명하게 보임 ⭐*/}
+          <div className="absolute top-0 ">
+            <BlueCircle />
           </div>
-      <div className="relative flex items-center bg-[#fff6] blur-[5px] justify-center gap-3">        </div>
-        
-        <BlueCircle />
-        <OrangeCircle />
-        
+          <div className="absolute -right-[70px] -top-[50px]">
+            <OrangeCircle />
+          </div>
+        </div>
       </nav>
 
       {/* 전체 모달 */}
@@ -49,6 +53,7 @@ const MenuSub = () => {
         isShowChatBox={isShowChatBox}
       />
 
+      {/* 이건 우선 남김 */}
       {/* <ModalChatBox
         handleCancelBtn={handleCancelBtn}
         isShowChatBox={isShowChatBox}
