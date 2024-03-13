@@ -95,6 +95,7 @@ const ItemList = () => {
         {/* 상세 페이지 */}
         {/* <Modal /> */}
       </main>
+      
       <Footer />
     </div>
   );
