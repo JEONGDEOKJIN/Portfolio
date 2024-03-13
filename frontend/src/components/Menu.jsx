@@ -40,13 +40,13 @@
           </div>
           
           {/* blur layer */}
-          <div className="fixed z-30 overflow-hidden top-0 h-[64px] w-full bg-[#fff6] blur-[5px] justify-center gap-3">
+          <div className="fixed z-30 overflow-hidden top-0 h-[64px] w-full bg-[#fff6] blur-[10px] justify-center gap-3">
               {/* blur 용으로 하나 놓고, 잘린 부분은 그 다음 으로 하나 놓는다 -top-[550px] -right-[320px] 여기에서 top 이 164차이 (위에 blur layer 들의 height 들을 합침) */}
-              <div className="absolute -z-10 -top-[166px] -right-[320px]">
+              <div className="absolute -z-10 -top-[550px] -right-[400px]">
               <OrangeCircle />
               </div>
 
-              <div className="absolute -z-10 -top-[110px] -left-[50px]">
+              <div className="absolute -z-10 -top-[406px] -left-[500px]">
               <BlueCircle />
               </div>
           </div>
@@ -90,11 +90,11 @@
           {/* blur 용으로 하나 놓고, 잘린 부분은 그 다음 으로 하나 놓는다 | 이때, 잘린 부분은 top 을 '부모 태그의 top' 만큼 다시 올려준다. ⭐
               이렇게 하는 이유는 overflow hidden 을 이용하기 위해서 ⭐⭐ | 다만, 좀 더 쉬운 방법이 있으면 그걸 활용해야 한다. 
             */}
-            <div className="absolute -z-10 -top-[550px] -right-[320px]">
+            <div className="absolute -z-10 -top-[700px] -right-[400px]">
               <OrangeCircle />
               </div>
 
-              <div className="absolute -z-10 -top-[220px] -left-[50px]">
+              <div className="absolute -z-10 -top-[570px] -left-[500px]">
               <BlueCircle />
             </div>
           
