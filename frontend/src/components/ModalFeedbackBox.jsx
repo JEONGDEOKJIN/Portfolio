@@ -2,12 +2,14 @@ import React from "react";
 import InputCreateFeedback from "./InputCreateFeedback";
 import BlueCircle from "./BlueCircle";
 import OrangeCircle from "./OrangeCircle";
+import BlueCircleSmall from "./BlueCircleSmall";
+import OrangeCircleSmall from "./OrangeCircleSmall";
 
 const ModalFeedbackBox = ({ handleCancelBtn, isShowChatBox }) => {
   return (
     <>
       {isShowChatBox ? (
-        <section className="fixed inset-0 z-30 w-full h-full transition-all duration-300 ease-linear bg-black/70 ">
+        <section className="fixed inset-0 z-[60] w-full h-full transition-all duration-300 ease-linear bg-black/70 ">
           <div className="z-50 h-auto w-[773px]  p-[56px] bg-gray-100 rounded-[32px] overflow-hidden fixed flex flex-row gap-[40px] top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
             <div className="flex flex-col flex-wrap gap-[40px] border-r-[1px]">
               <div className="flex gap-[42px]  flex-col mr-[40px]">
@@ -70,13 +72,14 @@ const ModalFeedbackBox = ({ handleCancelBtn, isShowChatBox }) => {
               </div>
             </div>
 
-              <div className="absolute z-0 -left-[250px] transform translate-y-1/3">
-                <BlueCircle />
-              </div>
+            {/* <div className="absolute z-0 left-[0px] transform translate-y-1/3"> */}
+            <div className="absolute z-0 -left-[250px]  top-[180px]  ">
+              <BlueCircleSmall />
+            </div>
 
-              <div className="absolute -z-10 -right-[170px] -bottom-[395px]">
-              <OrangeCircle />
-              </div>
+            <div className="absolute -z-10 -right-[210px] -bottom-[385px]">
+              <OrangeCircleSmall />
+            </div>
 
             <div>
               <InputCreateFeedback />
