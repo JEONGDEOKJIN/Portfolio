@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import OrangeCircle from "./OrangeCircle";
 import BlueCircle from "./BlueCircle";
 import ModalFeedbackBox from "./ModalFeedbackBox";
+import NavSubmenu from "./NavSubmenu";
+import LogoJeong from "./LogoJeong";
+import BtnSurpriseMeStart from "./BtnSurpriseMeStart";
 
 const menuItems = [
   { name: "Home", link: "#" },
@@ -45,29 +48,27 @@ const Menu = () => {
       {/* 하얀색 배경이 있어야 -> 밑으로 내려가도, 투명색으로 안 됨  */}
       <div className="fixed z-30 h-[64px] w-full bg-neutral-50">
         {/* button layer */}
-        <div className="z-50 gap-[20px] h-full flex items-center justify-center w-full ">
-          {/* <button
-            className="z-50 px-3 py-1 text-sm font-normal text-white rounded-md bg-stone-800"
-            // onClick={handleGetResume}
-          >
-            Get Resume📛
-          </button> */}
-
-          <button
-            className="z-50 px-6 py-3 text-sm font-[500] rounded-full cursor-pointer point-cursor bg-gray-950 text-gray-50 
+        <div className="z-50 flex items-center justify-center w-full h-full ">
+          {/* 버튼을 감싸는 박스가, 우선 가운데 정렬이 되게 -> 그 다음, 컴포넌트를 움직인다. */}
+          <div className="z-50 w-[50%] flex justify-end">
+            <button
+              className="mr-3 z-50 px-6 py-3 text-sm font-[500] rounded-full cursor-pointer point-cursor bg-gray-950 text-gray-50 
               hover:bg-gray-600 transition-all duration-500 ease-in hover:shadow-lg"
-            onClick={handleSendFeedback}
-          >
-            Send Feedback
-          </button>
-
-          <button
-            className="z-50 px-6 py-3 text-sm font-[500] text-gray-800 rounded-full cursor-pointer border-[1px] border-gray-800 point-cursor bg-neutral-50 
+              onClick={handleSendFeedback}
+            >
+              Send Feedback
+            </button>
+          </div>
+          {/* 버튼을 감싸는 박스가, 우선 가운데 정렬이 되게 -> 그 다음, 컴포넌트를 움직인다. */}
+          <div className="w-[50%] z-50 flex justify-start">
+            <button
+              className="ml-3 z-50 px-6 py-3 text-sm font-[500] text-gray-800 rounded-full cursor-pointer border-[1px] border-gray-800 point-cursor bg-neutral-50 
               hover:bg-neutral-200 transition-all duration-500 ease-in hover:border-none "
-            onClick={handleGetResume}
-          >
-            Download Resume
-          </button>
+              onClick={handleGetResume}
+            >
+              Download Resume
+            </button>
+          </div>
         </div>
 
         {/* blur layer */}
@@ -84,44 +85,21 @@ const Menu = () => {
       </div>
 
       {/* 가운데 sub menu */}
-      <div className="absolute top-[64px] h-[100px] z-50  flex flex-row w-full justify-center items-center bg-white ">
-        <ul className="flex  w-[33.333%] mr-auto ml-3 cursor-pointer">
-          <li className="flex items-center ml-3">
-            {" "}
-            <a href="https://tropical-trouser-a8d.notion.site/5fe2f6f3f2bd448c9d4cee3c59185f35?v=ab8fecd13c0c4d56a98d0bf30b19eadc">
-              Dev Wiki
-            </a>{" "}
-          </li>
-          <li className="flex items-center ml-3">
-            <a href="https://github.com/JEONGDEOKJIN">Github</a>
-          </li>
-          <li className="flex items-center ml-3">
-            {" "}
-            <a href="https://deokjin.gitbook.io/dj/">Blog</a>
-          </li>
-        </ul>
+      <div className="absolute top-[64px] h-[100px] z-50  flex  w-full justify-center items-center bg-white ">
+      <nav className="flex justify-start w-[33.333%] ">
+        <NavSubmenu />
+      </nav>
 
-        <div className="flex flex-row items-center w-[33.333%] justify-center ">
-          <figure
-            className="w-8 h-8 bg-green-800 bg-center bg-cover rounded-full shrink-0"
-            style={{
-              backgroundImage: `url(http://localhost:7070/getImg/images/ican_1707988168150.png)`,
-            }}
-          ></figure>
-
-          <a className="flex items-center font-semibold" href="/">
-            DJJ
-          </a>
+        {/* 로고 */}
+        <div className="flex items-center justify-center w-[33.333%]">
+          <LogoJeong />
         </div>
 
-        <div className="flex items-center  w-[33.333%] ">
-          <button
-            className="px-3 py-1 ml-auto mr-3 text-sm font-normal text-white rounded-md bg-stone-800"
-            onClick={handleGetResume}
-          >
-            I am lucky
-          </button>
+        {/* surprise me */}
+        <div className="flex justify-end w-[33.333%] items-center ">
+          <BtnSurpriseMeStart />
         </div>
+        
       </div>
 
       {/* 본문 Blue & Orange Circle  */}
