@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 import fetchAllMetaData from "../fetch/ItemList/fetchAllMetaData";
 import { isError, useQuery } from "react-query";
 import SelectSort from "./SelectSort";
@@ -19,6 +20,7 @@ import IconCancelItemDetail from "./IconCancelItemDetail";
 import HeaderProfile from "./HeaderProfile";
 import ProfileSection from "./ProfileSection";
 import ModalFeedbackBox from "./ModalFeedbackBox";
+import InfiniteLoop from "./InfiniteLoop";
 
 const CardList = ({
   searchTerm,
@@ -33,6 +35,11 @@ const CardList = ({
   const [isItemDetailOpened, setIsItemDetailOpened] = useState(false);
   const [isShowChatBox, setIsShowChatBox] = useState(false);
   const [indexOfItemDetail, setIndexOfItemDetail] = useState(null);
+
+  // const [marqueeInfiniteItem, setMarqueeInfiniteItem] =
+  //   useState(filteredSortedData);
+
+  const detailSectionRef = useRef(null);
 
   console.log("searchTerm✅ @CardList", searchTerm);
 
@@ -58,6 +65,27 @@ const CardList = ({
   useEffect(() => {
     if (isSubmitClicked == true) setIsSubmitClicked(false);
   }, [isSubmitClicked, setIsSubmitClicked]);
+
+  // // marque infinite loop 구현위해서, 배열 순서를 시간 순서대로 변경
+  // useEffect(() => {
+  //   let timer // setInterval 함수 들어갈 변수
+
+  //   if (isItemDetailOpened) {  // item 이 하나 클릭 되었을 때, 실행하게 함
+  //     timer = setInterval(() => {
+  //       setMarqueeInfiniteItem((prevItems) => {
+  //         const nextItems = [...prevItems.slice(1), prevItems[0]];
+  //         return nextItems;
+  //       });
+  //     }, 20000); // 10000 == 10초 간격
+  //   }
+
+  //   // 컴포넌트 언마운트 또는 isItemDetailOpened가 변경될 때 인터벌 정리
+  //   return () => {
+  //     if (timer) {
+  //       clearInterval(timer)
+  //     }
+  //   };
+  // }, isItemDetailOpened);
 
   // 기본 metaData 검색 useQuery
   const {
@@ -170,7 +198,7 @@ const CardList = ({
         })
     : [];
 
-  const handleCardItem = async (index) => {
+  const handleCardItem = (index) => {
     // fetch 요청 보내기
     // isItemDetailOpened(index) : 원래는 우선, 특정 index 인지 확인하고, 해당 index 를 제출
 
@@ -178,6 +206,20 @@ const CardList = ({
     setIndexOfItemDetail(index);
     console.log("indexOfItemDetail", indexOfItemDetail);
     console.log(`${index}`, index);
+  };
+
+  const handleSeeMoreItem = (index) => {
+    // setIsItemDetailOpened(true);
+    setIndexOfItemDetail(index); // 필요한 정보를 받아옴
+
+    // 스크롤을 위로 올리기
+    if (detailSectionRef.current) {
+      // 실제로 ref 로 해당 DOM 요소를 가리키고 있는지 체크
+      detailSectionRef.current.scrollTo({
+        top: 0,
+        behavior: "auto",
+      });
+    }
   };
 
   const handleCloseBtn = () => {
@@ -319,13 +361,16 @@ const CardList = ({
 
       {/* itemDetail 영역 | 여기는 컴포넌트로 따로 빼서 진행 */}
       {isItemDetailOpened && metaData ? (
-        <section className="">
+        <section>
           <div className="fixed inset-0 z-50 flex items-center justify-end w-full h-10 bg-black/80 mix-blend-normal">
             <button className="mb-1 mr-2" onClick={handleCloseBtn}>
               <IconCancelItemDetail />
             </button>
           </div>
-          <div className="fixed inset-0 z-50 flex flex-col w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-white inset-y-9">
+          <div
+            ref={detailSectionRef} // 스크롤이 올라갔으면 하는 영역이 여기여서 여기에 ref 를 잡음 ⭐
+            className="fixed inset-0 z-50 flex flex-col w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-white inset-y-9"
+          >
             {typeof indexOfItemDetail === "number" &&
               metaData[indexOfItemDetail] &&
               metaData[indexOfItemDetail].title && (
@@ -459,80 +504,84 @@ const CardList = ({
 
               <ProfileSection />
 
-              <section className="mt-20 text-[16px] font-bold mb-20">
+              <section className="relative mt-20 text-[16px] font-bold mb-20">
                 <div>You may also like </div>
-                <article>
-                  <ul className="flex flex-col mt-4 detailPageGridContainer">
-                    {filteredSortedData.slice(0, 4).map((item, index) => {
-                      return (
-                        <li
-                          key={index}
-                          className="flex flex-col cursor-pointer w-[250px] "
-                          onClick={() => handleCardItem(index)}
-                        >
-                          <figure
-                            className=" relative h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
-                            style={{
-                              // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
-                              backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
-                            }}
-                            onMouseEnter={() => setIsHovered(index)}
-                            onMouseLeave={() => setIsHovered(null)}
+                <article className="">
+                  <ul className="flex flex-row mt-4 detailPageGridContainer ">
+                    {/* <ul className="flex flex-row mt-4 detailPageGridContainer marquee-content"> */}
+                    {filteredSortedData &&
+                      filteredSortedData.slice(0, 4).map((item, index) => {
+                        return (
+                          <li
+                            key={index}
+                            // className="flex flex-col cursor-pointer w-[250px] ml-[80px] h-full"
+                            className="flex flex-col cursor-pointer w-[250px]  h-full"
+                            onClick={() => handleSeeMoreItem(index)}
                           >
-                            {/* 호버 했을 때 보이는 것  */}
-                            {isHovered === index ? (
-                              <div className="absolute flex items-end justify-between w-full h-full p-5 rounded-lg bg-gradient-to-b from-gray-50/5 to-gray-600/50">
-                                <span className="mb-3 mr-4 text-base font-normal text-gray-100 w-[80%]  truncate">
-                                  {item.summary}
-                                </span>
-                                {item.category === "category_feature" ? (
-                                  <span
-                                    className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64ea88] rounded-full 
+                            <figure
+                              className=" relative h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
+                              // className=" relative bg-top bg-no-repeat bg-cover w-[350px] h-[250px] rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
+                              style={{
+                                // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
+                                backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                              }}
+                              onMouseEnter={() => setIsHovered(index)}
+                              onMouseLeave={() => setIsHovered(null)}
+                            >
+                              {/* 호버 했을 때 보이는 것  */}
+                              {isHovered === index ? (
+                                <div className="absolute flex items-end justify-between w-full h-full p-5 rounded-lg bg-gradient-to-b from-gray-50/5 to-gray-600/50">
+                                  <span className="mb-3 mr-4 text-base font-normal text-gray-100 w-[80%]  truncate">
+                                    {item.summary}
+                                  </span>
+                                  {item.category === "category_feature" ? (
+                                    <span
+                                      className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64ea88] rounded-full 
                     hover:bg-[#275a34] items-center hover:text-gray-50"
-                                  >
-                                    기능
-                                  </span>
-                                ) : (
-                                  <span
-                                    className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64eaea] rounded-full 
+                                    >
+                                      기능
+                                    </span>
+                                  ) : (
+                                    <span
+                                      className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64eaea] rounded-full 
                     hover:bg-[#275c5c] items-center hover:text-gray-50"
-                                  >
-                                    플젝
-                                  </span>
-                                )}
+                                    >
+                                      플젝
+                                    </span>
+                                  )}
 
-                                <div className="mb-2">
-                                  <div className="ml-auto flex items-center justify-center p-2 text-[12px] font-semibold text-gray-700 rounded-full bg-gray-50 shrink-0 border-[1.5px] border-gray-200">
-                                    <SVGExternalLink />
-                                  </div>
-                                  {/* <div className="right-[-7px] top-[-5px] absolute w-5 h-5 text-[12px] flex items-center justify-center rounded-full bg-searchBoxBorder-100/85  text-gray-50">
+                                  <div className="mb-2">
+                                    <div className="ml-auto flex items-center justify-center p-2 text-[12px] font-semibold text-gray-700 rounded-full bg-gray-50 shrink-0 border-[1.5px] border-gray-200">
+                                      <SVGExternalLink />
+                                    </div>
+                                    {/* <div className="right-[-7px] top-[-5px] absolute w-5 h-5 text-[12px] flex items-center justify-center rounded-full bg-searchBoxBorder-100/85  text-gray-50">
                       stack 의 개수 세기📛
                     </div> */}
+                                  </div>
                                 </div>
+                              ) : (
+                                ""
+                              )}
+                            </figure>
+
+                            {/* description 부분 */}
+                            <div className="flex items-center justify-between py-3 font-medium 2 text-stone-900 ">
+                              <div className="flex items-center ">
+                                <figure
+                                  className="w-6 h-6 bg-top bg-no-repeat bg-cover rounded-full"
+                                  style={{
+                                    backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                                  }}
+                                ></figure>
+
+                                <span className="ml-2 text-sm font-medium text-gray-900 truncate max-w-[180px]">
+                                  {item.title}
+                                </span>
                               </div>
-                            ) : (
-                              ""
-                            )}
-                          </figure>
-
-                          {/* description 부분 */}
-                          <div className="flex items-center justify-between py-3 font-medium 2 text-stone-900 ">
-                            <div className="flex items-center ">
-                              <figure
-                                className="w-6 h-6 bg-top bg-no-repeat bg-cover rounded-full"
-                                style={{
-                                  backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
-                                }}
-                              ></figure>
-
-                              <span className="ml-2 text-sm font-medium text-gray-900 truncate max-w-[180px]">
-                                {item.title}
-                              </span>
                             </div>
-                          </div>
-                        </li>
-                      );
-                    })}
+                          </li>
+                        );
+                      })}
                   </ul>
                 </article>
               </section>

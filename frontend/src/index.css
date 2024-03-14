@@ -115,7 +115,27 @@ body {
   }
 
   .clipping_path {
-    clip-path : polygon()
+    clip-path: polygon();
+  }
+
+  /* 무한 루프 도는 애니메이션 */
+  .marquee-content {
+    display: flex;
+    flex: row;
+    width : 100%;
+
+    animation: marquee 20s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+    /* 왼쪽으로 가게 한다. */
   }
 
   /* [1차 설정] 
