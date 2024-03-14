@@ -4,6 +4,7 @@ import BlueCircle from "./BlueCircle";
 import OrangeCircle from "./OrangeCircle";
 import BlueCircleSmall from "./BlueCircleSmall";
 import OrangeCircleSmall from "./OrangeCircleSmall";
+import IconCancel from "./IconCancel";
 
 const ModalFeedbackBox = ({ handleCancelBtn, isShowChatBox }) => {
   return (
@@ -89,7 +90,7 @@ const ModalFeedbackBox = ({ handleCancelBtn, isShowChatBox }) => {
               className="absolute ml-auto mr-2 cursor-pointer right-3 top-5"
               onClick={handleCancelBtn}
             >
-              ❎
+              <IconCancel />
             </div>
           </div>
         </section>

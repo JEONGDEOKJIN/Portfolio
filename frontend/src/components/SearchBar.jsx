@@ -62,7 +62,7 @@ const SearchBar = ({
                   pl-12
                   py-[28px]
                   "
-            placeholder="Search features, skill & projects... "
+            placeholder="Search skills, features & projects... "
             onChange={handleSearchTermChange}
             value={searchBarInput}
           />

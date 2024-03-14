@@ -5,6 +5,7 @@ const NavSubmenu = () => {
     <>
       {/* 목차들 */}
 
+      {/* blog 주소, wiki 주소, github 주소는 footer 에서도 사용함. 변경시 필수 확인 */}
       <ul className="flex ml-3 cursor-pointer text-[14px] font-[600]">
         <li className="flex items-center ml-3 transition-all duration-200 ease-in-out hover:text-neutral-500">
           <a href="https://tropical-trouser-a8d.notion.site/5fe2f6f3f2bd448c9d4cee3c59185f35?v=ab8fecd13c0c4d56a98d0bf30b19eadc">

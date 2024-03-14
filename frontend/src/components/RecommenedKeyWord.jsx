@@ -6,7 +6,7 @@ return (
     <li className="mr-3 ">
     <a
         className="
-                text-sm border-gray-100 font-noraml text-slate-800 border-[1px] rounded-[40px] 
+                text-sm font-noraml text-slate-800 border-neutral-200 border-[1px] rounded-[40px] 
                 py-2
                 px-6
                 hover:border-gray-500
