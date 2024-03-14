@@ -32,7 +32,7 @@ const CardList = ({
   const [isHovered, setIsHovered] = useState(null);
   const [isItemDetailOpened, setIsItemDetailOpened] = useState(false);
   const [isShowChatBox, setIsShowChatBox] = useState(false);
-  const [indexOfItemDetail , setIndexOfItemDetail] = useState(null)
+  const [indexOfItemDetail, setIndexOfItemDetail] = useState(null);
 
   console.log("searchTerm✅ @CardList", searchTerm);
 
@@ -173,10 +173,10 @@ const CardList = ({
   const handleCardItem = async (index) => {
     // fetch 요청 보내기
     // isItemDetailOpened(index) : 원래는 우선, 특정 index 인지 확인하고, 해당 index 를 제출
-    
+
     setIsItemDetailOpened(!isItemDetailOpened);
     setIndexOfItemDetail(index);
-    console.log("indexOfItemDetail" , indexOfItemDetail)
+    console.log("indexOfItemDetail", indexOfItemDetail);
     console.log(`${index}`, index);
   };
 
@@ -186,11 +186,11 @@ const CardList = ({
 
   const handleSendFeedback = () => {
     setIsShowChatBox(true);
-};
+  };
 
-const handleCancelBtn = () => {
+  const handleCancelBtn = () => {
     setIsShowChatBox(false);
-};
+  };
 
   return (
     <>
@@ -318,105 +318,93 @@ const handleCancelBtn = () => {
       </ul>
 
       {/* itemDetail 영역 | 여기는 컴포넌트로 따로 빼서 진행 */}
-      {isItemDetailOpened && metaData? (
+      {isItemDetailOpened && metaData ? (
         <section className="">
           <div className="fixed inset-0 z-50 flex items-center justify-end w-full h-10 bg-black/80 mix-blend-normal">
             <button className="mb-1 mr-2" onClick={handleCloseBtn}>
               <IconCancelItemDetail />
             </button>
           </div>
-          <div className="fixed inset-0 z-50 flex flex-col w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-gray-50 inset-y-9">
-            
-            <HeaderProfile   />
-
+          <div className="fixed inset-0 z-50 flex flex-col w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-white inset-y-9">
+            {typeof indexOfItemDetail === "number" &&
+              metaData[indexOfItemDetail] &&
+              metaData[indexOfItemDetail].title && (
+                <HeaderProfile title={metaData[indexOfItemDetail].title} />
+              )}
 
             {/* 💪 mx-auto 하면 이제 가운데로 오긴 하는데, flex 를 써서 깔끔하게 오게 하고 싶긴 함  */}
-            <main className="w-full mt-12 bg-neutral-100 max-w-[1200px] mx-auto rounded-[64px] p-10">
-              <article>
-                <div className="flex flex-row justify-normal gap-[24px]">
-                {
-                  typeof indexOfItemDetail === 'number' && 
-                  metaData[indexOfItemDetail] &&
-                  metaData[indexOfItemDetail].architectureImg_1 && (
-                    <figure 
-                      style={{
-                        backgroundImage : `url(http://localhost:7070/getImg/${metaData[indexOfItemDetail].architectureImg_1})`
-                      }}
-                      className="w-[400px] h-[450px] bg-yellow-300 bg-no-repeat bg-cover rounded-[40px]">
-                    </figure>
-                  )
-                }
-                {
-                  typeof indexOfItemDetail === 'number' && 
-                  metaData[indexOfItemDetail] &&
-                  metaData[indexOfItemDetail].architectureImg_1 && (
-                    <figure 
-                      style={{
-                        backgroundImage : `url(http://localhost:7070/getImg/${metaData[indexOfItemDetail].demoVideo_1})`
-                      }}
-                      className="bg-yellow-500 rounded-[40px] w-full h-[450px]  bg-no-repeat bg-cover">
-                    </figure>
-                  )
-                }
+            <main className="w-full bg-[neutral-50] max-w-[1200px] mx-auto rounded-[64px] p-10">
+              <article className="w-full ">
+                {/* 사진 */}
+                <div className=" x-full flex flex-row justify-normal gap-[24px]">
+                  {typeof indexOfItemDetail === "number" &&
+                    metaData[indexOfItemDetail] &&
+                    metaData[indexOfItemDetail].architectureImg_1 && (
+                      <figure
+                        style={{
+                          backgroundImage: `url(http://localhost:7070/getImg/${metaData[indexOfItemDetail].architectureImg_1})`,
+                        }}
+                        className="shadow w-[400px] h-[450px]  bg-no-repeat bg-cover rounded-[40px]"
+                      ></figure>
+                    )}
+
+                  {typeof indexOfItemDetail === "number" &&
+                    metaData[indexOfItemDetail] &&
+                    metaData[indexOfItemDetail].architectureImg_1 && (
+                      <figure
+                        style={{
+                          backgroundImage: `url(http://localhost:7070/getImg/${metaData[indexOfItemDetail].demoVideo_1})`,
+                        }}
+                        className=" shadow rounded-[40px] w-full h-[450px]  bg-no-repeat bg-cover"
+                      ></figure>
+                    )}
                 </div>
 
-                <div className="flex flex-row bg-gray-300 gap-[80px] px-12 py-8 ">
+                <div className="shadow flex flex-row  gap-[80px] px-10 rounded-[64px] mt-[24px] py-10 bg-[#f9f9f9] w-full ">
                   {/* 왼쪽 */}
-                  <div className="flex flex-col flex-wrap bg-emerald-100 gap-[24px] ">
+                  <div className="flex flex-col flex-wrap  gap-[24px] ">
                     <span className="bg-[#1c5eff1a] w-fit text-[#1c5eff] px-[14px] py-[6px] rounded-[50px] text-[13px]">
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].endDate 
-                        && metaData[indexOfItemDetail].endDate.split('T')[0]}
+                      {metaData[indexOfItemDetail] &&
+                        metaData[indexOfItemDetail].endDate &&
+                        metaData[indexOfItemDetail].endDate.split("T")[0]}
                     </span>
 
                     <div>
                       <h2 className="text-[48px] font-semibold leading-[1.1em]  text-left	">
-                        {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].title}
+                        {metaData[indexOfItemDetail] &&
+                          metaData[indexOfItemDetail].title}
                       </h2>
 
                       {/* stack 각각을 , 로 구분해서 넣어주면 -> 각 요소를 , 기준으로 배열로 만들어서 -> map 돌릴 수 있음. */}
                       <span className="flex items-center mt-[1.1em] ml-[-6px]">
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].stacks && (
-                          metaData[indexOfItemDetail].stacks.split(',').map((item, index) => {
-                            return (
-                              <span 
-                                key={index}
-                                className="bg-[#2b593f] font-light text-neutral-50 px-[8px] py-[4px] rounded-[50px] text-[12px] ml-2">
-                                {item.trim()}
-                              </span>
-                            )
-                          }
-                      ))}
+                        {metaData[indexOfItemDetail] &&
+                          metaData[indexOfItemDetail].stacks &&
+                          metaData[indexOfItemDetail].stacks
+                            .split(",")
+                            .map((item, index) => {
+                              return (
+                                <span
+                                  key={index}
+                                  className="bg-[#2b593f] font-light text-neutral-50 px-[8px] py-[4px] rounded-[50px] text-[12px] ml-2"
+                                >
+                                  {item.trim()}
+                                </span>
+                              );
+                            })}
                       </span>
                     </div>
 
-                    <div className="text-[20px] leading-[1.6em] mt-[16px] bg-blue-800 w-[100%]">
+                    <div className="text-[20px] leading-[1.6em] mt-[16px]  w-[100%]">
                       <h5 className="">
                         <strong>Summary</strong>
                       </h5>
                       <p className="leading-[1.7em]  shrink-0 text-[15px] font-normal text-left mt-[15px]  	">
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
-                      {metaData[indexOfItemDetail] && metaData[indexOfItemDetail].summary}
+                        {metaData[indexOfItemDetail] &&
+                          metaData[indexOfItemDetail].summary}
+                        {metaData[indexOfItemDetail] &&
+                          metaData[indexOfItemDetail].summary}
+                        {metaData[indexOfItemDetail] &&
+                          metaData[indexOfItemDetail].summary}
                       </p>
                     </div>
 
@@ -432,7 +420,7 @@ const handleCancelBtn = () => {
                   </div>
 
                   {/* 오른쪽 */}
-                  <div className="bg-neutral-50 w-[30%] shrink-0 rounded-[32px]  p-8 flex gap-[12px] h-fit flex-col">
+                  <div className="shadow w-[30%] shrink-0 rounded-[32px] bg-white  p-8 flex gap-[12px] h-fit flex-col">
                     <h5 className="text-[20px] font-normal"> Information </h5>
 
                     <div className="flex justify-between">
@@ -459,19 +447,20 @@ const handleCancelBtn = () => {
                       <span className="text-[14px]"> ✅ </span>
                     </div>
 
-                    <button 
+                    <button
                       onClick={handleSendFeedback}
-                      className="px-4 py-3 w-full mx-auto ml-auto text-sm font-semibold rounded-full cursor-pointer mt-[16px] bg-gray-950 text-gray-50 hover:bg-gray-600 ">
+                      className="px-4 py-3 w-full mx-auto ml-auto text-sm font-semibold rounded-full cursor-pointer mt-[16px] bg-gray-950 text-gray-50 hover:bg-gray-600 "
+                    >
                       Feedback Now
                     </button>
                   </div>
                 </div>
               </article>
 
-            <ProfileSection />
+              <ProfileSection />
 
               <section className="mt-20 text-[16px] font-bold mb-20">
-                <div>You may also like | ✅ 클릭했을 때, 이동하게 해야 함 </div>
+                <div>You may also like </div>
                 <article>
                   <ul className="flex flex-col mt-4 detailPageGridContainer">
                     {filteredSortedData.slice(0, 4).map((item, index) => {
@@ -482,7 +471,7 @@ const handleCancelBtn = () => {
                           onClick={() => handleCardItem(index)}
                         >
                           <figure
-                            className="relative h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
+                            className=" relative h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
                             style={{
                               // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
                               backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
@@ -549,13 +538,12 @@ const handleCancelBtn = () => {
               </section>
             </main>
           </div>
-          
-        {/* 전체 모달 */}
-        <ModalFeedbackBox
+
+          {/* 전체 모달 */}
+          <ModalFeedbackBox
             handleCancelBtn={handleCancelBtn}
             isShowChatBox={isShowChatBox}
-        />
-
+          />
         </section>
       ) : (
         ""

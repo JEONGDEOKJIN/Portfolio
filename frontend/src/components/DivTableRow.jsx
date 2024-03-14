@@ -9,7 +9,7 @@ const DivTableRow = ({
 }) => {
   return (
     <>
-      <div className="flex text-[12px] text-gray-800">
+      <div className="flex text-[14px] text-gray-800">
         <div className="flex items-center justify-center w-[8%]  grow border-b-[1px] border-r-[1px] border-neutral-200 p-3">
           {largeCriteria}
         </div>
