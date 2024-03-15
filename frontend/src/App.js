@@ -11,6 +11,9 @@ import { Route, Routes } from "react-router-dom";
 import Feedback from "./components/Feedback";
 
 import FeatureList from "./pages/FeatureList";
+import AdminBoard from "./pages/AdminBoardPage";
+import AdminCreate from "./pages/AdminCreate";
+import AdminBoardPage from "./pages/AdminBoardPage";
 
 function App() {
   return (
@@ -30,7 +33,8 @@ function App() {
         {/* <Route path="itemList" element={ <ItemList /> }  /> */}
         <Route path="/" element={<FeatureList />} />
 
-        <Route path="/adminDJ" element={<Update />} />
+        <Route path="/admin/create" element={<AdminCreate/>} />
+        <Route path="/admin/board" element={<AdminBoardPage />} />
 
         {/* <Route path="feedback" element={ <Feedback /> }  /> */}
       </Routes>
