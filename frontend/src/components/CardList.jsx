@@ -292,17 +292,19 @@ const CardList = ({
                     <span className="mb-3 mr-4 text-base font-normal text-gray-100 w-[80%]  truncate">
                       {item.summary}
                     </span>
-                    {item.category === "category_feature" ? (
+                    {item.category === "feature" ? (
                       <span
-                        className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64ea88] rounded-full 
-                    hover:bg-[#275a34] items-center hover:text-gray-50"
+                        className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-medium 
+                        text-white transition duration-200 ease-linear bg-[#603b2b] rounded-full 
+                    hover:bg-[#eaa064] items-center hover:text-gray-50"
                       >
                         기능
                       </span>
                     ) : (
                       <span
-                        className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64eaea] rounded-full 
-                    hover:bg-[#275c5c] items-center hover:text-gray-50"
+                        className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-medium 
+                          text-white transition duration-200 ease-linear bg-[#28466c] rounded-full 
+                    hover:bg-[#6488ea] items-center hover:text-gray-50"
                       >
                         플젝
                       </span>
@@ -408,11 +410,25 @@ const CardList = ({
                 <div className="shadow flex flex-row  gap-[80px] px-10 rounded-[64px] mt-[24px] py-10 bg-[#f9f9f9] w-full ">
                   {/* 왼쪽 */}
                   <div className="flex flex-col flex-wrap  gap-[24px] ">
-                    <span className="bg-[#1c5eff1a] w-fit text-[#1c5eff] px-[14px] py-[6px] rounded-[50px] text-[13px]">
+                    <div className="flex ">
+                      <span className="bg-[#1c5eff1a] w-fit text-[#1c5eff] px-[14px] py-[6px] rounded-[50px] text-[13px]">
+                        {metaData[indexOfItemDetail] &&
+                          metaData[indexOfItemDetail].endDate &&
+                          metaData[indexOfItemDetail].endDate.split("T")[0]}
+                      </span>
+
                       {metaData[indexOfItemDetail] &&
-                        metaData[indexOfItemDetail].endDate &&
-                        metaData[indexOfItemDetail].endDate.split("T")[0]}
-                    </span>
+                      metaData[indexOfItemDetail].category &&
+                      metaData[indexOfItemDetail].category === "project" ? (
+                        <span className="bg-[#28466c] w-fit text-neutral-50 px-[14px] py-[6px] rounded-[50px] text-[13px] ml-2">
+                          project
+                        </span>
+                      ) : (
+                        <span className="bg-[#603b2b] w-fit text-neutral-50 px-[14px] py-[6px] rounded-[50px] text-[13px] ml-2">
+                          feature
+                        </span>
+                      )}
+                    </div>
 
                     <div>
                       <h2 className="text-[48px] font-semibold leading-[1.1em]  text-left	">
@@ -457,8 +473,18 @@ const CardList = ({
                       <h5 className="text-[20px] leading-[1.6em]  ">
                         <strong>기능 요구사항</strong>
                       </h5>
-
-                      <DivTable />
+                      
+                      {metaData[indexOfItemDetail] && (
+                          <DivTable
+                          fsd_largecategory = {metaData[indexOfItemDetail].fsd_largecategory}
+                          fsd_mediumcategory = {metaData[indexOfItemDetail].fsd_mediumcategory}
+                          fsd_smallcategory = {metaData[indexOfItemDetail].fsd_smallcategory}
+                          fsd_functionalrequirement = {metaData[indexOfItemDetail].fsd_functionalrequirement}
+                          fsd_nonfunctionalrequirement = {metaData[indexOfItemDetail].fsd_nonfunctionalrequirement}
+                          fsd_description = {metaData[indexOfItemDetail].fsd_description}
+                          fsd_status = {metaData[indexOfItemDetail].fsd_status}
+                        />
+                          )}
 
                       <div></div>
                     </div>
@@ -534,17 +560,19 @@ const CardList = ({
                                   <span className="mb-3 mr-4 text-base font-normal text-gray-100 w-[80%]  truncate">
                                     {item.summary}
                                   </span>
-                                  {item.category === "category_feature" ? (
+                                  {item.category === "feature" ? (
                                     <span
-                                      className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64ea88] rounded-full 
-                    hover:bg-[#275a34] items-center hover:text-gray-50"
+                                      className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold
+                                      text-white transition duration-200 ease-linear bg-[#603b2b] rounded-full 
+                                      hover:bg-[#eaa064 ] items-center hover:text-neutral-50"
                                     >
                                       기능
                                     </span>
                                   ) : (
                                     <span
-                                      className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold text-gray-800 transition duration-200 ease-linear bg-[#64eaea] rounded-full 
-                    hover:bg-[#275c5c] items-center hover:text-gray-50"
+                                      className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-semibold 
+                                      text-white transition duration-200 ease-linear bg-[#28466c] rounded-full 
+                                      hover:bg-[#6488ea ] items-center hover:text-neutral-50"
                                     >
                                       플젝
                                     </span>

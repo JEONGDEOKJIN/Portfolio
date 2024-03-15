@@ -49,7 +49,14 @@ export const postPortfolioMeta = async (req, res) => {
     subTasks,
     roles,
     stacks,
-    parentProject,
+    fsd_largecategory,
+    fsd_mediumcategory,
+    fsd_smallcategory,
+    fsd_functionalrequirement,
+    fsd_nonfunctionalrequirement,
+    fsd_description,
+    fsd_status,
+    projectID,
     assignee,
     startDate,
     endDate,
@@ -75,7 +82,14 @@ export const postPortfolioMeta = async (req, res) => {
       demoVideo_3: demoVideosArr[2] || null,
       demoVideo_4: demoVideosArr[3] || null,
       demoVideo_5: demoVideosArr[4] || null,
-      parentProject,
+      fsd_largecategory,
+      fsd_mediumcategory,
+      fsd_smallcategory,
+      fsd_functionalrequirement,
+      fsd_nonfunctionalrequirement,
+      fsd_description,
+      fsd_status,
+      projectID,
       assignee,
       startDate,
       endDate,
@@ -138,10 +152,10 @@ export const getSearchedItem = async (req, res) => {
       // MYSQL 에서는 테이블 이름이 모두 ⭐소문자⭐
       
       // 일반
-        // 'SELECT * FROM `portfoliometa` WHERE MATCH(title, summary, subTasks, roles, stacks , parentProject) AGAINST(:searchQuery IN NATURAL LANGUAGE MODE)',
+        // 'SELECT * FROM `portfoliometa` WHERE MATCH(title, summary, subTasks, roles, stacks , projectID, fsd_largecategory, fsd_mediumcategory, fsd_smallcategory , fsd_functionalrequirement , fsd_nonfunctionalrequirement , fsd_description, fsd_status) AGAINST(:searchQuery IN NATURAL LANGUAGE MODE)',
 
       // 와일드 카드 : good 를 검색하면 -> goodmoring 까지 검색됨 : 좀 오류가 있음 🟧
-        'SELECT * FROM `portfoliometa` WHERE MATCH(title, summary, subTasks, roles, stacks , parentProject) AGAINST(:searchQuery IN BOOLEAN MODE)',
+        'SELECT * FROM `portfoliometa` WHERE MATCH(title, summary, subTasks, roles, stacks , projectID, fsd_largecategory, fsd_mediumcategory, fsd_smallcategory , fsd_functionalrequirement , fsd_nonfunctionalrequirement , fsd_description, fsd_status  ) AGAINST(:searchQuery IN BOOLEAN MODE)',
 
       // 설정
       {

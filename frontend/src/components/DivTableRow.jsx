@@ -4,7 +4,8 @@ const DivTableRow = ({
   largeCriteria,
   mediumCriteria,
   smallCriteria,
-  requirement,
+  functionalRequirement, 
+  nonFunctionalRequirement,
   desc,
 }) => {
   return (
@@ -20,7 +21,10 @@ const DivTableRow = ({
           {smallCriteria}
         </div>
         <div className="flex items-center justify-center w-[20%]  grow border-b-[1px] border-r-[1px] border-neutral-200 text-left p-3">
-          {requirement}
+          {functionalRequirement}
+        </div>
+        <div className="flex items-center justify-center w-[20%]  grow border-b-[1px] border-r-[1px] border-neutral-200 text-left p-3">
+          {nonFunctionalRequirement}
         </div>
         <div className="flex items-center justify-center w-[30%]  grow border-b-[1px]  border-neutral-200 text-left p-3">
           {desc}

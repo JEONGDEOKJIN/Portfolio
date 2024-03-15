@@ -4,7 +4,8 @@ const DivTableRowHeader = ({
   largeCriteria,
   mediumCriteria,
   smallCriteria,
-  requirement,
+  functionalRequirement, 
+  nonFunctionalRequirement,
   desc,
 }) => {
   return (
@@ -16,11 +17,14 @@ const DivTableRowHeader = ({
         <div className="w-[10%]  grow border-b-[1px] border-r-[1px] border-neutral-200 text-center py-3">
           {mediumCriteria}
         </div>
-        <div className="w-[12%]  grow border-b-[1px] border-r-[1px] border-neutral-200 text-center py-3">
+        <div className="w-[10%]  grow border-b-[1px] border-r-[1px] border-neutral-200 text-center py-3">
           {smallCriteria}
         </div>
-        <div className="w-[20%]  grow border-b-[1px] border-r-[1px] border-neutral-200 text-center py-3">
-          {requirement}
+        <div className="w-[10%]  grow border-b-[1px] border-r-[1px] border-neutral-200 text-center py-3">
+          {functionalRequirement}
+        </div>
+        <div className="w-[10%]  grow border-b-[1px] border-r-[1px] border-neutral-200 text-center py-3">
+          {nonFunctionalRequirement}
         </div>
         <div className="w-[30%]  grow border-b-[1px]  border-neutral-200 text-center py-3">
           {desc}

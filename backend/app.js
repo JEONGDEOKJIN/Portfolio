@@ -53,7 +53,7 @@ app.use(
 // sequelize 설정
 sequelize
   .sync({ force: false })   
-    // 1) model 에서 설정 바꾹 -> 2) forece : true 로 하고 -> 3) 다시, 백엔드 시작하면, 바뀌어 있음. 
+    // 1) model 에서 설정 바꿈 -> 2) forece : true 로 하고 -> 3) 다시, 백엔드 시작하면, 바뀌어 있음. 
     // 즉, 'force: true'라면, model 의 최신정의를 반영해서 -> 다시, 새로운 테이블(DB)을 만든다. 
 
   .then(() => {

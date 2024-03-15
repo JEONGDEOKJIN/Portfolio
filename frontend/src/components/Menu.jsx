@@ -85,10 +85,10 @@ const Menu = () => {
       </div>
 
       {/* 가운데 sub menu */}
-      <div className="absolute top-[64px] h-[100px] z-50  flex  w-full justify-center items-center bg-white ">
-      <nav className="flex justify-start w-[33.333%] ">
-        <NavSubmenu />
-      </nav>
+      <div className="absolute top-[68px] h-[100px] z-50  flex  w-full justify-center items-center bg-white ">
+        <nav className="flex justify-start w-[33.333%] ">
+          <NavSubmenu />
+        </nav>
 
         {/* 로고 */}
         <div className="flex items-center justify-center w-[33.333%]">
@@ -99,7 +99,6 @@ const Menu = () => {
         <div className="flex justify-end w-[33.333%] items-center ">
           <BtnSurpriseMeStart />
         </div>
-        
       </div>
 
       {/* 본문 Blue & Orange Circle  */}
