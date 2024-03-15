@@ -1,41 +1,36 @@
 import express from "express";
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { fileURLToPath } from "url";
 
 import { sequelize } from "./models/index.js";
 import cors from "cors";
-import fs from 'fs'
+import fs from "fs";
 
-import portfolioMetaRouter from "./routers/portfolioMeta/index.js"
-
+import portfolioMetaRouter from "./routers/portfolioMeta/index.js";
 
 const app = express();
 
-
 // multer 실행을 위한 uploads 폴더 설정
 try {
-  fs.readdirSync('uploads'); // 'uploads' 폴더 확인
+  fs.readdirSync("uploads"); // 'uploads' 폴더 확인
 } catch (error) {
-  console.error('uploads 폴더가 없어, 폴더를 생성합니다.');
-  fs.mkdirSync('uploads'); // 'uploads' 폴더 생성
+  console.error("uploads 폴더가 없어, 폴더를 생성합니다.");
+  fs.mkdirSync("uploads"); // 'uploads' 폴더 생성
 }
 
-
 app.use(express.urlencoded({ extended: true })); // URL-encoded 형식의 본문을 파싱하기 위한 설정 (form 데이터 처리)
-app.use(express.json());   // 이걸 하면, 클라이언트에서 서버로 보낼 때, req.body 에서 받을 수 있어⭐
+app.use(express.json()); // 이걸 하면, 클라이언트에서 서버로 보낼 때, req.body 에서 받을 수 있어⭐
 // app.ts 에서 dirname == /c/Users/user11/Desktop/kga/projects/Real_estate_STO_project/backend
 
 // img 태그에서 src 로 이미지 요청 할 때, 사용되는 이미지 가져오는 경로
-  // common JS 에서의 구현
-    // app.use("/getImg", express.static(path.join(__dirname, "/uploads")));
-      // img 에서 소스 경로 localhost:3000/getImg 같은거 
-      // http://locahost:3000/getimg/admin_main_chartjs_1707908168730.jpg
-  // 동일 기능을 ES6 에서의 구현 
-      const __filename = fileURLToPath(import.meta.url);     // 현재 파일의 URL 얻기
-      const __dirname = path.dirname(__filename);     // 현재 파일이 위치한(현재 파일의 근접 디렉토리) 디렉토리 주소 구하기
-      app.use("/getImg", express.static(path.join(__dirname, "uploads")));
-
-
+// common JS 에서의 구현
+// app.use("/getImg", express.static(path.join(__dirname, "/uploads")));
+// img 에서 소스 경로 localhost:3000/getImg 같은거
+// http://locahost:3000/getimg/admin_main_chartjs_1707908168730.jpg
+// 동일 기능을 ES6 에서의 구현
+const __filename = fileURLToPath(import.meta.url); // 현재 파일의 URL 얻기
+const __dirname = path.dirname(__filename); // 현재 파일이 위치한(현재 파일의 근접 디렉토리) 디렉토리 주소 구하기
+app.use("/getImg", express.static(path.join(__dirname, "uploads")));
 
 // 📛 cors 설정
 app.use(
@@ -52,9 +47,9 @@ app.use(
 
 // sequelize 설정
 sequelize
-  .sync({ force: false })   
-    // 1) model 에서 설정 바꿈 -> 2) forece : true 로 하고 -> 3) 다시, 백엔드 시작하면, 바뀌어 있음. 
-    // 즉, 'force: true'라면, model 의 최신정의를 반영해서 -> 다시, 새로운 테이블(DB)을 만든다. 
+  .sync({ force: false })
+  // 1) model 에서 설정 바꿈 -> 2) forece : true 로 하고 -> 3) 다시, 백엔드 시작하면, 바뀌어 있음.
+  // 즉, 'force: true'라면, model 의 최신정의를 반영해서 -> 다시, 새로운 테이블(DB)을 만든다.
 
   .then(() => {
     console.log("database Connect");
@@ -62,7 +57,6 @@ sequelize
   .catch((err) => {
     console.error(err);
   });
-
 
 // 라우터 미들웨어 설정
 app.use("/meta_data", portfolioMetaRouter);

@@ -119,10 +119,34 @@ const CardList = ({
   // const dataToRender = searchTerm.trim() ? searchResultData : metaData
 
   // 2. 제출 버튼 눌러야 -> dropdown 에서 렌더되게 하기
-  let dataToRender = metaData;
+
+  // metaData 에서 중복되는 featureID 를 없애고, unique 한 feature 만 남기기 ----------------------
+
+  const uniqueFeaturerProjectIDData = (metaData) => {
+    // "feature" 카테고리 항목들을 featureID를 기준으로 중복 제거
+    const uniqueFeatures = {};
+    metaData.forEach((item) => {
+      if (item.category === "feature" && !uniqueFeatures[item.featureID]) {
+        uniqueFeatures[item.featureID] = item;
+      }
+    });
+  
+    // "project" 카테고리 항목들 모두 포함
+    const projects = metaData.filter(item => item.category === "project");
+  
+    // 두 종류의 항목을 합쳐서 반환
+    return [...projects, ...Object.values(uniqueFeatures)];
+  };
+
+// -------------------------------------- 이 위에 꺼가 수정하는 거 
+
+
+  let dataToRender = metaData ; // ⭐⭐⭐⭐⭐ 이게 수정 전
+  // let dataToRender = uniqueFeaturerProjectIDData(metaData) ; // 이게 위에 작업한 것 
 
   if (searchResultData && searchResultData.length > 0) {
-    dataToRender = searchResultData;
+    // dataToRender = uniqueFeaturerProjectIDData(searchResultData) 
+    dataToRender = searchResultData // 이게 수정 전⭐⭐⭐⭐⭐ 
   }
 
   console.log("dataToRender 에 들어가는 데이터", searchResultData);
@@ -473,18 +497,34 @@ const CardList = ({
                       <h5 className="text-[20px] leading-[1.6em]  ">
                         <strong>기능 요구사항</strong>
                       </h5>
-                      
+
                       {metaData[indexOfItemDetail] && (
-                          <DivTable
-                          fsd_largecategory = {metaData[indexOfItemDetail].fsd_largecategory}
-                          fsd_mediumcategory = {metaData[indexOfItemDetail].fsd_mediumcategory}
-                          fsd_smallcategory = {metaData[indexOfItemDetail].fsd_smallcategory}
-                          fsd_functionalrequirement = {metaData[indexOfItemDetail].fsd_functionalrequirement}
-                          fsd_nonfunctionalrequirement = {metaData[indexOfItemDetail].fsd_nonfunctionalrequirement}
-                          fsd_description = {metaData[indexOfItemDetail].fsd_description}
-                          fsd_status = {metaData[indexOfItemDetail].fsd_status}
+                        <DivTable
+                          metaData={metaData}
+                          selectedfeatureID={metaData[indexOfItemDetail].featureID}
+                          fsd_largecategory={
+                            metaData[indexOfItemDetail].fsd_largecategory
+                          }
+                          fsd_mediumcategory={
+                            metaData[indexOfItemDetail].fsd_mediumcategory
+                          }
+                          fsd_smallcategory={
+                            metaData[indexOfItemDetail].fsd_smallcategory
+                          }
+                          fsd_functionalrequirement={
+                            metaData[indexOfItemDetail]
+                              .fsd_functionalrequirement
+                          }
+                          fsd_nonfunctionalrequirement={
+                            metaData[indexOfItemDetail]
+                              .fsd_nonfunctionalrequirement
+                          }
+                          fsd_description={
+                            metaData[indexOfItemDetail].fsd_description
+                          }
+                          fsd_status={metaData[indexOfItemDetail].fsd_status}
                         />
-                          )}
+                      )}
 
                       <div></div>
                     </div>

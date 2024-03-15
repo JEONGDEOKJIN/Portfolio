@@ -19,6 +19,11 @@ class PortfolioMeta extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        // 기능(feature) ID : 대분류, 중분류, 소분류, 중 어느것에 붙일지는 내 마음 | 이건, 노션에 한번 쫙 정리하고, 그 다음 기입해야 함.
+        featureID: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
         // 업무 요약 (task summary, summary)
         summary: {
           type: DataTypes.STRING,
