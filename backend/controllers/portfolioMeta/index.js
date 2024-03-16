@@ -1,4 +1,4 @@
-import db, { sequelize } from "../../models/index.js";
+import { models, sequelize } from "../../models/index.js";
 
 export const postPortfolioMeta = async (req, res) => {
   // console.log("req body 로 payload 가 들어오는지 테스트", req.body);

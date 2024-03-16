@@ -1,5 +1,10 @@
 import { Model, DataTypes } from "sequelize";
 
+import { models } from "../models/index.js"
+
+
+
+
 class PortfolioMeta extends Model {
   static init(sequelize) {
     return super.init(
@@ -65,22 +70,23 @@ class PortfolioMeta extends Model {
         fsd_smallcategory: {
           type: DataTypes.STRING,
         },
-        // 기능명세서 - 기능 요구사항
-        fsd_functionalrequirement: {
-          type: DataTypes.TEXT,
-        },
-        // 기능명세서 - 비기능 요구사항
-        fsd_nonfunctionalrequirement: {
-          type: DataTypes.TEXT,
-        },
-        // 기능명세서 - 설명
-        fsd_description: {
-          type: DataTypes.TEXT,
-        },
-        // 기능명세서 - 상태
-        fsd_status: {
-          type: DataTypes.STRING,
-        },
+
+        // // 기능명세서 - 기능 요구사항 : ✅ FSDRequirement 테이블로 이동
+        // fsd_functionalrequirement: {
+        //   type: DataTypes.TEXT,
+        // },
+        // // 기능명세서 - 비기능 요구사항 : ✅ FSDRequirement 테이블로 이동
+        // fsd_nonfunctionalrequirement: {
+        //   type: DataTypes.TEXT,
+        // },
+        // // 기능명세서 - 설명 : ✅ FSDRequirement 테이블로 이동
+        // fsd_description: {
+        //   type: DataTypes.TEXT,
+        // },
+        // // 기능명세서 - 상태 : ✅ FSDRequirement 테이블로 이동
+        // fsd_status: {
+        //   type: DataTypes.STRING,
+        // },
 
         // 담당 역할 (frontend, backendend, aws, 기획)
         roles: {
@@ -144,7 +150,7 @@ class PortfolioMeta extends Model {
         underscored: false, // 모델 필드에 snake_case 적용할지 여부
         timestamps: true, // createdAt, updatedAt 필드를 추가할지 여부
         modelName: "PortfolioMeta", // sequelize 내부에서
-        tableName: "portfoliometa", // DB 에서 사용할 테이블 이름 ⭐ | 반드시 소문자로!
+        tableName: "portfoliometa", // models 에서 사용할 테이블 이름 ⭐ | 반드시 소문자로!
         // 왜냐면, 검색 인덱싱 작업에서, 대소문자 구분 관련해서, 소문자로 하는게 더 나을 것 같다고 해서
         charset: "utf8", // 인코딩 관련
         collate: "utf8_general_ci", // 인코딩 관련
@@ -153,7 +159,7 @@ class PortfolioMeta extends Model {
         indexes: [
           {
             type: "FULLTEXT",
-            name: "text_idx", // 인덱싱의 고유한 이름. | 다른 인덱싱 이름과 겹치면 안
+            name: "text_idx", // 인덱싱의 고유한 이름. | 다른 인덱싱 이름과 겹치면 안돼
 
             // 이 필드에 대해서 검색이 이루어짐
             fields: [
@@ -164,7 +170,7 @@ class PortfolioMeta extends Model {
               "stacks",
               "fsd_largecategory",
               "fsd_mediumcategory",
-              "fsd_smallcategory", 
+              "fsd_smallcategory",
               "fsd_functionalrequirement",
               "fsd_nonfunctionalrequirement",
               "fsd_description",
@@ -175,9 +181,13 @@ class PortfolioMeta extends Model {
     );
   }
 
-  // static associate(db) {
-  //     db.User.hasMany(db.Real_estate, { foreignKey : "seller", sourceKey : "id"});
-  // }
+  static associate(models) {
+    // models.User.hasMany(models.Real_estate, { foreignKey : "seller", sourceKey : "id"});
+    this.hasMany(models.FSDRequirement, {
+      foreignKey: "portfolioMetaId", // FSDrequirement 에 있는 '외래키 필드'
+      as: "requirements", // 옵셔널 : 연관된 데이터를 조회할 때 사용
+    });
+  }
 }
 
 export default PortfolioMeta;
