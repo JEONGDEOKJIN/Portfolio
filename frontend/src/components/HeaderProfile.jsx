@@ -23,12 +23,12 @@ const HeaderProfile = ({ title }) => {
           {/* profile */}
           <div className="flex items-center justify-center ">
             {/* <div className="flex items-center justify-center rounded-full w-14 h-14 bg-gradient-to-r from-cyan-400 to-blue-500"> */}
-              <figure
-                className="w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full shrink-0 "
-                style={{
-                  backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/JEONGDEOKJIN.jpg)`,
-                }}
-              ></figure>
+            <figure
+              className="w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full shrink-0 "
+              style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/JEONGDEOKJIN.jpg)`,
+              }}
+            ></figure>
             {/* </div> */}
           </div>
           <div className="ml-3 ">

@@ -35,6 +35,7 @@ const CardList = ({
   const [isItemDetailOpened, setIsItemDetailOpened] = useState(false);
   const [isShowChatBox, setIsShowChatBox] = useState(false);
   const [indexOfItemDetail, setIndexOfItemDetail] = useState(null);
+  const [clickedDetailedItem, setClickedDetailedItem] = useState(null);
 
   // const [marqueeInfiniteItem, setMarqueeInfiniteItem] =
   //   useState(filteredSortedData);
@@ -113,32 +114,6 @@ const CardList = ({
     searchTerm
   );
   if (loadingMessageComponent) return loadingMessageComponent; // loadingMessageComponent 가 있으면, 렌더링 한다.
-
-  // 검색 데이터가 있으면, 검색 데이터를 반영. 검색이 없으면 기본 metaData 를 렌더
-  // 1. 제출 버튼 없이도 -> 렌더 되게 하기 (검색 예상 dropdown 구현할 때 사용)
-  // const dataToRender = searchTerm.trim() ? searchResultData : metaData
-
-  // 2. 제출 버튼 눌러야 -> dropdown 에서 렌더되게 하기
-
-  // metaData 에서 중복되는 featureID 를 없애고, unique 한 feature 만 남기기 ----------------------
-
-  // const uniqueFeaturerProjectIDData = (metaData) => {
-  //   // "feature" 카테고리 항목들을 featureID를 기준으로 중복 제거
-  //   const uniqueFeatures = {};
-  //   metaData.forEach((item) => {
-  //     if (item.category === "feature" && !uniqueFeatures[item.featureID]) {
-  //       uniqueFeatures[item.featureID] = item;
-  //     }
-  //   });
-
-  //   // "project" 카테고리 항목들 모두 포함
-  //   const projects = metaData.filter(item => item.category === "project");
-
-  //   // 두 종류의 항목을 합쳐서 반환
-  //   return [...projects, ...Object.values(uniqueFeatures)];
-  // };
-
-  // -------------------------------------- 이 위에 꺼가 수정하는 거
 
   let dataToRender = metaData; // ⭐⭐⭐⭐⭐ 이게 수정 전
   // let dataToRender = uniqueFeaturerProjectIDData(metaData) ; // 이게 위에 작업한 것
@@ -221,19 +196,34 @@ const CardList = ({
         })
     : [];
 
-  const handleCardItem = (index) => {
+  const handleCardItem = (metaDataID) => {
     // fetch 요청 보내기
     // isItemDetailOpened(index) : 원래는 우선, 특정 index 인지 확인하고, 해당 index 를 제출
 
     setIsItemDetailOpened(!isItemDetailOpened);
-    setIndexOfItemDetail(index);
+
+    const clickedDetailedItemArr = metaData.find(
+      (item) => item.id === metaDataID
+    );
+
+    setClickedDetailedItem(clickedDetailedItemArr);
+
+    setIndexOfItemDetail(metaDataID);    // 이건 필요 없지 않나❓❓❓❓❓ 
     console.log("indexOfItemDetail", indexOfItemDetail);
-    console.log(`${index}`, index);
+    console.log("metaDataID", metaDataID);
   };
 
-  const handleSeeMoreItem = (index) => {
+  const handleSeeMoreItem = (metaDataID) => {
     // setIsItemDetailOpened(true);
-    setIndexOfItemDetail(index); // 필요한 정보를 받아옴
+    
+    setIndexOfItemDetail(metaDataID); // 필요한 정보를 받아옴    
+      // setIndexOfItemDetail(metaDataID);    // 이건 필요 없지 않나❓❓❓❓❓ 
+
+    const clickedDetailedItemArr = metaData.find(
+      (item) => item.id === metaDataID
+    );
+    setClickedDetailedItem(clickedDetailedItemArr);
+
 
     // 스크롤을 위로 올리기
     if (detailSectionRef.current) {
@@ -298,7 +288,7 @@ const CardList = ({
             <li
               key={index}
               className="flex flex-col cursor-pointer"
-              onClick={() => handleCardItem(index)}
+              onClick={() => handleCardItem(item.id)}
             >
               <figure
                 className="relative h-0 bg-cover   bg-no-repeat  pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
@@ -385,7 +375,7 @@ const CardList = ({
       </ul>
 
       {/* itemDetail 영역 | 여기는 컴포넌트로 따로 빼서 진행 */}
-      {isItemDetailOpened && metaData ? (
+      {isItemDetailOpened && metaData && clickedDetailedItem ? (
         <section>
           <div className="fixed inset-0 z-50 flex items-center justify-end w-full h-10 bg-black/80 mix-blend-normal">
             <button className="mb-1 mr-2" onClick={handleCloseBtn}>
@@ -397,9 +387,10 @@ const CardList = ({
             className="fixed inset-0 z-50 flex flex-col w-full h-full overflow-y-auto transition-opacity duration-300 ease-in-out bg-white inset-y-9"
           >
             {typeof indexOfItemDetail === "number" &&
-              metaData[indexOfItemDetail] &&
-              metaData[indexOfItemDetail].title && (
-                <HeaderProfile title={metaData[indexOfItemDetail].title} />
+              clickedDetailedItem &&
+              clickedDetailedItem.title && (
+                <HeaderProfile 
+                  title={clickedDetailedItem.title} />
               )}
 
             {/* 💪 mx-auto 하면 이제 가운데로 오긴 하는데, flex 를 써서 깔끔하게 오게 하고 싶긴 함  */}
@@ -408,22 +399,22 @@ const CardList = ({
                 {/* 사진 */}
                 <div className=" x-full flex flex-row justify-normal gap-[24px]">
                   {typeof indexOfItemDetail === "number" &&
-                    metaData[indexOfItemDetail] &&
-                    metaData[indexOfItemDetail].architectureImg_1 && (
+                    clickedDetailedItem &&
+                    clickedDetailedItem.architectureImg_1 && (
                       <figure
                         style={{
-                          backgroundImage: `url(http://localhost:7070/getImg/${metaData[indexOfItemDetail].architectureImg_1})`,
+                          backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.architectureImg_1})`,
                         }}
                         className="shadow w-[400px] h-[450px]  bg-no-repeat bg-cover rounded-[40px]"
                       ></figure>
                     )}
 
                   {typeof indexOfItemDetail === "number" &&
-                    metaData[indexOfItemDetail] &&
-                    metaData[indexOfItemDetail].architectureImg_1 && (
+                    clickedDetailedItem &&
+                    clickedDetailedItem.architectureImg_1 && (
                       <figure
                         style={{
-                          backgroundImage: `url(http://localhost:7070/getImg/${metaData[indexOfItemDetail].demoVideo_1})`,
+                          backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1})`,
                         }}
                         className=" shadow rounded-[40px] w-full h-[450px]  bg-no-repeat bg-cover"
                       ></figure>
@@ -435,14 +426,14 @@ const CardList = ({
                   <div className="flex flex-col flex-wrap  gap-[24px] min-w-[60%] ">
                     <div className="flex ">
                       <span className="bg-[#1c5eff1a] w-fit text-[#1c5eff] px-[14px] py-[6px] rounded-[50px] text-[13px]">
-                        {metaData[indexOfItemDetail] &&
-                          metaData[indexOfItemDetail].endDate &&
-                          metaData[indexOfItemDetail].endDate.split("T")[0]}
+                        {clickedDetailedItem &&
+                          clickedDetailedItem.endDate &&
+                          clickedDetailedItem.endDate.split("T")[0]}
                       </span>
 
-                      {metaData[indexOfItemDetail] &&
-                      metaData[indexOfItemDetail].category &&
-                      metaData[indexOfItemDetail].category === "project" ? (
+                      {clickedDetailedItem &&
+                      clickedDetailedItem.category &&
+                      clickedDetailedItem.category === "project" ? (
                         <span className="bg-[#28466c] w-fit text-neutral-50 px-[14px] py-[6px] rounded-[50px] text-[13px] ml-2">
                           project
                         </span>
@@ -455,15 +446,14 @@ const CardList = ({
 
                     <div>
                       <h2 className="text-[48px] font-semibold leading-[1.1em]  text-left	">
-                        {metaData[indexOfItemDetail] &&
-                          metaData[indexOfItemDetail].title}
+                        {clickedDetailedItem && clickedDetailedItem.title}
                       </h2>
 
                       {/* stack 각각을 , 로 구분해서 넣어주면 -> 각 요소를 , 기준으로 배열로 만들어서 -> map 돌릴 수 있음. */}
                       <span className="flex items-center mt-[1.1em] ml-[-6px]">
-                        {metaData[indexOfItemDetail] &&
-                          metaData[indexOfItemDetail].stacks &&
-                          metaData[indexOfItemDetail].stacks
+                        {clickedDetailedItem &&
+                          clickedDetailedItem.stacks &&
+                          clickedDetailedItem.stacks
                             .split(",")
                             .map((item, index) => {
                               return (
@@ -483,8 +473,7 @@ const CardList = ({
                         <strong>Summary</strong>
                       </h5>
                       <p className="leading-[1.7em]  shrink-0 text-[15px] font-normal text-left mt-[15px]  	">
-                        {metaData[indexOfItemDetail] &&
-                          metaData[indexOfItemDetail].summary}
+                        {clickedDetailedItem && clickedDetailedItem.summary}
                       </p>
                     </div>
 
@@ -493,19 +482,19 @@ const CardList = ({
                         <strong>기능 요구사항</strong>
                       </h5>
 
-                      {metaData[indexOfItemDetail] && (
+                      {clickedDetailedItem && (
                         <DivTable
                           indexOfItemDetail={indexOfItemDetail}
                           metaData={metaData}
-                          // selectedfeatureID={metaData[indexOfItemDetail].featureID}
+                          // selectedfeatureID={clickedDetailedItem.featureID}
                           fsd_largecategory={
-                            metaData[indexOfItemDetail].fsd_largecategory
+                            clickedDetailedItem.fsd_largecategory
                           }
                           fsd_mediumcategory={
-                            metaData[indexOfItemDetail].fsd_mediumcategory
+                            clickedDetailedItem.fsd_mediumcategory
                           }
                           fsd_smallcategory={
-                            metaData[indexOfItemDetail].fsd_smallcategory
+                            clickedDetailedItem.fsd_smallcategory
                           }
                         />
                       )}
@@ -566,7 +555,7 @@ const CardList = ({
                             key={index}
                             // className="flex flex-col cursor-pointer w-[250px] ml-[80px] h-full"
                             className="flex flex-col cursor-pointer w-[250px]  h-full"
-                            onClick={() => handleSeeMoreItem(index)}
+                            onClick={() => handleSeeMoreItem(item.id)}
                           >
                             <figure
                               className=" relative h-0 bg-top bg-no-repeat bg-cover pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
