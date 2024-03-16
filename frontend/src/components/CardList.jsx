@@ -21,6 +21,7 @@ import HeaderProfile from "./HeaderProfile";
 import ProfileSection from "./ProfileSection";
 import ModalFeedbackBox from "./ModalFeedbackBox";
 import InfiniteLoop from "./InfiniteLoop";
+import projectNames from "../utils/projectNames";
 
 const CardList = ({
   searchTerm,
@@ -36,7 +37,6 @@ const CardList = ({
   const [isShowChatBox, setIsShowChatBox] = useState(false);
   const [indexOfItemDetail, setIndexOfItemDetail] = useState(null);
   const [clickedDetailedItem, setClickedDetailedItem] = useState(null);
-
   // const [marqueeInfiniteItem, setMarqueeInfiniteItem] =
   //   useState(filteredSortedData);
 
@@ -208,22 +208,21 @@ const CardList = ({
 
     setClickedDetailedItem(clickedDetailedItemArr);
 
-    setIndexOfItemDetail(metaDataID);    // 이건 필요 없지 않나❓❓❓❓❓ 
+    setIndexOfItemDetail(metaDataID); // 이건 필요 없지 않나❓❓❓❓❓
     console.log("indexOfItemDetail", indexOfItemDetail);
     console.log("metaDataID", metaDataID);
   };
 
   const handleSeeMoreItem = (metaDataID) => {
     // setIsItemDetailOpened(true);
-    
-    setIndexOfItemDetail(metaDataID); // 필요한 정보를 받아옴    
-      // setIndexOfItemDetail(metaDataID);    // 이건 필요 없지 않나❓❓❓❓❓ 
+
+    setIndexOfItemDetail(metaDataID); // 필요한 정보를 받아옴
+    // setIndexOfItemDetail(metaDataID);    // 이건 필요 없지 않나❓❓❓❓❓
 
     const clickedDetailedItemArr = metaData.find(
       (item) => item.id === metaDataID
     );
     setClickedDetailedItem(clickedDetailedItemArr);
-
 
     // 스크롤을 위로 올리기
     if (detailSectionRef.current) {
@@ -389,8 +388,7 @@ const CardList = ({
             {typeof indexOfItemDetail === "number" &&
               clickedDetailedItem &&
               clickedDetailedItem.title && (
-                <HeaderProfile 
-                  title={clickedDetailedItem.title} />
+                <HeaderProfile title={clickedDetailedItem.title} />
               )}
 
             {/* 💪 mx-auto 하면 이제 가운데로 오긴 하는데, flex 를 써서 깔끔하게 오게 하고 싶긴 함  */}
@@ -509,26 +507,71 @@ const CardList = ({
 
                     <div className="flex justify-between">
                       <span className="text-gray-600 text-[14px]">Project</span>
-                      <span className="text-[14px]"> STO 프로젝트 </span>
+                      <span className="text-[14px]">
+                        {projectNames[clickedDetailedItem.projectID]}
+                      </span>
                     </div>
 
                     <div className="flex justify-between">
                       <span className="text-gray-600 text-[14px]">Date</span>
-                      <span className="text-[14px]"> 23.03.11 - 03.12 </span>
+                      <span className="text-[14px]">
+                        {(() => {
+                          const startDatePart = clickedDetailedItem.startDate
+                            .split("T")[0]
+                            .split("-");
+                          const endDatePart = clickedDetailedItem.endDate
+                            .split("T")[0]
+                            .split("-");
+                          return `${startDatePart[0].slice(2, 4)}.${
+                            startDatePart[1]
+                          }.${startDatePart[2]}-${startDatePart[0].slice(
+                            2,
+                            4
+                          )}.${endDatePart[1]}.${endDatePart[2]}`;
+                        })()}
+                      </span>
                     </div>
 
                     <div className="flex justify-between">
-                      <span className="text-gray-600 text-[14px]">
-                        프로젝트 깃 주소
-                      </span>
-                      <span className="text-[14px]"> ✅ </span>
+                      <a
+                        className="text-[14px] "
+                        href={clickedDetailedItem.repository}
+                      >
+                        <span className="text-gray-600 text-[14px]">
+                          프로젝트 깃 주소
+                        </span>
+                        <span className="text-[14px] ">
+                          {clickedDetailedItem.repository}
+                        </span>
+                      </a>
                     </div>
 
                     <div className="flex justify-between">
-                      <span className="text-gray-600 text-[14px]">
-                        프로젝트 일지
-                      </span>
-                      <span className="text-[14px]"> ✅ </span>
+                      <a
+                        className="text-[14px] "
+                        href={clickedDetailedItem.projectDocuments}
+                      >
+                        <span className="text-gray-600 text-[14px]">
+                          프로젝트 일지
+                        </span>
+                        <span className="text-[14px] ">
+                          {clickedDetailedItem.projectDocuments}
+                        </span>
+                      </a>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <a
+                        className="text-[14px] "
+                        href="https://deokjin.gitbook.io/dj/"
+                      >
+                        <span className="text-gray-600 text-[14px]">
+                          개발 공부 블로그
+                        </span>
+                        <span className="text-[14px] ">
+                          https://deokjin.gitbook.io/dj
+                        </span>
+                      </a>
                     </div>
 
                     <button
