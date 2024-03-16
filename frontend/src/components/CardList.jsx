@@ -122,21 +122,21 @@ const CardList = ({
 
   // metaData 에서 중복되는 featureID 를 없애고, unique 한 feature 만 남기기 ----------------------
 
-  const uniqueFeaturerProjectIDData = (metaData) => {
-    // "feature" 카테고리 항목들을 featureID를 기준으로 중복 제거
-    const uniqueFeatures = {};
-    metaData.forEach((item) => {
-      if (item.category === "feature" && !uniqueFeatures[item.featureID]) {
-        uniqueFeatures[item.featureID] = item;
-      }
-    });
+  // const uniqueFeaturerProjectIDData = (metaData) => {
+  //   // "feature" 카테고리 항목들을 featureID를 기준으로 중복 제거
+  //   const uniqueFeatures = {};
+  //   metaData.forEach((item) => {
+  //     if (item.category === "feature" && !uniqueFeatures[item.featureID]) {
+  //       uniqueFeatures[item.featureID] = item;
+  //     }
+  //   });
   
-    // "project" 카테고리 항목들 모두 포함
-    const projects = metaData.filter(item => item.category === "project");
+  //   // "project" 카테고리 항목들 모두 포함
+  //   const projects = metaData.filter(item => item.category === "project");
   
-    // 두 종류의 항목을 합쳐서 반환
-    return [...projects, ...Object.values(uniqueFeatures)];
-  };
+  //   // 두 종류의 항목을 합쳐서 반환
+  //   return [...projects, ...Object.values(uniqueFeatures)];
+  // };
 
 // -------------------------------------- 이 위에 꺼가 수정하는 거 
 
@@ -501,7 +501,7 @@ const CardList = ({
                       {metaData[indexOfItemDetail] && (
                         <DivTable
                           metaData={metaData}
-                          selectedfeatureID={metaData[indexOfItemDetail].featureID}
+                          // selectedfeatureID={metaData[indexOfItemDetail].featureID}
                           fsd_largecategory={
                             metaData[indexOfItemDetail].fsd_largecategory
                           }
@@ -511,18 +511,24 @@ const CardList = ({
                           fsd_smallcategory={
                             metaData[indexOfItemDetail].fsd_smallcategory
                           }
-                          fsd_functionalrequirement={
-                            metaData[indexOfItemDetail]
-                              .fsd_functionalrequirement
-                          }
-                          fsd_nonfunctionalrequirement={
-                            metaData[indexOfItemDetail]
-                              .fsd_nonfunctionalrequirement
-                          }
-                          fsd_description={
-                            metaData[indexOfItemDetail].fsd_description
-                          }
-                          fsd_status={metaData[indexOfItemDetail].fsd_status}
+                          // fsd_requirement={
+                          //   metaData[indexOfItemDetail]
+                          //     .fsd_requirement
+                          // }
+                          
+                          // fsd_functionalrequirement={
+                          //   metaData[indexOfItemDetail]
+                          //     .fsd_functionalrequirement
+                          // }
+                          // fsd_nonfunctionalrequirement={
+                          //   metaData[indexOfItemDetail]
+                          //     .fsd_nonfunctionalrequirement
+                          // }
+                          
+                          // fsd_description={
+                          //   metaData[indexOfItemDetail].fsd_description
+                          // }
+                          // fsd_status={metaData[indexOfItemDetail].fsd_status}
                         />
                       )}
 

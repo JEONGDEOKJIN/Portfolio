@@ -9,12 +9,8 @@ class FSDRequirement extends Model {
   static init(sequelize) {
     return super.init(
       {
-        // 기능명세서 - 기능 요구사항 : ✅ FSDRequirement 테이블로 이동
-        fsd_functionalrequirement: {
-          type: DataTypes.TEXT,
-        },
-        // 기능명세서 - 비기능 요구사항 : ✅ FSDRequirement 테이블로 이동
-        fsd_nonfunctionalrequirement: {
+        // 기능명세서 - 기능 및 비기능 요구사항 : ✅ FSDRequirement 테이블로 이동
+        fsd_requirement: {
           type: DataTypes.TEXT,
         },
         // 기능명세서 - 설명 : ✅ FSDRequirement 테이블로 이동
@@ -51,8 +47,7 @@ class FSDRequirement extends Model {
             name: "fsd_requirement_idx",
 
             fields: [
-              "fsd_functionalrequirement",
-              "fsd_nonfunctionalrequirement",
+              "fsd_requirement",
               "fsd_description",
               "fsd_status",
             ],

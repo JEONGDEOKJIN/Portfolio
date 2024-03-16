@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 
-const AdminItem = ({name , column}) => {
+const AdminItem = ({ name, column }) => {
   return (
     <>
-        <span className="font-medium text-gray-900 truncate max-w-[100px]">
-            {name} : {column}
-        </span>
+      <span className="font-medium text-gray-900 truncate ">
+        {name} : {column}
+      </span>
     </>
-  )
-}
+  );
+};
 
-export default AdminItem
+export default AdminItem;

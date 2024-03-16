@@ -21,17 +21,16 @@ const AdminBoard = () => {
   );
   if (statusMessageComponent) return statusMessageComponent;
 
-  
   return (
     <>
       <section>
         <h1>지금 저장되어 있는 것들 모두 보이게 하기</h1>
 
-        <div>
-          <ULAdminCardList metaData={metaData} />;
-        </div>
-  
-  
+        {metaData && (
+          <div>
+            <ULAdminCardList metaData={metaData} />;
+          </div>
+        )}
       </section>
     </>
   );

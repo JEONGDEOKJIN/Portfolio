@@ -7,6 +7,7 @@ import cors from "cors";
 import fs from "fs";
 
 import portfolioMetaRouter from "./routers/portfolioMeta/index.js";
+import adminRouter from "./routers/admin/index.js";
 
 const app = express();
 
@@ -60,6 +61,9 @@ sequelize
 
 // 라우터 미들웨어 설정
 app.use("/meta_data", portfolioMetaRouter);
+// '/meta_data/allMetaData' 경로로 요청할 경우 -> 앞부분이 /meta_data 이면, portfolioMetaRouter 로 가게 한다. -> 그 안에서, 어떤 controller 로 갈지 찾는다.
+
+app.use("/admin", adminRouter);
 // 📛 이미지 경로 설정
 // app.use("/user_imgs", express.static(path.join(__dirname, "imgs", "userImg")));
 

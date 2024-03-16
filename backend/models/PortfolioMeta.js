@@ -25,10 +25,10 @@ class PortfolioMeta extends Model {
           allowNull: false,
         },
         // 기능(feature) ID : 대분류, 중분류, 소분류, 중 어느것에 붙일지는 내 마음 | 이건, 노션에 한번 쫙 정리하고, 그 다음 기입해야 함.
-        featureID: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-        },
+        // featureID: {
+        //   type: DataTypes.INTEGER,
+        //   allowNull: false,
+        // },
         // 업무 요약 (task summary, summary)
         summary: {
           type: DataTypes.STRING,
@@ -71,22 +71,8 @@ class PortfolioMeta extends Model {
           type: DataTypes.STRING,
         },
 
-        // // 기능명세서 - 기능 요구사항 : ✅ FSDRequirement 테이블로 이동
-        // fsd_functionalrequirement: {
-        //   type: DataTypes.TEXT,
-        // },
-        // // 기능명세서 - 비기능 요구사항 : ✅ FSDRequirement 테이블로 이동
-        // fsd_nonfunctionalrequirement: {
-        //   type: DataTypes.TEXT,
-        // },
-        // // 기능명세서 - 설명 : ✅ FSDRequirement 테이블로 이동
-        // fsd_description: {
-        //   type: DataTypes.TEXT,
-        // },
-        // // 기능명세서 - 상태 : ✅ FSDRequirement 테이블로 이동
-        // fsd_status: {
-        //   type: DataTypes.STRING,
-        // },
+        // // 기능명세서 - 기능 및 비기능 요구사항 : ✅ FSDRequirement 테이블로 이동
+
 
         // 담당 역할 (frontend, backendend, aws, 기획)
         roles: {
@@ -171,9 +157,7 @@ class PortfolioMeta extends Model {
               "fsd_largecategory",
               "fsd_mediumcategory",
               "fsd_smallcategory",
-              "fsd_functionalrequirement",
-              "fsd_nonfunctionalrequirement",
-              "fsd_description",
+
             ],
           },
         ],
