@@ -4,6 +4,7 @@ import DivTableRow from "./DivTableRow";
 
 const DivTable = ({
   metaData,
+  indexOfItemDetail,
   // selectedfeatureID,
   fsd_largecategory,
   fsd_mediumcategory,
@@ -33,7 +34,7 @@ const DivTable = ({
           desc={"설명"}
         />
 
-        {metaData.map((item, index) => {
+        {metaData.filter((item) => item.id === indexOfItemDetail).map((item, index) => {
           return (
             <DivTableRow
               key={index}

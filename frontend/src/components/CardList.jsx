@@ -130,23 +130,22 @@ const CardList = ({
   //       uniqueFeatures[item.featureID] = item;
   //     }
   //   });
-  
+
   //   // "project" 카테고리 항목들 모두 포함
   //   const projects = metaData.filter(item => item.category === "project");
-  
+
   //   // 두 종류의 항목을 합쳐서 반환
   //   return [...projects, ...Object.values(uniqueFeatures)];
   // };
 
-// -------------------------------------- 이 위에 꺼가 수정하는 거 
+  // -------------------------------------- 이 위에 꺼가 수정하는 거
 
-
-  let dataToRender = metaData ; // ⭐⭐⭐⭐⭐ 이게 수정 전
-  // let dataToRender = uniqueFeaturerProjectIDData(metaData) ; // 이게 위에 작업한 것 
+  let dataToRender = metaData; // ⭐⭐⭐⭐⭐ 이게 수정 전
+  // let dataToRender = uniqueFeaturerProjectIDData(metaData) ; // 이게 위에 작업한 것
 
   if (searchResultData && searchResultData.length > 0) {
-    // dataToRender = uniqueFeaturerProjectIDData(searchResultData) 
-    dataToRender = searchResultData // 이게 수정 전⭐⭐⭐⭐⭐ 
+    // dataToRender = uniqueFeaturerProjectIDData(searchResultData)
+    dataToRender = searchResultData; // 이게 수정 전⭐⭐⭐⭐⭐
   }
 
   console.log("dataToRender 에 들어가는 데이터", searchResultData);
@@ -433,7 +432,7 @@ const CardList = ({
 
                 <div className="shadow flex flex-row  gap-[80px] px-10 rounded-[64px] mt-[24px] py-10 bg-[#f9f9f9] w-full ">
                   {/* 왼쪽 */}
-                  <div className="flex flex-col flex-wrap  gap-[24px] ">
+                  <div className="flex flex-col flex-wrap  gap-[24px] min-w-[60%] ">
                     <div className="flex ">
                       <span className="bg-[#1c5eff1a] w-fit text-[#1c5eff] px-[14px] py-[6px] rounded-[50px] text-[13px]">
                         {metaData[indexOfItemDetail] &&
@@ -486,10 +485,6 @@ const CardList = ({
                       <p className="leading-[1.7em]  shrink-0 text-[15px] font-normal text-left mt-[15px]  	">
                         {metaData[indexOfItemDetail] &&
                           metaData[indexOfItemDetail].summary}
-                        {metaData[indexOfItemDetail] &&
-                          metaData[indexOfItemDetail].summary}
-                        {metaData[indexOfItemDetail] &&
-                          metaData[indexOfItemDetail].summary}
                       </p>
                     </div>
 
@@ -500,6 +495,7 @@ const CardList = ({
 
                       {metaData[indexOfItemDetail] && (
                         <DivTable
+                          indexOfItemDetail={indexOfItemDetail}
                           metaData={metaData}
                           // selectedfeatureID={metaData[indexOfItemDetail].featureID}
                           fsd_largecategory={
@@ -511,24 +507,6 @@ const CardList = ({
                           fsd_smallcategory={
                             metaData[indexOfItemDetail].fsd_smallcategory
                           }
-                          // fsd_requirement={
-                          //   metaData[indexOfItemDetail]
-                          //     .fsd_requirement
-                          // }
-                          
-                          // fsd_functionalrequirement={
-                          //   metaData[indexOfItemDetail]
-                          //     .fsd_functionalrequirement
-                          // }
-                          // fsd_nonfunctionalrequirement={
-                          //   metaData[indexOfItemDetail]
-                          //     .fsd_nonfunctionalrequirement
-                          // }
-                          
-                          // fsd_description={
-                          //   metaData[indexOfItemDetail].fsd_description
-                          // }
-                          // fsd_status={metaData[indexOfItemDetail].fsd_status}
                         />
                       )}
 
