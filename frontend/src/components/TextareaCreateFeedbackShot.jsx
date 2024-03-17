@@ -4,7 +4,13 @@ const TextareaCreateFeedbackShot = ({
   isInputError,
   labelName,
   textareaName,
+  setValue, 
 }) => {
+
+  const handleTextareaChange = (e) => {
+    setValue(e.target.value)
+  }
+
   return (
     <>
       <div>
@@ -18,6 +24,7 @@ const TextareaCreateFeedbackShot = ({
         `}
           type="text"
           name={textareaName}
+          onChange={handleTextareaChange}
         />
         {isInputError ? (
           <p className="text-[#f2545b] mx-1 text-[14px]">

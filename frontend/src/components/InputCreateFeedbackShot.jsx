@@ -1,6 +1,12 @@
 import React from "react";
 
-const InputCreateFeedbackShot = ({ isInputError, labelName, inputName }) => {
+const InputCreateFeedbackShot = ({ isInputError, labelName, inputName, setValue }) => {
+
+  // 변경사항이 발생하면, 처리하는 이벤트 핸들러
+  const handleInputChange = (e) => {
+    setValue(e.target.value)
+  }
+
   return (
     <>
       <div className="">
@@ -14,6 +20,7 @@ const InputCreateFeedbackShot = ({ isInputError, labelName, inputName }) => {
         `}
           type="text"
           name={inputName}
+          onChange={handleInputChange}
         />
         {isInputError ? (
           <p className="text-[#f2545b] mx-1 text-[14px]">
