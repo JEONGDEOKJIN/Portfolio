@@ -5,6 +5,7 @@ const TextareaCreateFeedbackShot = ({
   labelName,
   textareaName,
   setValue, 
+  showErrorMessageBoolean
 }) => {
 
   const handleTextareaChange = (e) => {
@@ -26,7 +27,7 @@ const TextareaCreateFeedbackShot = ({
           name={textareaName}
           onChange={handleTextareaChange}
         />
-        {isInputError ? (
+        {showErrorMessageBoolean ? (
           <p className="text-[#f2545b] mx-1 text-[14px]">
             Please complete this required field.
           </p>

@@ -14,6 +14,9 @@ const InputCreateFeedback = ({setIsShowChatBox}) => {
   const [feedbackDesc, setFeedbackDesc] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showFeedbackNameError, setShowFeedbackNameError] = useState(false)
+  const [showFeedbackEmailError, setShowFeedbackEmailError] = useState(false)
+  const [showFeedbackDescError, setShowFeedbackDescError] = useState(false)
+  const [showFeedbackRatingsError, setShowFeedbackRatingsError] = useState(false)
 
   // 📛 피드백 별점 받은 것 post 보내야 함
   const [feedbackRating, setFeedbackRating] = useState(null);
@@ -35,12 +38,22 @@ const InputCreateFeedback = ({setIsShowChatBox}) => {
     const isFeedbackNameValid = feedbackName !== null && feedbackName.trim() !== ''; // 비어있지 않으면, true
     setShowFeedbackNameError(!isFeedbackNameValid) // 유효하면(isFeedbackNameValid == true) 이면 -> 에러메시지 안 보여줌 
 
-    // const isFeedbackEmailValid = feedbackEmail !== null && feedbackEmail.trim() !== ''; // 비어있지 않으면, true
-    // setShowFeedbackEmailError(!isFeedbackEmailValid) // 유효하면(isFeedbackEmailValid == true) 이면 -> 에러메시지 안 보여줌 
+    const isFeedbackEmailValid = feedbackEmail !== null && feedbackEmail.trim() !== ''; // 비어있지 않으면, true
+    setShowFeedbackEmailError(!isFeedbackEmailValid) // 유효하면(isFeedbackEmailValid == true) 이면 -> 에러메시지 안 보여줌 
+    
+    const isFeedbackDesclValid = feedbackDesc !== null && feedbackDesc.trim() !== ''; // 비어있지 않으면, true
+    setShowFeedbackDescError(!isFeedbackDesclValid) // 유효하면(isFeedbackEmailValid == true) 이면 -> 에러메시지 안 보여줌 
+    
+    const isRatingslValid = feedbackRating !== null // 비어있지 않으면, true
+    setShowFeedbackRatingsError(!isRatingslValid) // 유효하면(isFeedbackEmailValid == true) 이면 -> 에러메시지 안 보여줌 
 
     // 모든 유효성 검사 통과 여부 : 전체가 true 면 -> isFormValidity 이게 true
-    const isFormValidity = isFeedbackNameValid 
+    const isFormValidity = isFeedbackNameValid && isFeedbackEmailValid && isFeedbackDesclValid && isRatingslValid
     
+    if(!isFormValidity){
+      return
+    }
+
     if(isFormValidity){
       formData.append("email", feedbackEmail);
       formData.append("description", feedbackDesc);
@@ -102,7 +115,7 @@ const InputCreateFeedback = ({setIsShowChatBox}) => {
             isInputError={isInputError}
             labelName="Name"
             inputName="feedbackName"
-            showErrorMessageBoolean = {isFeedbackNameValid}
+            showErrorMessageBoolean = {showFeedbackNameError}
             setValue={setFeedbackName}
             />
           <InputCreateFeedbackShot
@@ -110,7 +123,7 @@ const InputCreateFeedback = ({setIsShowChatBox}) => {
             labelName="Email"
             inputName="feedbackEmail"
             setValue={setFeedbackEmail}
-            // showErrorMessageBoolean = {isFeedbackEmailValid}
+            showErrorMessageBoolean = {showFeedbackEmailError}
             
           />
           <TextareaCreateFeedbackShot
@@ -118,6 +131,7 @@ const InputCreateFeedback = ({setIsShowChatBox}) => {
             labelName="Description"
             textareaName="feedbackDesc"
             setValue={setFeedbackDesc}
+            showErrorMessageBoolean = {showFeedbackDescError}
           />
           {/* 별점 : 클릭 했으면 -> 해당 rating 저장 -> 그에 따라, 색깔 순서 변경 */}
           <div>
@@ -144,7 +158,7 @@ const InputCreateFeedback = ({setIsShowChatBox}) => {
                   <div
                     key={index}
                     className="cursor-point"
-                    onClick={() => setFeedbackRating(index)}
+                    onClick={() => setFeedbackRating(item)}
                     onMouseEnter={() => setColoredStarNum(index)}
                     onMouseLeave={() => setColoredStarNum(-1)}
                   >
@@ -157,7 +171,7 @@ const InputCreateFeedback = ({setIsShowChatBox}) => {
                 );
               })}
             </div>
-            {isInputError ? (
+            {showFeedbackRatingsError ? (
               <p className="text-[#f2545b] mx-1 text-[14px]">
                 Please complete this required field.
               </p>
