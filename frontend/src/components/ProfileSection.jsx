@@ -54,6 +54,8 @@ const ProfileSection = () => {
         <ModalFeedbackBox
           handleCancelBtn={handleCancelBtn}
           isShowChatBox={isShowChatBox}
+          setIsShowChatBox={setIsShowChatBox}
+          
         />
       </section>
     </>

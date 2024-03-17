@@ -6,7 +6,11 @@ import BlueCircleSmall from "./BlueCircleSmall";
 import OrangeCircleSmall from "./OrangeCircleSmall";
 import IconCancel from "./IconCancel";
 
-const ModalFeedbackBox = ({ handleCancelBtn, isShowChatBox }) => {
+const ModalFeedbackBox = ({
+  handleCancelBtn,
+  setIsShowChatBox,
+  isShowChatBox,
+}) => {
   return (
     <>
       {isShowChatBox ? (
@@ -83,7 +87,7 @@ const ModalFeedbackBox = ({ handleCancelBtn, isShowChatBox }) => {
             </div>
 
             <div>
-              <InputCreateFeedback />
+              <InputCreateFeedback setIsShowChatBox={setIsShowChatBox} />
             </div>
 
             <div

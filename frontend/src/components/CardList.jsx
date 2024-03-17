@@ -676,6 +676,8 @@ const CardList = ({
           <ModalFeedbackBox
             handleCancelBtn={handleCancelBtn}
             isShowChatBox={isShowChatBox}
+            setIsShowChatBox={setIsShowChatBox}
+
           />
         </section>
       ) : (

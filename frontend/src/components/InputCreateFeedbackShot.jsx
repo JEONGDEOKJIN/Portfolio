@@ -1,9 +1,10 @@
 import React from "react";
 
-const InputCreateFeedbackShot = ({ isInputError, labelName, inputName, setValue }) => {
+const InputCreateFeedbackShot = ({ isInputError, labelName, inputName, setValue , showErrorMessageBoolean }) => {
 
   // 변경사항이 발생하면, 처리하는 이벤트 핸들러
   const handleInputChange = (e) => {
+    
     setValue(e.target.value)
   }
 
@@ -22,7 +23,7 @@ const InputCreateFeedbackShot = ({ isInputError, labelName, inputName, setValue 
           name={inputName}
           onChange={handleInputChange}
         />
-        {isInputError ? (
+        {showErrorMessageBoolean ? (
           <p className="text-[#f2545b] mx-1 text-[14px]">
             Please complete this required field.
           </p>

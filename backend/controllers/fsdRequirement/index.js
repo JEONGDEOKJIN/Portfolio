@@ -1,11 +1,6 @@
 import { models, sequelize } from "../../models/index.js";
 
 export const postFsdRequirement = async (req, res) => {
-  console.log("postFsdRequirement 로 신호 가나? ");
-  console.log("postFsdRequirement 값 들어가나?", req);
-  console.log("postFsdRequirement 값 들어가나?", req.params);
-  console.log("req.body 값 들어가나?", req.body);
-
   const { id } = req.params; // 이 외래키에 대해서 create 하고 싶음.
 
   const { fsd_requirement, fsd_description } = req.body;

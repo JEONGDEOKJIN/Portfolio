@@ -8,6 +8,7 @@ import fs from "fs";
 
 import portfolioMetaRouter from "./routers/portfolioMeta/index.js";
 import adminRouter from "./routers/admin/index.js";
+import feedbackmessageRouter from "./routers/feedbackmessage/index.js"
 
 const app = express();
 
@@ -66,6 +67,8 @@ app.use("/meta_data", portfolioMetaRouter);
 app.use("/admin", adminRouter);
 // 📛 이미지 경로 설정
 // app.use("/user_imgs", express.static(path.join(__dirname, "imgs", "userImg")));
+
+app.use("/feedbackmessage" , feedbackmessageRouter)
 
 // 서버 설정
 const PORT = 7070;

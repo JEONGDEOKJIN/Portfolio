@@ -56,6 +56,8 @@ const HeaderProfile = ({ title }) => {
         <ModalFeedbackBox
           handleCancelBtn={handleCancelBtn}
           isShowChatBox={isShowChatBox}
+          setIsShowChatBox={setIsShowChatBox}
+
         />
       </header>
     </>

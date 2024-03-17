@@ -119,6 +119,8 @@ const Menu = () => {
       <ModalFeedbackBox
         handleCancelBtn={handleCancelBtn}
         isShowChatBox={isShowChatBox}
+        setIsShowChatBox={setIsShowChatBox}
+
       />
     </div>
   );

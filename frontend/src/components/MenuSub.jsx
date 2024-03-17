@@ -51,6 +51,8 @@ const MenuSub = () => {
       <ModalFeedbackBox
         handleCancelBtn={handleCancelBtn}
         isShowChatBox={isShowChatBox}
+        setIsShowChatBox={setIsShowChatBox}
+
       />
 
       {/* 이건 우선 남김 */}
