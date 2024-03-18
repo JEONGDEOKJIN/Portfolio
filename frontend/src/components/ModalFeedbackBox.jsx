@@ -62,8 +62,13 @@ const ModalFeedbackBox = ({
                 </p> */}
 
                 <div className="flex flex-row items-center">
-                  <div className="w-[60px] h-[60px] bg-blue-300 rounded-full flex items-center justify-center">
-                    사진
+                  <div className="w-[60px] h-[60px] bg-blue-800 rounded-full flex items-center justify-center">
+                    <figure
+                      className="w-[72px] h-[72px] shrink-0 bg-center bg-no-repeat bg-cover rounded-full"
+                      style={{
+                        backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/JEONGDEOKJIN.jpg)`,
+                      }}
+                    ></figure>
                   </div>
                   <div className="flex flex-col flex-wrap ml-4">
                     <p className="text-[14px] font-semibold text-gray-900">

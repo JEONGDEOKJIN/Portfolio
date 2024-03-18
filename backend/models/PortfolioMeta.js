@@ -151,7 +151,6 @@ class PortfolioMeta extends Model {
             fields: [
               "title",
               "summary",
-              "subTasks",
               "roles",
               "stacks",
               "fsd_largecategory",

@@ -51,7 +51,6 @@ export const postPortfolioMeta = async (req, res) => {
     fsd_largecategory,
     fsd_mediumcategory,
     fsd_smallcategory,
-    fsd_status,
     projectID,
     // featureID,
     assignee,
@@ -82,7 +81,7 @@ export const postPortfolioMeta = async (req, res) => {
       fsd_largecategory,
       fsd_mediumcategory,
       fsd_smallcategory,
-      fsd_status,
+      // fsd_status,
       projectID,
       // featureID,
       assignee,
@@ -140,7 +139,7 @@ export const getSearchedItem = async (req, res) => {
   // 와일드 카드
   const searchTerm = req.query.query + "*";
 
-  // console.log("검색 요청한 키워드 받아오기 searchTerm | 작동함 🔵" , searchTerm)
+  console.log("검색 요청한 키워드 받아오기 searchTerm | 작동함 🔵" , searchTerm)
 
   try {
     // full-text 인덱싱을 활용해서, 검색기능을 만들려면, sequelize 인스턴스를 직접 가져와서, 직접 쿼리를 실행해야
@@ -152,7 +151,7 @@ export const getSearchedItem = async (req, res) => {
       // 'SELECT * FROM `portfoliometa` WHERE MATCH(title, summary, subTasks, roles, stacks , projectID, fsd_largecategory, fsd_mediumcategory, fsd_smallcategory , fsd_description, fsd_status) AGAINST(:searchQuery IN NATURAL LANGUAGE MODE)',
 
       // 와일드 카드 : good 를 검색하면 -> goodmoring 까지 검색됨 : 좀 오류가 있음 🟧
-      "SELECT * FROM `portfoliometa` WHERE MATCH(title, summary, subTasks, roles, stacks , projectID, fsd_largecategory, fsd_mediumcategory, fsd_smallcategory, fsd_status  ) AGAINST(:searchQuery IN BOOLEAN MODE)",
+      "SELECT * FROM `portfoliometa` WHERE MATCH(title, summary, roles, stacks, fsd_largecategory, fsd_mediumcategory, fsd_smallcategory  ) AGAINST(:searchQuery IN BOOLEAN MODE)",
 
       // 설정
       {

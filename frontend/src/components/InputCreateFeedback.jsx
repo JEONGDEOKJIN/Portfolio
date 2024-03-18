@@ -7,98 +7,108 @@ import BtnSubmitFeedback from "./BtnSubmitFeedback";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const InputCreateFeedback = ({setIsShowChatBox}) => {
+const InputCreateFeedback = ({ setIsShowChatBox }) => {
   const [isInputError, setInputError] = useState(true);
   const [feedbackName, setFeedbackName] = useState(null);
   const [feedbackEmail, setFeedbackEmail] = useState(null);
   const [feedbackDesc, setFeedbackDesc] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showFeedbackNameError, setShowFeedbackNameError] = useState(false)
-  const [showFeedbackEmailError, setShowFeedbackEmailError] = useState(false)
-  const [showFeedbackDescError, setShowFeedbackDescError] = useState(false)
-  const [showFeedbackRatingsError, setShowFeedbackRatingsError] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showFeedbackNameError, setShowFeedbackNameError] = useState(false);
+  const [showFeedbackEmailError, setShowFeedbackEmailError] = useState(false);
+  const [showFeedbackDescError, setShowFeedbackDescError] = useState(false);
+  const [showFeedbackRatingsError, setShowFeedbackRatingsError] =
+    useState(false);
 
   // 📛 피드백 별점 받은 것 post 보내야 함
   const [feedbackRating, setFeedbackRating] = useState(null);
 
   const [coloredStarNum, setColoredStarNum] = useState(-1);
 
-  const [isFormValidity , setIsFormValidity] = useState(false)
+  const [isFormValidity, setIsFormValidity] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  // ✅ 
+  // ✅
   const handleSubmit = async (e) => {
     e.preventDefault(); // form 태그의 기본동작인 폼 제출 기본 이벤트 방지
 
     // form 객체 생성
     const formData = new FormData();
-    
-    // 유효성 검사 
-    const isFeedbackNameValid = feedbackName !== null && feedbackName.trim() !== ''; // 비어있지 않으면, true
-    setShowFeedbackNameError(!isFeedbackNameValid) // 유효하면(isFeedbackNameValid == true) 이면 -> 에러메시지 안 보여줌 
 
-    const isFeedbackEmailValid = feedbackEmail !== null && feedbackEmail.trim() !== ''; // 비어있지 않으면, true
-    setShowFeedbackEmailError(!isFeedbackEmailValid) // 유효하면(isFeedbackEmailValid == true) 이면 -> 에러메시지 안 보여줌 
-    
-    const isFeedbackDesclValid = feedbackDesc !== null && feedbackDesc.trim() !== ''; // 비어있지 않으면, true
-    setShowFeedbackDescError(!isFeedbackDesclValid) // 유효하면(isFeedbackEmailValid == true) 이면 -> 에러메시지 안 보여줌 
-    
-    const isRatingslValid = feedbackRating !== null // 비어있지 않으면, true
-    setShowFeedbackRatingsError(!isRatingslValid) // 유효하면(isFeedbackEmailValid == true) 이면 -> 에러메시지 안 보여줌 
+    // 유효성 검사
+    const isFeedbackNameValid =
+      feedbackName !== null && feedbackName.trim() !== ""; // 비어있지 않으면, true
+    setShowFeedbackNameError(!isFeedbackNameValid); // 유효하면(isFeedbackNameValid == true) 이면 -> 에러메시지 안 보여줌
+
+    const emailValidRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    const isFeedbackEmailValid = feedbackEmail !== null && feedbackEmail.trim() !== "" && emailValidRegex.test(feedbackEmail.trim())// 비어있지 않으면, true
+    setShowFeedbackEmailError(!isFeedbackEmailValid); // 유효하면(isFeedbackEmailValid == true) 이면 -> 에러메시지 안 보여줌
+
+    const isFeedbackDescValid =
+      feedbackDesc !== null && feedbackDesc.trim() !== ""; // 비어있지 않으면, true
+    setShowFeedbackDescError(!isFeedbackDescValid); // 유효하면(isFeedbackEmailValid == true) 이면 -> 에러메시지 안 보여줌
+
+    const isRatingsValid = feedbackRating !== null; // 비어있지 않으면, true
+    setShowFeedbackRatingsError(!isRatingsValid); // 유효하면(isFeedbackEmailValid == true) 이면 -> 에러메시지 안 보여줌
 
     // 모든 유효성 검사 통과 여부 : 전체가 true 면 -> isFormValidity 이게 true
-    const isFormValidity = isFeedbackNameValid && isFeedbackEmailValid && isFeedbackDesclValid && isRatingslValid
-    
-    if(!isFormValidity){
-      return
+    const isFormValidity =
+      isFeedbackNameValid &&
+      isFeedbackEmailValid &&
+      isFeedbackDescValid &&
+      isRatingsValid;
+
+    if (!isFormValidity) {
+      return;
     }
 
-    if(isFormValidity){
+    if (isFormValidity) {
       formData.append("email", feedbackEmail);
       formData.append("description", feedbackDesc);
       formData.append("ratings", feedbackRating);
-      
+
       console.log("feedback message 보낼 때, 담긴 formData 확인👇👇👇");
       for (let [key, value] of formData.entries()) {
         console.log(key, value);
       }
-  
+
       setIsSubmitting(true); // 중복 제출 방지 위한 상태관리
-  
+
       // axios 로 form 객체 보내기
       try {
         const response = await axios.post(
-          `http://localhost:7070/feedbackmessage`, 
+          `http://localhost:7070/feedbackmessage`,
           formData,
           {
-            // 보내는 데이터가 일반 텍스트 일 경우 : 추가 header 설정 하지 않음 
-            // 보내는 데이터가 파일, 이미지 등일 경우 : multipart/form-data 설정 
-                // headers: {
-                  // //   "Content-Type": "multipart/form-data", //✅ file 이 추가되면, multer 랑 같이! 아, file 이니까, 보내는 type 도 바뀌어야 하는구나
-                // },
-            withCredentials : true
+            // 보내는 데이터가 일반 텍스트 일 경우 : 추가 header 설정 하지 않음
+            // 보내는 데이터가 파일, 이미지 등일 경우 : multipart/form-data 설정
+            // headers: {
+            // //   "Content-Type": "multipart/form-data", //✅ file 이 추가되면, multer 랑 같이! 아, file 이니까, 보내는 type 도 바뀌어야 하는구나
+            // },
+            withCredentials: true,
           }
-        )
-        console.log("feedback create 요청 후 서버에서 완료 응답 받음🔵", response);
-  
+        );
+        console.log(
+          "feedback create 요청 후 서버에서 완료 응답 받음🔵",
+          response
+        );
+
         if (response) setIsSubmitting(false);
-        
-        if(response.status === 200){
-          alert("제출 완료 입니다! 빠르게 파악해서 반영하게요🙏")
-          setIsShowChatBox(false)
-          navigate(`/`) // 리디렉션
-        } else { 
-          alert("제출 에러입니다. 다시 시도해주세요😔")
-          navigate(`/`) // 리디렉션
-        }
-        
+
+        if (response.status === 200) {
+          alert("제출 완료 입니다! 감사합니다!🙏");
+          setIsShowChatBox(false);
+          navigate(`/`); // 리디렉션
+        } else {
+          alert("제출 에러입니다. 다시 시도해주세요😔");
+          navigate(`/`); // 리디렉션
+        } 
+
         // ✅ 페이지 리디렉션
-          // const lastId = response.data.id;
-          // navigate(`read/${lastId}`)
-        
+        // const lastId = response.data.id;
+        // navigate(`read/${lastId}`)
       } catch (error) {
-        console.log("feedbackmessage post 요청 보낼 때, error 발생 " , error) // error 표기도 잘 짜야 함
+        console.log("feedbackmessage post 요청 보낼 때, error 발생 ", error); // error 표기도 잘 짜야 함
       }
     }
   };
@@ -115,23 +125,22 @@ const InputCreateFeedback = ({setIsShowChatBox}) => {
             isInputError={isInputError}
             labelName="Name"
             inputName="feedbackName"
-            showErrorMessageBoolean = {showFeedbackNameError}
+            showErrorMessageBoolean={showFeedbackNameError}
             setValue={setFeedbackName}
-            />
+          />
           <InputCreateFeedbackShot
             isInputError={isInputError}
             labelName="Email"
             inputName="feedbackEmail"
             setValue={setFeedbackEmail}
-            showErrorMessageBoolean = {showFeedbackEmailError}
-            
+            showErrorMessageBoolean={showFeedbackEmailError}
           />
           <TextareaCreateFeedbackShot
             isInputError={isInputError}
             labelName="Description"
             textareaName="feedbackDesc"
             setValue={setFeedbackDesc}
-            showErrorMessageBoolean = {showFeedbackDescError}
+            showErrorMessageBoolean={showFeedbackDescError}
           />
           {/* 별점 : 클릭 했으면 -> 해당 rating 저장 -> 그에 따라, 색깔 순서 변경 */}
           <div>

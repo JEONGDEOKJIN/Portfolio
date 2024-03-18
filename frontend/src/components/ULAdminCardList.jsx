@@ -52,7 +52,7 @@ const ULAdminCardList = ({ metaData }) => {
 
 
 
-                  <AdminItem name="fsd_status" column={item.fsd_status} />
+                  {/* <AdminItem name="fsd_status" column={item.fsd_status} /> */}
                   <AdminItem name="roles" column={item.roles} />
                   <AdminItem name="stacks" column={item.stacks} />
                 </div>
