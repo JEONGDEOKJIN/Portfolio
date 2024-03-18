@@ -25,9 +25,11 @@ import projectNames from "../utils/projectNames";
 
 const CardList = ({
   searchTerm,
+  setSearchTerm,
   isSubmitClicked,
   setIsSubmitClicked,
   searchBarInput,
+  setSearchBarInput,
 }) => {
   const [selectedFilterOptionArr, setSelectedFilterOptionArr] = useState([]);
   const [sortOption, setSortOption] = useState("recommended");
@@ -158,37 +160,55 @@ const CardList = ({
           const selectedCategories = selectedFilterOptionArr.filter((option) =>
             option.startsWith("category_")
           );
+          // console.log("selectedCategories🔥🔥", selectedCategories); // ["category_project"] 이렇게 나옴
+
           const selectedRoles = selectedFilterOptionArr.filter((option) =>
             option.startsWith("roles_")
           );
 
+          // 접두사 category 및 roles 제거
+          // ⭐⭐ 왜냐면, 'selectedCategories' 에 저장되어 있는 건 'category_project' 인데, DB 로 부터 오는 metaData 는, 순수하게 project, 또는 feature 로만 저장되어 있
+          const deleteCategoryPrefix = selectedCategories.map(
+            (item) => item.split("_")[1]
+          );
+          const deleteRolesPrefix = selectedRoles.map(
+            (item) => item.split("_")[1]
+          );
+
           // 카테고리만 선택된 상황에서, 해당 item 의 콜백함수를 true 로 반환해서 필터링
-          if (selectedCategories.length > 0 && selectedRoles.length === 0) {
+          if (
+            deleteCategoryPrefix.length > 0 &&
+            deleteRolesPrefix.length === 0
+          ) {
             // selectedCategories 의 배열 안의 요소를 순회하면서,
             // 'item.category 의 각 요소의 문자열'이라면,  'clickedCategory 문자열' 과 동일한지 를 판단
             // 'item.category이 배열' 이라면, 각 배열 요소 안에, 'clickedCategory 문자열' 이 있는지를 판단.
             // 동일하다면, some 메서드는 true 를 반환한다.
             // 그러면, 현재, ⭐filter 함수의 콜백함수가 실행중인 상황이므로⭐, 현재 진행중인 콜백함수에는 true 가 반환된다.
             // 따라서, filter 함수로 돌아가서, 현재 진행중인 item 에 대해서는 true 이므로, filter 를 통과하게 된다.
-            return selectedCategories.some((clickedCategory) =>
-              item.category.includes(clickedCategory)
+            return deleteCategoryPrefix.some(
+              (deleteCategoryPrefixItem) =>
+                item.category.includes(deleteCategoryPrefixItem) // item 의 category 필드에 'project' 인 걸 filter 에서 return
             );
           }
 
           // 역할만 선택된 상황에서, 해당 item 의 콜백함수를 true 로 반환해서 필터링
-          if (selectedRoles.length > 0 && selectedCategories.length === 0) {
-            return selectedRoles.some((clickedRole) =>
-              item.roles.includes(clickedRole)
+          if (
+            deleteRolesPrefix.length > 0 &&
+            deleteCategoryPrefix.length === 0
+          ) {
+            return deleteRolesPrefix.some((deleteRolesPrefixItem) =>
+              item.roles.includes(deleteRolesPrefixItem)
             );
           }
 
           // 위의 조건이 모두 아니면, '모두 선택된 상황' 이므로 -> 전부 다 필터링 한다.
           return (
-            selectedCategories.some((clickedCategory) =>
-              item.category.includes(clickedCategory)
+            deleteCategoryPrefix.some((deleteCategoryPrefixItem) =>
+              item.category.includes(deleteCategoryPrefixItem)
             ) &&
-            selectedRoles.some((clickedRole) =>
-              item.roles.includes(clickedRole)
+            deleteRolesPrefix.some((deleteRolesPrefixItem) =>
+              item.roles.includes(deleteRolesPrefixItem)
             )
           );
 
@@ -276,7 +296,11 @@ const CardList = ({
           sortOption={sortOption}
         />
 
-        <CategoryOptions />
+        <CategoryOptions
+          setSearchBarInput={setSearchBarInput}
+          setSearchTerm={setSearchTerm}
+          setIsSubmitClicked={setIsSubmitClicked}
+        />
 
         <FilterBtn
           selectedFilterOptionArr={selectedFilterOptionArr}

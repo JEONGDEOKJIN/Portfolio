@@ -83,6 +83,8 @@ const ItemList = () => {
         {/* 카드 리스트 섹션 */}
         <section className="p-3 mb-3 main ">
           <CardList
+            setSearchTerm ={setSearchTerm}
+            setSearchBarInput ={setSearchBarInput }
             searchTerm={searchTerm}
             setIsSubmitClicked={setIsSubmitClicked}
             isSubmitClicked={isSubmitClicked}

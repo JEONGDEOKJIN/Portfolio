@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 
-const CategoryOptions = () => {
+const CategoryOptions = ({
+  setSearchBarInput,
+  setSearchTerm,
+  setIsSubmitClicked,
+}) => {
   const [selectedCategory, setSelectedCategory] = useState("Discover");
+
+  const handleCategoryOptionClick = (item) => {
+    setSelectedCategory(item);
+    setSearchBarInput(item); // 검색필드에 해당 키워드가 들어간 것 처럼 보이게 하기
+    setSearchTerm(item); // a 태그 에서는, 이벤트 핸들러 속성이 없기 때문에, e.target.value 를 사용하지 않음
+    setIsSubmitClicked(true); // 검색 버튼이 실제로 눌린 것 처럼 동작하게 하기
+  };
 
   const categories = [
     "Discover",
@@ -29,7 +40,7 @@ const CategoryOptions = () => {
                         : "text-gray-900 shrink-0"
                     }
                 `}
-              onClick={() => setSelectedCategory(item)}
+              onClick={() => handleCategoryOptionClick(item)}
             >
               {item}
             </li>
@@ -41,6 +52,7 @@ const CategoryOptions = () => {
 };
 
 export default CategoryOptions;
+
 
 {
   /* <ul className="flex flex-row gap-[8px]">
