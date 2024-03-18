@@ -4,9 +4,10 @@ import CardList from "../../components/CardList";
 import { isError, useQuery } from "react-query";
 import Footer from "../../components/Footer";
 import Navigation from "../../components/Navigation";
-import RecommenedKeyWord from "../../components/RecommenedKeyWord";
+import RecommenedKeyWord from "../../components/RecommendedKeyWord";
 import Header1Discover from "../../components/Header1Discover";
 import Header2Desc from "../../components/Header2Desc";
+import RecommendedKeyWord from "../../components/RecommendedKeyWord";
 
 const ItemList = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -47,11 +48,32 @@ const ItemList = () => {
                 <li className="mr-3 text-xs text-gray-500">
                   Trending searches
                 </li>
-                <RecommenedKeyWord keyword={"Next.js"} />
-                <RecommenedKeyWord keyword={"React.js"} />
-                <RecommenedKeyWord keyword={"Redux & Recoil"} />
-                <RecommenedKeyWord keyword={"반응형 웹"} />
-                <RecommenedKeyWord keyword={"figma"} />
+                <RecommendedKeyWord 
+                  setIsSubmitClicked= {setIsSubmitClicked}
+                  setSearchBarInput = {setSearchBarInput}
+                  setSearchTerm = {setSearchTerm} 
+                  keyword={"Next.js"} />
+                <RecommendedKeyWord 
+                  setIsSubmitClicked= {setIsSubmitClicked}
+                  setSearchBarInput = {setSearchBarInput}
+                  setSearchTerm = {setSearchTerm} 
+                  keyword={"React.js"} />
+                <RecommendedKeyWord 
+                  setIsSubmitClicked= {setIsSubmitClicked}
+                  setSearchBarInput = {setSearchBarInput}
+                  setSearchTerm = {setSearchTerm} 
+                  keyword={"Redux & Recoil"} />
+                <RecommendedKeyWord 
+                  setIsSubmitClicked= {setIsSubmitClicked}
+                  setSearchBarInput = {setSearchBarInput}
+                  setSearchTerm = {setSearchTerm} 
+                  keyword={"반응형 웹"} />
+                <RecommendedKeyWord 
+                  setIsSubmitClicked= {setIsSubmitClicked}
+                  setSearchBarInput = {setSearchBarInput}
+                  setSearchTerm = {setSearchTerm} 
+                  keyword={"figma"} />
+
               </ul>
             </div>
           </div>

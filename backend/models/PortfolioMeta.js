@@ -141,10 +141,11 @@ class PortfolioMeta extends Model {
         charset: "utf8", // 인코딩 관련
         collate: "utf8_general_ci", // 인코딩 관련
 
-        // 인덱싱
+        // 인덱싱 
         indexes: [
           {
-            type: "FULLTEXT",
+            type: "FULLTEXT",  // FULLTEXT 인덱스가 이 되어야 -> 와일드 카드 사용 할 수 있고 -> 그래야, 'good' 을 검색하면, 'goods' 까지 나옴
+              // 따라서, 검색 되길 원하는 필드가 변경되면 -> model 설정 자체를 바꿔야 하고 -> 따라서 app.js 에서   .sync({ force: ture }) 로 바꾸고 -> DB 자체를 비운뒤에 다시 시도 해야 함 
             name: "text_idx", // 인덱싱의 고유한 이름. | 다른 인덱싱 이름과 겹치면 안돼
 
             // 이 필드에 대해서 검색이 이루어짐
@@ -156,7 +157,6 @@ class PortfolioMeta extends Model {
               "fsd_largecategory",
               "fsd_mediumcategory",
               "fsd_smallcategory",
-
             ],
           },
         ],

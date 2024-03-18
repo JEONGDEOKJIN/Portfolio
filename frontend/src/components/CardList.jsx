@@ -67,8 +67,6 @@ const CardList = ({
     if (isSubmitClicked == true) setIsSubmitClicked(false);
   }, [isSubmitClicked, setIsSubmitClicked]);
 
-
-
   // 기본 metaData 검색 useQuery
   const {
     data: metaData,
@@ -96,15 +94,53 @@ const CardList = ({
   );
   if (loadingMessageComponent) return loadingMessageComponent; // loadingMessageComponent 가 있으면, 렌더링 한다.
 
-  let dataToRender = metaData; // ⭐⭐⭐⭐⭐ 이게 수정 전
-  // let dataToRender = uniqueFeaturerProjectIDData(metaData) ; // 이게 위에 작업한 것
+  // let dataToRender = metaData; // ⭐⭐⭐⭐⭐ 이게 수정 전 | 우선, 전역 변수로 관리 | 잘못되면 이거 살리고
+  // let dataToRender = uniqueFeaturerProjectIDData(metaData) ; // 이게 위에 작업한
+
+  let dataToRender = [];
 
   if (searchResultData && searchResultData.length > 0) {
     // dataToRender = uniqueFeaturerProjectIDData(searchResultData)
-    dataToRender = searchResultData; // 이게 수정 전⭐⭐⭐⭐⭐
+
+    // 수정전 : metaData 테이블 하나에서만 검색 결과를 가져옴
+    // dataToRender = searchResultData; // 이게 수정 전⭐⭐⭐⭐⭐ | 잘못되면 이거 살리고
+
+    // 수정후 : metaData + FSDRequirement 에서, 검색 결과 가져옴
+    // 검색 된 것 중, -> metaData 에서 온거면 -> 'metaData.id 와 검색결과의id' 동일하면 -> dataToRender 에 넣기
+    // 검색 된 것 중, -> FSDRequirement 에서 온거면 -> 'metaData.id 와 검색결과의projectID' 동일하면 -> dataToRender 에 넣기
+
+    const searchResultFromPortfolioMeta = searchResultData.filter(
+      (item) => item.source === "PortfolioMeta"
+    );
+
+    searchResultFromPortfolioMeta.forEach((searchItem) => {
+      const matchedMetaItem = metaData.find(
+        (metaItem) => metaItem.id === searchItem.id
+      );
+      if (matchedMetaItem) {
+        dataToRender.push(matchedMetaItem);
+      }
+    });
+
+    const searchResultFromFSDRequirement = searchResultData.filter(
+      (item) => item.source === "FSDRequirement"
+    );
+
+    searchResultFromFSDRequirement.forEach((searchItem) => {
+      const matchedMetaItem = metaData.find(
+        (metaItem) => metaItem.id === searchItem.portfolioMetaId
+      );
+      if (matchedMetaItem) {
+        dataToRender.push(matchedMetaItem);
+      }
+    });
+  } else {
+    dataToRender = metaData; // 검색 데이터가 없으면, metaData 로 렌더링
   }
 
-  console.log("dataToRender 에 들어가는 데이터", searchResultData);
+  console.log("searchResultData 에 들어가는 데이터", searchResultData);
+  // fsd 에서 나오면 배열에 들어가 있음.
+
   console.log("dataToRender 에 들어간 데이터", dataToRender);
   console.log("metaData 에 있는 것", metaData);
 
@@ -658,7 +694,6 @@ const CardList = ({
             handleCancelBtn={handleCancelBtn}
             isShowChatBox={isShowChatBox}
             setIsShowChatBox={setIsShowChatBox}
-
           />
         </section>
       ) : (

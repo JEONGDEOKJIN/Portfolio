@@ -1,4 +1,5 @@
 import { models, sequelize } from "../../models/index.js";
+import { BOOLEAN } from "sequelize";
 
 export const postPortfolioMeta = async (req, res) => {
   // console.log("req body 로 payload 가 들어오는지 테스트", req.body);
@@ -133,31 +134,69 @@ export const getAllItem = async (req, res) => {
 };
 
 export const getSearchedItem = async (req, res) => {
-  // 일반
   // const searchTerm = req.query.query // 이렇게 2번 query 로 접근해야 가져와짐
 
   // 와일드 카드
   const searchTerm = req.query.query + "*";
 
-  console.log("검색 요청한 키워드 받아오기 searchTerm | 작동함 🔵" , searchTerm)
+  console.log("검색 요청한 키워드 받아오기 searchTerm | 작동함 🔵", searchTerm);
 
   try {
     // full-text 인덱싱을 활용해서, 검색기능을 만들려면, sequelize 인스턴스를 직접 가져와서, 직접 쿼리를 실행해야
     const searchedItem = await sequelize.query(
       // full-text 인덱싱을 설정한 title, summary, subTasks, stacks 컬럼에서, AGAINST 메서드를 사용해서 검색하기
       // MYSQL 에서는 테이블 이름이 모두 ⭐소문자⭐
+      // 와일드 카드 : good 를 검색하면 -> goodmoring 까지 검색됨
 
-      // 일반
-      // 'SELECT * FROM `portfoliometa` WHERE MATCH(title, summary, subTasks, roles, stacks , projectID, fsd_largecategory, fsd_mediumcategory, fsd_smallcategory , fsd_description, fsd_status) AGAINST(:searchQuery IN NATURAL LANGUAGE MODE)',
-
-      // 와일드 카드 : good 를 검색하면 -> goodmoring 까지 검색됨 : 좀 오류가 있음 🟧
-      "SELECT * FROM `portfoliometa` WHERE MATCH(title, summary, roles, stacks, fsd_largecategory, fsd_mediumcategory, fsd_smallcategory  ) AGAINST(:searchQuery IN BOOLEAN MODE)",
+      `(
+        SELECT 
+          'PortfolioMeta' AS source,  
+          id,   
+          title, 
+          summary, 
+          roles, 
+          stacks, 
+          NULL AS fsd_requirement, 
+          NULL AS fsd_description,
+          NULL AS fsd_status,
+          NULL AS portfolioMetaId,
+          startDate,
+          endDate
+        FROM 
+          portfoliometa
+        WHERE
+          MATCH(title, summary, roles, stacks, fsd_largecategory, fsd_mediumcategory, fsd_smallcategory) AGAINST(:searchQuery IN BOOLEAN MODE)
+        )
+      
+      UNION ALL 
+      (
+        SELECT
+          'FSDRequirement' AS source,
+          id, 
+          NULL AS title,
+          NULL AS summary,
+          NULL AS roles,
+          NULL AS stacks,
+          fsd_requirement,
+          fsd_description,
+          fsd_status,
+          portfolioMetaId,
+          NULL AS startDate,
+          NULL AS endDate
+        FROM 
+          fsdrequirements
+        WHERE
+          MATCH(fsd_requirement, fsd_description, fsd_status) AGAINST(:searchQuery IN BOOLEAN MODE)
+      )`,
+      //  'PortfolioMeta' AS source : 검색 결과가 어떤 테이블에서 왔는지를 확인하는 가상의 테이블
+      //  NULL AS fsd_requirement : 우선 비워두고, 뒤에서 채운다.
 
       // 설정
       {
         replacements: { searchQuery: searchTerm }, // 여기서 searchQuery를 searchTerm으로 매핑
-        model: models.PortfolioMeta, // 결과를 PortfolioMeta 모델 인스턴스로 매핑
-        mapToModel: true, // Raw 쿼리 결과를 모델 인스턴스로 매핑하도록 설정
+        // model: models.PortfolioMeta, // 결과를 PortfolioMeta 모델 인스턴스로 매핑
+        mapToModel: true, // Raw 쿼리 결과를 모델 인스턴스로 매핑 -> Sequelize 모델 인스턴스의 메소드나 더 복잡한 로직을 적용하고 싶을 때
+        // 단순 클라이언트 전달 용도면, 추가하지 않아도 됨.
         type: sequelize.QueryTypes.SELECT, // 쿼리 타입을 SELECT로 지정
       }
     );
@@ -166,6 +205,7 @@ export const getSearchedItem = async (req, res) => {
 
     // 검색결과가 없을 때의 send 도 있어야 할거 같은데
     if (searchedItem.length > 0) {
+      console.log("searchedItem 검색결과", searchedItem);
       return res.status(200).send(searchedItem);
     } else {
       return res
@@ -177,6 +217,53 @@ export const getSearchedItem = async (req, res) => {
     return res.status(500).send(error.message);
   }
 };
+
+// 기존 getSearchedItem 기능
+// export const getSearchedItem = async (req, res) => {
+
+//   // const searchTerm = req.query.query // 이렇게 2번 query 로 접근해야 가져와짐
+
+//   // 와일드 카드
+//   const searchTerm = req.query.query + "*";
+
+//   console.log("검색 요청한 키워드 받아오기 searchTerm | 작동함 🔵", searchTerm);
+
+//   try {
+//     // full-text 인덱싱을 활용해서, 검색기능을 만들려면, sequelize 인스턴스를 직접 가져와서, 직접 쿼리를 실행해야
+//     const searchedItem = await sequelize.query(
+//       // full-text 인덱싱을 설정한 title, summary, subTasks, stacks 컬럼에서, AGAINST 메서드를 사용해서 검색하기
+//       // MYSQL 에서는 테이블 이름이 모두 ⭐소문자⭐
+
+//       // 일반 🔵 | 작동함
+//       // 'SELECT * FROM `portfoliometa` WHERE MATCH(title, summary, roles, stacks, fsd_largecategory, fsd_mediumcategory, fsd_smallcategory) AGAINST(:searchQuery IN NATURAL LANGUAGE MODE)',
+
+//       // 와일드 카드 : good 를 검색하면 -> goodmoring 까지 검색됨 : 좀 오류가 있음 🟧
+//       "SELECT * FROM `portfoliometa` WHERE MATCH(title, summary, roles, stacks, fsd_largecategory, fsd_mediumcategory, fsd_smallcategory  ) AGAINST(:searchQuery IN BOOLEAN MODE)",
+
+//       // 설정
+//       {
+//         replacements: { searchQuery: searchTerm }, // 여기서 searchQuery를 searchTerm으로 매핑
+//         model: models.PortfolioMeta, // 결과를 PortfolioMeta 모델 인스턴스로 매핑
+//         mapToModel: true, // Raw 쿼리 결과를 모델 인스턴스로 매핑하도록 설정
+//         type: sequelize.QueryTypes.SELECT, // 쿼리 타입을 SELECT로 지정
+//       }
+//     );
+
+//     // console.log("searchedItem" , searchedItem)
+
+//     // 검색결과가 없을 때의 send 도 있어야 할거 같은데
+//     if (searchedItem.length > 0) {
+//       return res.status(200).send(searchedItem);
+//     } else {
+//       return res
+//         .status(404)
+//         .send({ message: "해당 키워드에 대한 검색 결과가 없어요😥" });
+//     }
+//   } catch (error) {
+//     console.log("searchedItem 오류 발생", error);
+//     return res.status(500).send(error.message);
+//   }
+// };
 
 export const updateItemById = async (req, res) => {
   // const { id } = req.params; // id 값 가져오기
