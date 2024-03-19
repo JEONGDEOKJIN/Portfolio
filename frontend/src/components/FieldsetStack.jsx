@@ -20,7 +20,7 @@ const FieldsetStack = ({
   const handleClearStacks = () => {
     setSelectedFilterOptionArr(
       selectedFilterOptionArr.filter(
-        (item) => item != 'stacks_nodejs' && item != 'stacks_reactjs' && item != 'stacks_nextjs'
+        (item) => item != 'stacks_node.js' && item != 'stacks_react.js' && item != 'stacks_next.js'
       )
     );
   };

@@ -166,7 +166,11 @@ const CardList = ({
             option.startsWith("roles_")
           );
 
-          // 접두사 category 및 roles 제거
+          const selectedStacks = selectedFilterOptionArr.filter((option) =>
+            option.startsWith("stacks_")
+          );
+
+          // 접두사 category, roles 및 stacks 제거
           // ⭐⭐ 왜냐면, 'selectedCategories' 에 저장되어 있는 건 'category_project' 인데, DB 로 부터 오는 metaData 는, 순수하게 project, 또는 feature 로만 저장되어 있
           const deleteCategoryPrefix = selectedCategories.map(
             (item) => item.split("_")[1]
@@ -174,11 +178,15 @@ const CardList = ({
           const deleteRolesPrefix = selectedRoles.map(
             (item) => item.split("_")[1]
           );
+          const deleteStacksPrefix = selectedStacks.map(
+            (item) => item.split("_")[1]
+          );
 
           // 카테고리만 선택된 상황에서, 해당 item 의 콜백함수를 true 로 반환해서 필터링
           if (
             deleteCategoryPrefix.length > 0 &&
-            deleteRolesPrefix.length === 0
+            deleteRolesPrefix.length === 0 &&
+            deleteStacksPrefix.length === 0 
           ) {
             // selectedCategories 의 배열 안의 요소를 순회하면서,
             // 'item.category 의 각 요소의 문자열'이라면,  'clickedCategory 문자열' 과 동일한지 를 판단
@@ -195,10 +203,23 @@ const CardList = ({
           // 역할만 선택된 상황에서, 해당 item 의 콜백함수를 true 로 반환해서 필터링
           if (
             deleteRolesPrefix.length > 0 &&
-            deleteCategoryPrefix.length === 0
+            deleteCategoryPrefix.length === 0 && 
+            deleteStacksPrefix.length === 0
           ) {
             return deleteRolesPrefix.some((deleteRolesPrefixItem) =>
               item.roles.includes(deleteRolesPrefixItem)
+            );
+          }
+
+          // 역할만 선택된 상황에서, 해당 item 의 콜백함수를 true 로 반환해서 필터링
+          if (
+            deleteStacksPrefix.length > 0 &&
+            deleteCategoryPrefix.length === 0 && 
+            deleteRolesPrefix.length === 0  
+            
+          ) {
+            return deleteStacksPrefix.some((deleteStacksPrefixItem) =>
+              item.stacks.includes(deleteStacksPrefixItem)
             );
           }
 
@@ -209,6 +230,9 @@ const CardList = ({
             ) &&
             deleteRolesPrefix.some((deleteRolesPrefixItem) =>
               item.roles.includes(deleteRolesPrefixItem)
+            ) &&
+            deleteStacksPrefix.some((deleteStacksPrefixItem) =>
+              item.stacks.includes(deleteStacksPrefixItem)
             )
           );
 

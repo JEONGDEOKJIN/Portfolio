@@ -13,15 +13,14 @@ const ULDropDownStack = ({
       setSelectedFilterOptionArr([]);
     } else {
       setSelectedFilterOptionArr((prev) => {
-        const isAlreadySelected = prev.includes(optionToFetch)
-        
-        if(isAlreadySelected){
-          return prev.filter( (item) => item != optionToFetch )
-        } else { 
-          return [...prev, optionToFetch]
+        const isAlreadySelected = prev.includes(optionToFetch);
+
+        if (isAlreadySelected) {
+          return prev.filter((item) => item != optionToFetch);
+        } else {
+          return [...prev, optionToFetch];
         }
-      }
-      );
+      });
     }
   };
 
@@ -34,29 +33,32 @@ const ULDropDownStack = ({
           border-[1.5px] border-gray-200/90  rounded-[7px]
         "
       >
-        
-        <ListOption  
-            keywordToDB = 'stacks_nextjs'
-            keywordToShow = '📛 Next.js'
-            selectedFilterOptionArr = {selectedFilterOptionArr}
-            handleFilterDropDownList = {() => handleFilterDropDownList("stacks_nextjs")}
-        />
-        
-        <ListOption  
-            keywordToDB = 'stacks_reactjs'
-            keywordToShow = '📛 React.js'
-            selectedFilterOptionArr = {selectedFilterOptionArr}
-            handleFilterDropDownList = {() => handleFilterDropDownList("stacks_reactjs")}
+        <ListOption
+          keywordToDB="stacks_next.js"
+          keywordToShow="🎯 Next.js"
+          selectedFilterOptionArr={selectedFilterOptionArr}
+          handleFilterDropDownList={() =>
+            handleFilterDropDownList("stacks_next.js")
+          }
         />
 
-        <ListOption  
-            keywordToDB = 'stacks_nodejs'
-            keywordToShow = '📛 Node.js'
-            selectedFilterOptionArr = {selectedFilterOptionArr}
-            handleFilterDropDownList = {() => handleFilterDropDownList("stacks_nodejs")}
+        <ListOption
+          keywordToDB="stacks_react.js"
+          keywordToShow="🎯 React.js"
+          selectedFilterOptionArr={selectedFilterOptionArr}
+          handleFilterDropDownList={() =>
+            handleFilterDropDownList("stacks_react.js")
+          }
         />
-        
 
+        <ListOption
+          keywordToDB="stacks_node.js"
+          keywordToShow="🎯 Node.js"
+          selectedFilterOptionArr={selectedFilterOptionArr}
+          handleFilterDropDownList={() =>
+            handleFilterDropDownList("stacks_node.js")
+          }
+        />
       </ul>
     </>
   );
@@ -64,7 +66,8 @@ const ULDropDownStack = ({
 
 export default ULDropDownStack;
 
-{/* {selectedFilterOptionArr?.includes("category_project") ? (
+{
+  /* {selectedFilterOptionArr?.includes("category_project") ? (
   <li
     onClick={() => handleFilterDropDownList("category_project")}
     className="pl-2 h-[42px] text-sm flex text-[13px] items-center bg-neutral-100 rounded-[7px] text-gray-600 cursor-pointer hover:bg-neutral-50/90 hover:rounded-[7px]"
@@ -81,10 +84,11 @@ export default ULDropDownStack;
   >
     category_project
   </li>
-)} */}
+)} */
+}
 
-
-{/* {selectedFilterOptionArr?.includes("category_feature") ? (
+{
+  /* {selectedFilterOptionArr?.includes("category_feature") ? (
   <li
     onClick={() => handleFilterDropDownList("category_feature")}
     className="pl-2 h-[42px] text-sm flex text-[13px] items-center bg-neutral-100 text-gray-600 cursor-pointer hover:bg-neutral-50/90 hover:rounded-[7px]"
@@ -163,4 +167,5 @@ export default ULDropDownStack;
     roles_aws <ArrowUp />
   </li>
   
-)} */}
+)} */
+}
