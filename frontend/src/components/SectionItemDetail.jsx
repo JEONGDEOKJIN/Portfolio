@@ -25,6 +25,10 @@ const SectionItemDetail = ({
   handleCancelBtn,
   handleSeeMoreItem,
 }) => {
+  const handleArchitectureImage = () => {
+    console.log("handleArchitectureImage 클릭");
+  };
+
   return (
     <>
       {/* itemDetail 영역 | 여기는 컴포넌트로 따로 빼서 진행 */}
@@ -57,13 +61,14 @@ const SectionItemDetail = ({
                         style={{
                           backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.architectureImg_1})`,
                         }}
-                        className="shadow w-[400px] h-[450px]  bg-no-repeat bg-cover rounded-[40px]"
+                        onClick={() => handleArchitectureImage()}
+                        className=" shadow w-[400px] h-[450px]  bg-no-repeat bg-cover rounded-[40px]"
                       ></figure>
                     )}
 
                   {typeof indexOfItemDetail === "number" &&
                     clickedDetailedItem &&
-                    clickedDetailedItem.architectureImg_1 && (
+                    clickedDetailedItem.demoVideo_1 && (
                       <figure
                         style={{
                           backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1})`,

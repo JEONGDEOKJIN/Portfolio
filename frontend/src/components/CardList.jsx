@@ -26,6 +26,7 @@ import DivRelatedFeatureProjects from "./DivRelatedFeatureProjects";
 import ULCardList from "./ULCardList";
 import SectionItemDetail from "./SectionItemDetail";
 import useCardDetailItem from "../hooks/useDetailItem";
+import IconCancelZoomImage from "./IconCancelZoomImage";
 
 const CardList = ({
   searchTerm,
@@ -43,9 +44,16 @@ const CardList = ({
   const [isShowChatBox, setIsShowChatBox] = useState(false);
   const [indexOfItemDetail, setIndexOfItemDetail] = useState(null);
   const [clickedDetailedItem, setClickedDetailedItem] = useState(null);
+  const [isArchitectureImageZoomed, setIsArchitectureImageZoomed] =
+    useState(false);
+  const [isDemoImageZoomed, setIsDemoImageZoomed] = useState(false);
+  const [isDemoImageHover, setIsDemoImageHover] = useState(false);
 
   // const [marqueeInfiniteItem, setMarqueeInfiniteItem] =
   //   useState(filteredSortedData);
+
+  const [isArchitectureImageHover, setIsArchitectureImageHover] =
+    useState(false);
 
   const detailSectionRef = useRef(null);
 
@@ -143,9 +151,11 @@ const CardList = ({
       const matchedMetaItem = metaData.find(
         (metaItem) => metaItem.id === searchItem.portfolioMetaId
       );
-      if (matchedMetaItem && 
+      if (
+        matchedMetaItem &&
         // dataToRender 안에 matchedMetaItem안에 담긴 데이터가 이미 있는지 검증해야 함
-        !dataToRender.some((item) => item.id === matchedMetaItem.id)) {
+        !dataToRender.some((item) => item.id === matchedMetaItem.id)
+      ) {
         dataToRender.push(matchedMetaItem);
       }
     });
@@ -353,6 +363,14 @@ const CardList = ({
     setIsShowChatBox(false);
   };
 
+  const handleArchitectureImage = () => {
+    setIsArchitectureImageZoomed(!isArchitectureImageZoomed);
+  };
+
+  const handleDemoImage = () => {
+    setIsDemoImageZoomed(!isDemoImageZoomed);
+  };
+
   return (
     <>
       <section className="flex flex-row justify-between items-center h-[10rem]  ">
@@ -399,7 +417,7 @@ const CardList = ({
         isHovered={isHovered}
       />
 
-      <SectionItemDetail
+      {/* <SectionItemDetail
         isItemDetailOpened={isItemDetailOpened}
         metaData={metaData}
         clickedDetailedItem={clickedDetailedItem}
@@ -416,7 +434,8 @@ const CardList = ({
         handleCloseBtn={handleCloseBtn} // 이건 파일로 뺄 수 있지 않아?
         handleRelatedItem={handleRelatedItem} // 이건 파일로 뺄 수 있지 않아?
         handleSeeMoreItem={handleSeeMoreItem}
-      />
+      /> */}
+
       {/* itemDetail 영역 | 여기는 컴포넌트로 따로 빼서 진행 */}
       {isItemDetailOpened && metaData && clickedDetailedItem ? (
         <section>
@@ -447,9 +466,40 @@ const CardList = ({
                         style={{
                           backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.architectureImg_1})`,
                         }}
-                        className="shadow w-[400px] h-[450px]  bg-no-repeat bg-cover rounded-[40px]"
-                      ></figure>
+                        onClick={() => handleArchitectureImage()}
+                        onMouseEnter={() => setIsArchitectureImageHover(true)}
+                        onMouseLeave={() => setIsArchitectureImageHover(false)}
+                        className="relative cursor-pointer shadow w-[400px] h-[450px]  bg-no-repeat bg-cover rounded-[40px]"
+                      >
+                        {isArchitectureImageHover && (
+                          <div className="absolute inset-0 flex flex-col items-center justify-center w-full y-full bg-gradient-to-b rounded-[40px] from-black/50 to-black/50">
+                            <p className="font-medium text-[20px] text-neutral-50 border-[1px] p-2 rounded-[5px] ">
+                              아키텍처
+                            </p>
+                          </div>
+                        )}
+                      </figure>
                     )}
+
+                  {isArchitectureImageZoomed && (
+                    <div className="fixed inset-0 z-30 flex items-center justify-center bg-black/90">
+                      <div
+                        onClick={() => handleArchitectureImage()}
+                        className="absolute z-50 cursor-pointer top-5 right-5"
+                      >
+                        <IconCancelZoomImage />
+                      </div>
+
+                      <figure
+                        style={{
+                          backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.architectureImg_1})`,
+                        }}
+                        // onClick={() => handleDemoImage()}
+
+                        className="w-full  max-w-[90%] max-h-[90%] h-full z-50 bg-no-repeat bg-contain bg-center shadow cursor-pointer"
+                      ></figure>
+                    </div>
+                  )}
 
                   {typeof indexOfItemDetail === "number" &&
                     clickedDetailedItem &&
@@ -458,9 +508,40 @@ const CardList = ({
                         style={{
                           backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1})`,
                         }}
-                        className=" shadow rounded-[40px] w-full h-[450px]  bg-no-repeat bg-cover"
-                      ></figure>
+                        onClick={() => handleDemoImage()}
+                        onMouseEnter={() => setIsDemoImageHover(true)}
+                        onMouseLeave={() => setIsDemoImageHover(false)}
+                        className="cursor-pointer shadow relative rounded-[40px] w-full h-[450px]  bg-no-repeat bg-cover"
+                      >
+                        {isDemoImageHover && (
+                          <div className="absolute inset-0 flex flex-col items-center justify-center w-full y-full bg-black/50 rounded-[40px]">
+                            <p className="font-medium text-[20px] text-neutral-50 border-[1px] p-2 rounded-[5px] ">
+                              시연 동영상
+                            </p>
+                          </div>
+                        )}
+                      </figure>
                     )}
+
+                  {isDemoImageZoomed && (
+                    <div className="fixed inset-0 z-30 flex items-center justify-center bg-black/90 ">
+                      <div
+                        onClick={() => handleDemoImage()}
+                        className="absolute z-50 cursor-pointer top-5 right-5"
+                      >
+                        <IconCancelZoomImage />
+                      </div>
+
+                      <figure
+                        style={{
+                          backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1})`,
+                        }}
+                        // onClick={() => handleDemoImage()}
+
+                        className="w-full  max-w-[90%] max-h-[90%] h-full z-50 bg-no-repeat bg-contain bg-center shadow cursor-pointer"
+                      ></figure>
+                    </div>
+                  )}
                 </div>
 
                 <div className="shadow flex flex-row  gap-[80px] px-10 rounded-[64px] mt-[24px] py-10 bg-[#f9f9f9] w-full ">
