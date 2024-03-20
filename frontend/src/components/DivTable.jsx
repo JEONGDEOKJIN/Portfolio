@@ -25,7 +25,7 @@ const DivTable = ({
 
   return (
     <>
-      <div className="flex flex-col border-t-1 border-neutral-200 mt-[15px]">
+      <div className="flex flex-col  border-neutral-200 mt-[15px]">
         <DivTableRowHeader
           largeCriteria={"대분류"}
           mediumCriteria={"중분류"}
@@ -34,18 +34,20 @@ const DivTable = ({
           desc={"설명"}
         />
 
-        {metaData.filter((item) => item.id === indexOfItemDetail).map((item, index) => {
-          return (
-            <DivTableRow
-              key={index}
-              largeCriteria={item.fsd_largecategory}
-              mediumCriteria={item.fsd_mediumcategory}
-              smallCriteria={item.fsd_smallcategory}
-              functionalRequirement={item.requirements}
-              desc={item.fsd_description}
-            />
-          );
-        })}
+        {metaData
+          .filter((item) => item.id === indexOfItemDetail)
+          .map((item, index) => {
+            return (
+              <DivTableRow
+                key={index}
+                largeCriteria={item.fsd_largecategory}
+                mediumCriteria={item.fsd_mediumcategory}
+                smallCriteria={item.fsd_smallcategory}
+                functionalRequirement={item.requirements}
+                desc={item.fsd_description}
+              />
+            );
+          })}
 
         {/* <DivTableRow
           largeCriteria={"어드민"}

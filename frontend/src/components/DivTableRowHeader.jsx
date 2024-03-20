@@ -10,7 +10,7 @@ const DivTableRowHeader = ({
 }) => {
   return (
     <>
-      <div className="flex text-[14px] text-gray-900 ">
+      <div className="flex text-[14px] text-gray-900 border-t-[1px]  ">
         <div className="w-[10%]  grow border-b-[1px] border-r-[1px] border-neutral-200 text-center py-3">
           {largeCriteria}
         </div>

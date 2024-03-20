@@ -15,20 +15,15 @@ const ItemList = () => {
   const [searchBarInput, setSearchBarInput] = useState("");
 
   return (
-
     <div className="flex flex-col overflow-x-hidden ">
-
       <header className="w-full bg-indigo-200 ">
         <Navigation />
       </header>
 
       <main className="w-full">
-        
         {/* 검색 hero 섹션 */}
         <section className="flex flex-col items-center px-6 py-10 mt-[150px]">
-          
           <div className="  tablet:h-[560px] tablet:max-w-[560px] flex flex-col justify-evenly items-center">
-  
             <Header1Discover />
 
             <Header2Desc />
@@ -48,56 +43,55 @@ const ItemList = () => {
                 <li className="mr-3 text-xs text-gray-500">
                   Trending searches
                 </li>
-                <RecommendedKeyWord 
-                  setIsSubmitClicked= {setIsSubmitClicked}
-                  setSearchBarInput = {setSearchBarInput}
-                  setSearchTerm = {setSearchTerm} 
-                  keyword={"Next.js"} />
-                <RecommendedKeyWord 
-                  setIsSubmitClicked= {setIsSubmitClicked}
-                  setSearchBarInput = {setSearchBarInput}
-                  setSearchTerm = {setSearchTerm} 
-                  keyword={"React.js"} />
-                <RecommendedKeyWord 
-                  setIsSubmitClicked= {setIsSubmitClicked}
-                  setSearchBarInput = {setSearchBarInput}
-                  setSearchTerm = {setSearchTerm} 
-                  keyword={"Redux & Recoil"} />
-                <RecommendedKeyWord 
-                  setIsSubmitClicked= {setIsSubmitClicked}
-                  setSearchBarInput = {setSearchBarInput}
-                  setSearchTerm = {setSearchTerm} 
-                  keyword={"반응형 웹"} />
-                <RecommendedKeyWord 
-                  setIsSubmitClicked= {setIsSubmitClicked}
-                  setSearchBarInput = {setSearchBarInput}
-                  setSearchTerm = {setSearchTerm} 
-                  keyword={"figma"} />
-
+                <RecommendedKeyWord
+                  setIsSubmitClicked={setIsSubmitClicked}
+                  setSearchBarInput={setSearchBarInput}
+                  setSearchTerm={setSearchTerm}
+                  keyword={"Next.js"}
+                />
+                <RecommendedKeyWord
+                  setIsSubmitClicked={setIsSubmitClicked}
+                  setSearchBarInput={setSearchBarInput}
+                  setSearchTerm={setSearchTerm}
+                  keyword={"React.js"}
+                />
+                <RecommendedKeyWord
+                  setIsSubmitClicked={setIsSubmitClicked}
+                  setSearchBarInput={setSearchBarInput}
+                  setSearchTerm={setSearchTerm}
+                  keyword={"Redux & Recoil"}
+                />
+                <RecommendedKeyWord
+                  setIsSubmitClicked={setIsSubmitClicked}
+                  setSearchBarInput={setSearchBarInput}
+                  setSearchTerm={setSearchTerm}
+                  keyword={"반응형 웹"}
+                />
+                <RecommendedKeyWord
+                  setIsSubmitClicked={setIsSubmitClicked}
+                  setSearchBarInput={setSearchBarInput}
+                  setSearchTerm={setSearchTerm}
+                  keyword={"figma"}
+                />
               </ul>
             </div>
           </div>
-          
         </section>
 
         {/* 카드 리스트 섹션 */}
         <section className="p-3 mb-3 main ">
           <CardList
-            setSearchTerm ={setSearchTerm}
-            setSearchBarInput ={setSearchBarInput }
+            setSearchTerm={setSearchTerm}
+            setSearchBarInput={setSearchBarInput}
             searchTerm={searchTerm}
             setIsSubmitClicked={setIsSubmitClicked}
             isSubmitClicked={isSubmitClicked}
             searchBarInput={searchBarInput}
           />
         </section>
-
       </main>
 
-    
       <Footer />
-    
-    
     </div>
   );
 };

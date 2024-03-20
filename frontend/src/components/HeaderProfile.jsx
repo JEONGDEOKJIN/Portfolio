@@ -10,6 +10,7 @@ const HeaderProfile = ({ title }) => {
 
   const handleCancelBtn = () => {
     setIsShowChatBox(false);
+
   };
 
   return (
@@ -57,7 +58,6 @@ const HeaderProfile = ({ title }) => {
           handleCancelBtn={handleCancelBtn}
           isShowChatBox={isShowChatBox}
           setIsShowChatBox={setIsShowChatBox}
-
         />
       </header>
     </>

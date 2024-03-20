@@ -22,6 +22,10 @@ import ProfileSection from "./ProfileSection";
 import ModalFeedbackBox from "./ModalFeedbackBox";
 import InfiniteLoop from "./InfiniteLoop";
 import projectNames from "../utils/projectNames";
+import DivRelatedFeatureProjects from "./DivRelatedFeatureProjects";
+import ULCardList from "./ULCardList";
+import SectionItemDetail from "./SectionItemDetail";
+import useCardDetailItem from "../hooks/useDetailItem";
 
 const CardList = ({
   searchTerm,
@@ -39,6 +43,7 @@ const CardList = ({
   const [isShowChatBox, setIsShowChatBox] = useState(false);
   const [indexOfItemDetail, setIndexOfItemDetail] = useState(null);
   const [clickedDetailedItem, setClickedDetailedItem] = useState(null);
+
   // const [marqueeInfiniteItem, setMarqueeInfiniteItem] =
   //   useState(filteredSortedData);
 
@@ -119,7 +124,13 @@ const CardList = ({
       const matchedMetaItem = metaData.find(
         (metaItem) => metaItem.id === searchItem.id
       );
-      if (matchedMetaItem) {
+      console.log("matchedMetaItem", matchedMetaItem);
+
+      if (
+        matchedMetaItem &&
+        !dataToRender.some((item) => item.id === matchedMetaItem.id)
+      ) {
+        // dataToRender 안에 matchedMetaItem안에 담긴 데이터가 이미 있는지 검증해야 함
         dataToRender.push(matchedMetaItem);
       }
     });
@@ -132,7 +143,9 @@ const CardList = ({
       const matchedMetaItem = metaData.find(
         (metaItem) => metaItem.id === searchItem.portfolioMetaId
       );
-      if (matchedMetaItem) {
+      if (matchedMetaItem && 
+        // dataToRender 안에 matchedMetaItem안에 담긴 데이터가 이미 있는지 검증해야 함
+        !dataToRender.some((item) => item.id === matchedMetaItem.id)) {
         dataToRender.push(matchedMetaItem);
       }
     });
@@ -186,7 +199,7 @@ const CardList = ({
           if (
             deleteCategoryPrefix.length > 0 &&
             deleteRolesPrefix.length === 0 &&
-            deleteStacksPrefix.length === 0 
+            deleteStacksPrefix.length === 0
           ) {
             // selectedCategories 의 배열 안의 요소를 순회하면서,
             // 'item.category 의 각 요소의 문자열'이라면,  'clickedCategory 문자열' 과 동일한지 를 판단
@@ -203,7 +216,7 @@ const CardList = ({
           // 역할만 선택된 상황에서, 해당 item 의 콜백함수를 true 로 반환해서 필터링
           if (
             deleteRolesPrefix.length > 0 &&
-            deleteCategoryPrefix.length === 0 && 
+            deleteCategoryPrefix.length === 0 &&
             deleteStacksPrefix.length === 0
           ) {
             return deleteRolesPrefix.some((deleteRolesPrefixItem) =>
@@ -214,9 +227,8 @@ const CardList = ({
           // 역할만 선택된 상황에서, 해당 item 의 콜백함수를 true 로 반환해서 필터링
           if (
             deleteStacksPrefix.length > 0 &&
-            deleteCategoryPrefix.length === 0 && 
-            deleteRolesPrefix.length === 0  
-            
+            deleteCategoryPrefix.length === 0 &&
+            deleteRolesPrefix.length === 0
           ) {
             return deleteStacksPrefix.some((deleteStacksPrefixItem) =>
               item.stacks.includes(deleteStacksPrefixItem)
@@ -261,13 +273,21 @@ const CardList = ({
     // fetch 요청 보내기
     // isItemDetailOpened(index) : 원래는 우선, 특정 index 인지 확인하고, 해당 index 를 제출
 
-    setIsItemDetailOpened(!isItemDetailOpened);
+    setIsItemDetailOpened(!isItemDetailOpened); // 처음에 false 였다가, true 로 변함
 
     const clickedDetailedItemArr = metaData.find(
       (item) => item.id === metaDataID
     );
 
     setClickedDetailedItem(clickedDetailedItemArr);
+
+    // 모달이 열릴 때, 원본 documment 에 있는 스크롤을 없애기
+    if (!isItemDetailOpened) {
+      // 처음에 false 였다가, true 로 변함
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = ""; // cleaner 기능
+    }
 
     setIndexOfItemDetail(metaDataID); // 이건 필요 없지 않나❓❓❓❓❓
     console.log("indexOfItemDetail", indexOfItemDetail);
@@ -276,6 +296,31 @@ const CardList = ({
 
   const handleSeeMoreItem = (metaDataID) => {
     // setIsItemDetailOpened(true);
+
+    console.log("handleSeeMoreItem 에 ID 들어갔나", metaDataID);
+
+    setIndexOfItemDetail(metaDataID); // 필요한 정보를 받아옴
+    // setIndexOfItemDetail(metaDataID);    // 이건 필요 없지 않나❓❓❓❓❓
+
+    const clickedDetailedItemArr = metaData.find(
+      (item) => item.id === metaDataID
+    );
+    setClickedDetailedItem(clickedDetailedItemArr);
+
+    // 스크롤을 위로 올리기
+    if (detailSectionRef.current) {
+      // 실제로 ref 로 해당 DOM 요소를 가리키고 있는지 체크
+      detailSectionRef.current.scrollTo({
+        top: 0,
+        behavior: "auto",
+      });
+    }
+  };
+
+  const handleRelatedItem = (metaDataID) => {
+    // setIsItemDetailOpened(true);
+
+    console.log("handleRelatedItem 에 ID 들어갔나", metaDataID);
 
     setIndexOfItemDetail(metaDataID); // 필요한 정보를 받아옴
     // setIndexOfItemDetail(metaDataID);    // 이건 필요 없지 않나❓❓❓❓❓
@@ -296,6 +341,7 @@ const CardList = ({
   };
 
   const handleCloseBtn = () => {
+    document.body.style.overflowY = "auto"; // 디테일 페이지에서 클릭했을 때에도, 스크롤 생기게 하기
     setIsItemDetailOpened(false);
   };
 
@@ -346,98 +392,31 @@ const CardList = ({
       )}
 
       {/* cardListGridContainer : index.css 로 설정 */}
-      <ul className="flex flex-col cardListGridContainer px-[72px]">
-        {filteredSortedData.map((item, index) => {
-          return (
-            <li
-              key={index}
-              className="flex flex-col cursor-pointer"
-              onClick={() => handleCardItem(item.id)}
-            >
-              <figure
-                className="relative h-0 bg-cover   bg-no-repeat  pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
-                style={{
-                  // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
-                  backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
-                }}
-                onMouseEnter={() => setIsHovered(index)}
-                onMouseLeave={() => setIsHovered(null)}
-              >
-                {/* 호버 했을 때 보이는 것  */}
-                {isHovered === index ? (
-                  <div className="absolute flex items-end justify-between w-full h-full p-5 rounded-lg bg-gradient-to-b from-gray-50/5 to-gray-600/50">
-                    <span className="mb-3 mr-4 text-base font-normal text-gray-100 w-[80%]  truncate">
-                      {item.summary}
-                    </span>
-                    {item.category === "feature" ? (
-                      <span
-                        className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-medium 
-                        text-white transition duration-200 ease-linear bg-[#603b2b] rounded-full 
-                    hover:bg-[#eaa064] items-center hover:text-gray-50"
-                      >
-                        기능
-                      </span>
-                    ) : (
-                      <span
-                        className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-medium 
-                          text-white transition duration-200 ease-linear bg-[#28466c] rounded-full 
-                    hover:bg-[#6488ea] items-center hover:text-gray-50"
-                      >
-                        플젝
-                      </span>
-                    )}
+      <ULCardList
+        filteredSortedData={filteredSortedData}
+        handleCardItem={handleCardItem} // 이벤트 핸들러 함수 넘길 때 이게 맞니
+        setIsHovered={setIsHovered}
+        isHovered={isHovered}
+      />
 
-                    <div className="mb-2">
-                      <div className="ml-auto flex items-center justify-center p-2 text-[12px] font-semibold text-gray-700 rounded-full bg-gray-50 shrink-0 border-[1.5px] border-gray-200">
-                        <SVGExternalLink />
-                      </div>
-                      {/* <div className="right-[-7px] top-[-5px] absolute w-5 h-5 text-[12px] flex items-center justify-center rounded-full bg-searchBoxBorder-100/85  text-gray-50">
-                      stack 의 개수 세기📛
-                    </div> */}
-                    </div>
-                  </div>
-                ) : (
-                  ""
-                )}
-              </figure>
-
-              {/* description 부분 */}
-              <div className="flex items-center justify-between py-3 font-medium text-stone-900 ">
-                <div className="flex items-center ">
-                  <figure
-                    className="w-6 h-6 bg-top bg-no-repeat bg-cover rounded-full"
-                    style={{
-                      backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
-                    }}
-                  ></figure>
-
-                  <span className="ml-2 text-sm font-medium text-gray-900 truncate max-w-[100px]">
-                    {item.title}
-                  </span>
-                </div>
-
-                <div className="flex items-center ml-2 ">
-                  <SVGCalendar />
-                  <span className="ml-[2px] mt-[2px] text-xs text-gray-600 truncate hover:text-gray-800">
-                    {(() => {
-                      const startDatePart = item.startDate
-                        .split("T")[0]
-                        .split("-");
-                      const endDatePart = item.endDate.split("T")[0].split("-");
-                      return `${startDatePart[0].slice(2, 4)}.${
-                        startDatePart[1]
-                      }.${startDatePart[2]}-${startDatePart[0].slice(2, 4)}.${
-                        endDatePart[1]
-                      }.${endDatePart[2]}`;
-                    })()}
-                  </span>
-                </div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-
+      <SectionItemDetail
+        isItemDetailOpened={isItemDetailOpened}
+        metaData={metaData}
+        clickedDetailedItem={clickedDetailedItem}
+        detailSectionRef={detailSectionRef}
+        indexOfItemDetail={indexOfItemDetail}
+        projectNames={projectNames}
+        filteredSortedData={filteredSortedData}
+        setIsHovered={setIsHovered}
+        isHovered={isHovered}
+        isShowChatBox={isShowChatBox}
+        setIsShowChatBox={setIsShowChatBox}
+        handleCancelBtn={handleCancelBtn}
+        handleSendFeedback={handleSendFeedback}
+        handleCloseBtn={handleCloseBtn} // 이건 파일로 뺄 수 있지 않아?
+        handleRelatedItem={handleRelatedItem} // 이건 파일로 뺄 수 있지 않아?
+        handleSeeMoreItem={handleSeeMoreItem}
+      />
       {/* itemDetail 영역 | 여기는 컴포넌트로 따로 빼서 진행 */}
       {isItemDetailOpened && metaData && clickedDetailedItem ? (
         <section>
@@ -563,6 +542,24 @@ const CardList = ({
                       )}
 
                       <div></div>
+                    </div>
+
+                    <div className="mt-[16px]">
+                      <h5 className="text-[20px] leading-[1.6em]  ">
+                        <strong>관련 기능 및 프로젝트</strong>
+                      </h5>
+
+                      {clickedDetailedItem && (
+                        <DivRelatedFeatureProjects
+                          handleRelatedItem={handleRelatedItem}
+                          relatedItems={metaData.filter(
+                            (item) =>
+                              item.projectID ===
+                                clickedDetailedItem.projectID &&
+                              item.id !== clickedDetailedItem.id // detail page 에서 자기랑 동일한 건 안 보여주기
+                          )}
+                        />
+                      )}
                     </div>
                   </div>
 
@@ -747,24 +744,97 @@ const CardList = ({
       ) : (
         ""
       )}
-
-      {/* <section className="bg-blue-300">
-          <div className="top-0 z-50 h-full w-[360px] transition-all duration-100 ease-linear; fixed right-0">
-            <div className="mt-[96px] h-100vh-96px relative bg-gray-200 rounded-2xl shadow-lg overscroll-none transition-all duration-100 ease-linear">
-              <div className="h-[64px] flex flex-row items-center justify-between">
-                <p className="ml-2 text-base"> 피드백 보내기🚀 </p>
-                <div className="mr-2 cursor-pointer" onClick={handleCancelBtn}>
-                  {" "}
-                  ❎
-                </div>
-              </div>
-
-              <input type="text" className="rounded-lx" />
-            </div>
-          </div>
-        </section> */}
     </>
   );
 };
 
 export default CardList;
+// 컴포넌트화 시키기전 카드리스트
+{
+  /* <ul className="flex flex-col cardListGridContainer px-[72px]">
+        {filteredSortedData.map((item, index) => {
+          return (
+            <li
+              key={index}
+              className="flex flex-col cursor-pointer"
+              onClick={() => handleCardItem(item.id)}
+            >
+              <figure
+                className="relative h-0 bg-cover   bg-no-repeat  pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
+                style={{
+                  // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
+                  backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                }}
+                onMouseEnter={() => setIsHovered(index)}
+                onMouseLeave={() => setIsHovered(null)}
+              >
+                {isHovered === index ? (
+                  <div className="absolute flex items-end justify-between w-full h-full p-5 rounded-lg bg-gradient-to-b from-gray-50/5 to-gray-600/50">
+                    <span className="mb-3 mr-4 text-base font-normal text-gray-100 w-[80%]  truncate">
+                      {item.summary}
+                    </span>
+                    {item.category === "feature" ? (
+                      <span
+                        className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-medium 
+                        text-white transition duration-200 ease-linear bg-[#603b2b] rounded-full 
+                    hover:bg-[#eaa064] items-center hover:text-gray-50"
+                      >
+                        기능
+                      </span>
+                    ) : (
+                      <span
+                        className="px-1 shrink-0 justify-center  flex ml-1 mb-2 mr-2 w-[34px] h-[34px]  text-[10px] font-medium 
+                          text-white transition duration-200 ease-linear bg-[#28466c] rounded-full 
+                    hover:bg-[#6488ea] items-center hover:text-gray-50"
+                      >
+                        플젝
+                      </span>
+                    )}
+
+                    <div className="mb-2">
+                      <div className="ml-auto flex items-center justify-center p-2 text-[12px] font-semibold text-gray-700 rounded-full bg-gray-50 shrink-0 border-[1.5px] border-gray-200">
+                        <SVGExternalLink />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </figure>
+
+              <div className="flex items-center justify-between py-3 font-medium text-stone-900 ">
+                <div className="flex items-center ">
+                  <figure
+                    className="w-6 h-6 bg-top bg-no-repeat bg-cover rounded-full"
+                    style={{
+                      backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                    }}
+                  ></figure>
+
+                  <span className="ml-2 text-sm font-medium text-gray-900 truncate max-w-[100px]">
+                    {item.title}
+                  </span>
+                </div>
+
+                <div className="flex items-center ml-2 ">
+                  <SVGCalendar />
+                  <span className="ml-[2px] mt-[2px] text-xs text-gray-600 truncate hover:text-gray-800">
+                    {(() => {
+                      const startDatePart = item.startDate
+                        .split("T")[0]
+                        .split("-");
+                      const endDatePart = item.endDate.split("T")[0].split("-");
+                      return `${startDatePart[0].slice(2, 4)}.${
+                        startDatePart[1]
+                      }.${startDatePart[2]}-${startDatePart[0].slice(2, 4)}.${
+                        endDatePart[1]
+                      }.${endDatePart[2]}`;
+                    })()}
+                  </span>
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul> */
+}
