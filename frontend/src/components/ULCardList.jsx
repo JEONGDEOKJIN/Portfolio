@@ -1,12 +1,12 @@
-import React from 'react'
-import SVGExternalLink from './SVGExternalLink';
-import SVGCalendar from './SVGCalendar';
+import React from "react";
+import SVGExternalLink from "./SVGExternalLink";
+import SVGCalendar from "./SVGCalendar";
 
 const ULCardList = ({
-    filteredSortedData, 
-    handleCardItem, // 이벤트 핸들러 함수 넘길 때 이게 맞니 
-    setIsHovered,
-    isHovered,
+  filteredSortedData,
+  handleCardItem, // 이벤트 핸들러 함수 넘길 때 이게 맞니
+  setIsHovered,
+  isHovered,
 }) => {
   return (
     <>
@@ -15,14 +15,15 @@ const ULCardList = ({
           return (
             <li
               key={index}
-              className="flex flex-col cursor-pointer"
+              className="flex flex-col justify-center cursor-pointer "
               onClick={() => handleCardItem(item.id)}
             >
               <figure
-                className="relative h-0 bg-cover   bg-no-repeat  pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
+                // className="relative h-0 bg-cover   bg-no-repeat  pb-75% rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
+                className="relative h-[200px]  bg-cover w-[315px]  bg-no-repeat  rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
                 style={{
                   // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
-                  backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                  backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_2})`,
                 }}
                 onMouseEnter={() => setIsHovered(index)}
                 onMouseLeave={() => setIsHovered(null)}
@@ -31,7 +32,7 @@ const ULCardList = ({
                 {isHovered === index ? (
                   <div className="absolute flex items-end justify-between w-full h-full p-5 rounded-lg bg-gradient-to-b from-gray-50/5 to-gray-600/50">
                     <span className="mb-3 mr-4 text-base font-normal text-gray-100 w-[80%]  truncate">
-                      {item.summary}
+                      {item.fsd_mediumcategory}
                     </span>
                     {item.category === "feature" ? (
                       <span
@@ -66,21 +67,22 @@ const ULCardList = ({
               </figure>
 
               {/* description 부분 */}
-              <div className="flex items-center justify-between py-3 font-medium text-stone-900 ">
-                <div className="flex items-center ">
+              {/* <div className="flex items-center justify-between py-3 font-medium text-stone-900 "> */}
+              <div className="flex items-center justify-between py-3  w-[315px] font-medium text-stone-900 ">
+                <div className="flex items-center  w-[60%]">
                   <figure
                     className="w-6 h-6 bg-top bg-no-repeat bg-cover rounded-full"
                     style={{
-                      backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                      backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_5})`,
                     }}
                   ></figure>
 
-                  <span className="ml-2 text-sm font-medium text-gray-900 truncate max-w-[100px]">
-                    {item.title}
+                  <span className="ml-2 text-sm font-medium text-gray-900 truncate ">
+                    {item.fsd_smallcategory}
                   </span>
                 </div>
 
-                <div className="flex items-center ml-2 ">
+                <div className="flex items-center ml-2  w-[35%] ">
                   <SVGCalendar />
                   <span className="ml-[2px] mt-[2px] text-xs text-gray-600 truncate hover:text-gray-800">
                     {(() => {
@@ -102,7 +104,7 @@ const ULCardList = ({
         })}
       </ul>
     </>
-  )
-}
+  );
+};
 
-export default ULCardList
+export default ULCardList;

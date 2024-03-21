@@ -70,11 +70,19 @@ const SectionItemDetail = ({
                     clickedDetailedItem &&
                     clickedDetailedItem.demoVideo_1 && (
                       <figure
-                        style={{
-                          backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1})`,
-                        }}
+                        // style={{
+                        //   backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1})`,
+                        // }}
                         className=" shadow rounded-[40px] w-full h-[450px]  bg-no-repeat bg-cover"
-                      ></figure>
+                      >
+                        <video
+                          className="object-cover w-full h-full"
+                          src={`http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1}`}
+                          autoPlay
+                          loop
+                          muted
+                        ></video>
+                      </figure>
                     )}
                 </div>
 
@@ -282,7 +290,7 @@ const SectionItemDetail = ({
                               // className=" relative bg-top bg-no-repeat bg-cover w-[350px] h-[250px] rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
                               style={{
                                 // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
-                                backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                                backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_2})`,
                               }}
                               onMouseEnter={() => setIsHovered(index)}
                               onMouseLeave={() => setIsHovered(null)}

@@ -37,6 +37,8 @@ const DivTable = ({
         {metaData
           .filter((item) => item.id === indexOfItemDetail)
           .map((item, index) => {
+            console.log("indexOfItemDetail", indexOfItemDetail);
+            console.log("item, fsd_largecategory 이거?", item);
             return (
               <DivTableRow
                 key={index}

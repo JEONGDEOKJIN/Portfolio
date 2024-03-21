@@ -505,14 +505,22 @@ const CardList = ({
                     clickedDetailedItem &&
                     clickedDetailedItem.architectureImg_1 && (
                       <figure
-                        style={{
-                          backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1})`,
-                        }}
+                        // gif 할 때의 버전
+                        // style={{
+                        //   backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1})`,
+                        // }}
                         onClick={() => handleDemoImage()}
                         onMouseEnter={() => setIsDemoImageHover(true)}
                         onMouseLeave={() => setIsDemoImageHover(false)}
                         className="cursor-pointer shadow relative rounded-[40px] w-full h-[450px]  bg-no-repeat bg-cover"
                       >
+                        <video
+                          className="object-cover w-full h-full"
+                          src={`http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1}`}
+                          autoPlay
+                          loop
+                          muted
+                        ></video>
                         {isDemoImageHover && (
                           <div className="absolute inset-0 flex flex-col items-center justify-center w-full y-full bg-black/50 rounded-[40px]">
                             <p className="font-medium text-[20px] text-neutral-50 border-[1px] p-2 rounded-[5px] ">
@@ -533,13 +541,21 @@ const CardList = ({
                       </div>
 
                       <figure
-                        style={{
-                          backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1})`,
-                        }}
+                        // style={{
+                        //   backgroundImage: `url(http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1})`,
+                        // }}
                         // onClick={() => handleDemoImage()}
 
                         className="w-full  max-w-[90%] max-h-[90%] h-full z-50 bg-no-repeat bg-contain bg-center shadow cursor-pointer"
-                      ></figure>
+                      >
+                        <video
+                          className="object-cover w-full h-full"
+                          src={`http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1}`}
+                          autoPlay
+                          loop
+                          muted
+                        ></video>
+                      </figure>
                     </div>
                   )}
                 </div>
@@ -677,13 +693,13 @@ const CardList = ({
 
                     <div className="flex justify-between">
                       <a
-                        className="text-[14px] "
+                        className="text-[14px]  "
                         href={clickedDetailedItem.repository}
                       >
                         <span className="text-gray-600 text-[14px]">
                           프로젝트 깃 주소
                         </span>
-                        <span className="text-[14px] ">
+                        <span className="text-[14px] flex  ">
                           {clickedDetailedItem.repository}
                         </span>
                       </a>
@@ -697,7 +713,7 @@ const CardList = ({
                         <span className="text-gray-600 text-[14px]">
                           프로젝트 일지
                         </span>
-                        <span className="text-[14px] ">
+                        <span className="text-[14px] flex ">
                           {clickedDetailedItem.projectDocuments}
                         </span>
                       </a>
@@ -711,7 +727,7 @@ const CardList = ({
                         <span className="text-gray-600 text-[14px]">
                           개발 공부 블로그
                         </span>
-                        <span className="text-[14px] ">
+                        <span className="text-[14px] flex ">
                           https://deokjin.gitbook.io/dj
                         </span>
                       </a>
@@ -748,7 +764,7 @@ const CardList = ({
                               // className=" relative bg-top bg-no-repeat bg-cover w-[350px] h-[250px] rounded-lg hover:scale-105 transition-all duration-500 ease-in-out"
                               style={{
                                 // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${item.image})`,
-                                backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                                backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_2})`,
                               }}
                               onMouseEnter={() => setIsHovered(index)}
                               onMouseLeave={() => setIsHovered(null)}
@@ -757,7 +773,7 @@ const CardList = ({
                               {isHovered === index ? (
                                 <div className="absolute flex items-end justify-between w-full h-full p-5 rounded-lg bg-gradient-to-b from-gray-50/5 to-gray-600/50">
                                   <span className="mb-3 mr-4 text-base font-normal text-gray-100 w-[80%]  truncate">
-                                    {item.summary}
+                                    {item.fsd_mediumcategory}
                                   </span>
                                   {item.category === "feature" ? (
                                     <span
@@ -796,10 +812,18 @@ const CardList = ({
                               <div className="flex items-center ">
                                 <figure
                                   className="w-6 h-6 bg-top bg-no-repeat bg-cover rounded-full"
-                                  style={{
-                                    backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
-                                  }}
-                                ></figure>
+                                  // style={{
+                                  //   backgroundImage: `url(http://localhost:7070/getImg/${item.demoVideo_1})`,
+                                  // }}
+                                >
+                                  <video
+                                    className="object-cover w-full h-full"
+                                    src={`http://localhost:7070/getImg/${clickedDetailedItem.demoVideo_1}`}
+                                    autoPlay
+                                    loop
+                                    muted
+                                  ></video>
+                                </figure>
 
                                 <span className="ml-2 text-sm font-medium text-gray-900 truncate max-w-[180px]">
                                   {item.title}

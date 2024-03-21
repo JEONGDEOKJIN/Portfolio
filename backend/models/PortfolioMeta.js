@@ -1,9 +1,6 @@
 import { Model, DataTypes } from "sequelize";
 
-import { models } from "../models/index.js"
-
-
-
+import { models } from "../models/index.js";
 
 class PortfolioMeta extends Model {
   static init(sequelize) {
@@ -73,7 +70,6 @@ class PortfolioMeta extends Model {
 
         // // 기능명세서 - 기능 및 비기능 요구사항 : ✅ FSDRequirement 테이블로 이동
 
-
         // 담당 역할 (frontend, backendend, aws, 기획)
         roles: {
           type: DataTypes.STRING,
@@ -98,15 +94,15 @@ class PortfolioMeta extends Model {
         endDate: {
           type: DataTypes.DATE,
         },
-        // 시연 영상 | demoVideo
+        // 시연 영상 | demoVideo | mp4
         demoVideo_1: {
           type: DataTypes.STRING,
         },
-        // 시연 영상 | demoVideo
+        // 시연 영상 | demoVideo | gif. 썸네일 용
         demoVideo_2: {
           type: DataTypes.STRING,
         },
-        // 시연 영상 | demoVideo
+        // 시연 영상 | demoVideo | 
         demoVideo_3: {
           type: DataTypes.STRING,
         },
@@ -116,6 +112,10 @@ class PortfolioMeta extends Model {
         },
         // 시연 영상 | demoVideo
         demoVideo_5: {
+          type: DataTypes.STRING,
+        },
+        // thumbnail | demoVideo
+        thumbnail: {
           type: DataTypes.STRING,
         },
         // ASW 배포 주소 | deployedURL
@@ -141,11 +141,11 @@ class PortfolioMeta extends Model {
         charset: "utf8", // 인코딩 관련
         collate: "utf8_general_ci", // 인코딩 관련
 
-        // 인덱싱 
+        // 인덱싱
         indexes: [
           {
-            type: "FULLTEXT",  // FULLTEXT 인덱스가 이 되어야 -> 와일드 카드 사용 할 수 있고 -> 그래야, 'good' 을 검색하면, 'goods' 까지 나옴
-              // 따라서, 검색 되길 원하는 필드가 변경되면 -> model 설정 자체를 바꿔야 하고 -> 따라서 app.js 에서   .sync({ force: ture }) 로 바꾸고 -> DB 자체를 비운뒤에 다시 시도 해야 함 
+            type: "FULLTEXT", // FULLTEXT 인덱스가 이 되어야 -> 와일드 카드 사용 할 수 있고 -> 그래야, 'good' 을 검색하면, 'goods' 까지 나옴
+            // 따라서, 검색 되길 원하는 필드가 변경되면 -> model 설정 자체를 바꿔야 하고 -> 따라서 app.js 에서   .sync({ force: ture }) 로 바꾸고 -> DB 자체를 비운뒤에 다시 시도 해야 함
             name: "text_idx", // 인덱싱의 고유한 이름. | 다른 인덱싱 이름과 겹치면 안돼
 
             // 이 필드에 대해서 검색이 이루어짐
