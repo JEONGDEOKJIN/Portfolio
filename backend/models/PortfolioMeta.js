@@ -114,10 +114,10 @@ class PortfolioMeta extends Model {
         demoVideo_5: {
           type: DataTypes.STRING,
         },
-        // thumbnail | demoVideo
-        thumbnail: {
-          type: DataTypes.STRING,
-        },
+        // // thumbnail | demoVideo
+        // thumbnail: {
+        //   type: DataTypes.STRING,
+        // },
         // ASW 배포 주소 | deployedURL
         deployedURL: {
           type: DataTypes.STRING,
