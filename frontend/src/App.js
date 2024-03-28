@@ -2,11 +2,7 @@ import "./App.css";
 
 import ItemList from "./contents/ItemList/ItemList";
 
-
-// import Update from "./page/crud_test/Update";
-import Delete from "./page/crud_test/page/Delete";
 import { Route, Routes } from "react-router-dom";
-import Feedback from "./components/Feedback";
 
 import FeatureList from "./pages/FeatureList";
 import AdminBoard from "./pages/AdminBoardPage";
@@ -21,7 +17,6 @@ function App() {
       {/* <State /> */}
       {/* <Create /> */}
       {/* <Update /> */}
-      {/* <Delete /> */}
 
       <Routes>
         {/* <Route path="test/update" element={<Update />} /> */}
