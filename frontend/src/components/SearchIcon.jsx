@@ -13,7 +13,7 @@ const SearchIcon = () => {
         <path
           stroke="#000000"
           opacity={0.5}
-          stroke-linecap="round"
+          strokeLinecap="round"
           stroke-linejoin="round"
           stroke-width="2"
           d="M7.445 13.578a5.333 5.333 0 1 0 0-10.667 5.333 5.333 0 0 0 0 10.667ZM14.112 14.911l-2.9-2.9"

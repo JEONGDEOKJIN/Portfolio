@@ -13,7 +13,7 @@ const ArrowDown = () => {
       >
         <path
           stroke="#000"
-          stroke-linecap="round"
+          strokeLinecap="round"
           stroke-linejoin="round"
           stroke-width="2"
           d="M12 5v14M19 12l-7 7-7-7"
