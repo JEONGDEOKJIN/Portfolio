@@ -15,8 +15,8 @@ const SVGFilterIcon = () => {
         <path
           stroke="#000"
           strokeLinecap="round"
-          stroke-linejoin="round"
-          stroke-width="3"
+          strokeLinejoin="round"
+          strokeWidth="3"
           d="M5 12h14M3 6h18M7 18h10"
         />
       </svg>
