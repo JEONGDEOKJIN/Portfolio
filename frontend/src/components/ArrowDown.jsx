@@ -14,8 +14,8 @@ const ArrowDown = () => {
         <path
           stroke="#000"
           strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linejoin="round"
+          stroke-width="2"
           d="M12 5v14M19 12l-7 7-7-7"
         />
       </svg>

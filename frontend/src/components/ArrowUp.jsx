@@ -8,7 +8,7 @@ const ArrowUp = () => {
         width="12"
         height="12"
         fill="none"
-        viewBox="0 0 24 24"
+        viewBox="0 0 24 24" 
         className="ml-1 rotate-180"
       >
         <path
@@ -18,6 +18,7 @@ const ArrowUp = () => {
           strokeWidth="2"
           d="M12 5v14M19 12l-7 7-7-7"
         />
+        
       </svg>
     </>
   );

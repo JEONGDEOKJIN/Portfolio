@@ -15,8 +15,8 @@ const SVGCalendar = () => {
           <path
             stroke="#7e7e7e"
             strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="3"
+            stroke-linejoin="round"
+            stroke-width="3"
             d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2ZM16 2v4M8 2v4M3 10h18"
             className="group-hover:stroke-searchBoxBorder100/80"
           />
