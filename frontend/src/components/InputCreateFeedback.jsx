@@ -41,7 +41,10 @@ const InputCreateFeedback = ({ setIsShowChatBox }) => {
     setShowFeedbackNameError(!isFeedbackNameValid); // 유효하면(isFeedbackNameValid == true) 이면 -> 에러메시지 안 보여줌
 
     const emailValidRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-    const isFeedbackEmailValid = feedbackEmail !== null && feedbackEmail.trim() !== "" && emailValidRegex.test(feedbackEmail.trim())// 비어있지 않으면, true
+    const isFeedbackEmailValid =
+      feedbackEmail !== null &&
+      feedbackEmail.trim() !== "" &&
+      emailValidRegex.test(feedbackEmail.trim()); // 비어있지 않고, 정규식 통과하면 true
     setShowFeedbackEmailError(!isFeedbackEmailValid); // 유효하면(isFeedbackEmailValid == true) 이면 -> 에러메시지 안 보여줌
 
     const isFeedbackDescValid =
@@ -102,7 +105,7 @@ const InputCreateFeedback = ({ setIsShowChatBox }) => {
         } else {
           alert("제출 에러입니다. 다시 시도해주세요😔");
           navigate(`/`); // 리디렉션
-        } 
+        }
 
         // ✅ 페이지 리디렉션
         // const lastId = response.data.id;

@@ -609,16 +609,17 @@ const CardList = ({
 
                     <div className="text-[20px] leading-[1.6em] mt-[16px]  w-[100%]">
                       <h5 className="">
-                        <strong>Summary</strong>
+                        <strong>서비스 소개</strong>
                       </h5>
                       <p className="leading-[1.7em]  shrink-0 text-[15px] font-normal text-left mt-[15px]  	">
-                        {clickedDetailedItem && clickedDetailedItem.summary}
+                        {/* {clickedDetailedItem && clickedDetailedItem.summary} */}
+                        누구나 쉽게 부동산을 소유할 수 있는 '부동산 조각투자 서비스' 로써, 부동산 자산을 불록체인 토큰화 하여 '분양' 받고, '매매' 할 수 있는 STO 거래 플랫폼
                       </p>
                     </div>
 
                     <div className="mt-[16px]">
                       <h5 className="text-[20px] leading-[1.6em]  ">
-                        <strong>기능 요구사항</strong>
+                        <strong>팀 구성 (✅ 점핏 이력서 목차에 따름) </strong>
                       </h5>
 
                       {clickedDetailedItem && (
@@ -643,7 +644,7 @@ const CardList = ({
 
                     <div className="mt-[16px]">
                       <h5 className="text-[20px] leading-[1.6em]  ">
-                        <strong>관련 기능 및 프로젝트</strong>
+                        <strong>역할 (✅ 점핏 이력서 목차 및 노션 wiki 에 적은 플젝 소개 목차 에 따름) </strong>
                       </h5>
 
                       {clickedDetailedItem && (
@@ -658,6 +659,36 @@ const CardList = ({
                         />
                       )}
                     </div>
+
+                    <div className="mt-[16px]">
+                      <h5 className="text-[20px] leading-[1.6em]  ">
+                        <strong>주요기능 (✅ 점핏 이력서 목차 및 노션 wiki 에 적은 플젝 소개 목차 에 따름) </strong>
+                      </h5>
+                      - UI 보여주고 
+                      - 테이블로 어떤 페이지 인지 설명
+                    </div>
+
+                    <div className="mt-[16px]">
+                      <h5 className="text-[20px] leading-[1.6em]  ">
+                        <strong>주요기술과제 (✅ 점핏 이력서 목차 및 노션 wiki 에 적은 플젝 소개 목차 에 따름) </strong>
+                      </h5>
+                      - 위에서 역할이랑 겹칠 수도 있지 않을까? 아직 잘 모르겠네...                        
+                    </div>
+                    
+                    <div className="mt-[16px]">
+                      <h5 className="text-[20px] leading-[1.6em]  ">
+                        <strong>협업방식 (✅ 점핏 이력서 목차 및 노션 wiki 에 적은 플젝 소개 목차 에 따름) </strong>
+                      </h5>
+
+                    </div>
+                    
+                    <div className="mt-[16px]">
+                      <h5 className="text-[20px] leading-[1.6em]  ">
+                        <strong>산출물 (✅ 이건 오른쪽에 있는 INFO 박스로 대체하거나 해보자) </strong>
+                      </h5>
+
+                    </div>
+
                   </div>
 
                   {/* 오른쪽 */}

@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { BrowserRouter } from "react-router-dom";
 
 // QueryClient 인스턴스 생성
 const queryClient = new QueryClient();

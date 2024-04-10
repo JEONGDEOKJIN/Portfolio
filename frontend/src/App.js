@@ -1,9 +1,7 @@
 import "./App.css";
 
 import ItemList from "./contents/ItemList/ItemList";
-
 import { Route, Routes } from "react-router-dom";
-
 import FeatureList from "./pages/FeatureList";
 import AdminBoard from "./pages/AdminBoardPage";
 import AdminCreate from "./pages/AdminCreate";
